@@ -6,3 +6,5 @@ The three implicit fields were obtained using the following SIGMA commands (with
 3. S2Go_3dFDSIS13A8OSystem_gpu: produces result_s13 in 16 seconds
 
 The computations were performed on a machine equiped with a 3.5 GHz core and a Quadro M4000 GPU.
+
+The script used to compute these results can be found in scripts/fdsi/script_fdi.sh
