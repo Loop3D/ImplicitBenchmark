@@ -26,6 +26,10 @@ implementations can also be tested.
  * Fault.[ts,dxf]: the interpreted fault surface affecting Horizon D, in Gocad TSurf 
    and AutoCAD DXF formats.
 
+All csv data Files contain a Cutoff column, than contains a random number which may
+be used to decimate the data set. For example, taking 20% of the data means 
+using only the points whose cutoff is lower than 0.
+
 ## Output
 
 Please rename the `Results_` as `Results_YOURNAME` directory. 

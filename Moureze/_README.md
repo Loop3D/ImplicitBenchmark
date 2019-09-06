@@ -18,6 +18,10 @@ points.
  * `Sections_[EW,NS].csv` are sections lines. The field `PART_ID` is a unique 
  section identifier in each file. 
 
+All Data Files contain a Cutoff column, than contains a random number which may
+be used to decimate the data set. For example, taking 20% of the data means 
+using only the points whose cutoff is lower than 0.2
+
 ## Results
 
 Please rename the `Results_` as `Results_YOURNAME` directory. The directory
