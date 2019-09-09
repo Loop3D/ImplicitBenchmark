@@ -8,3 +8,5 @@ The three implicit fields were obtained using the following SIGMA commands (with
 The computations were performed on a machine equiped with a 3.5 GHz core and a Quadro M4000 GPU.
 
 The script used to compute these results can be found in scripts/fdsi/script_fdi.sh
+
+WARNING: There are two voxets provided: Results.vo and Modeste_Voxet.vo. Modeste_Voxet.vo should be used, Results.vo has the z-axis reversed. 
