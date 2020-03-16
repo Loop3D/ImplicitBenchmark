@@ -1,0 +1,113 @@
+GOCAD Voxet 1 
+HEADER {
+*graphicframework*slice*visible: false
+*graphicframework*slice*smooth: false
+*graphicframework*slice*axis: 1
+*graphicframework*slice*index: 1
+*graphicframework*timeinterval: 1
+last_selected_folder: Info
+ascii: off
+name: CartesianDomain
+smoothed: on
+use_private_colormaps: off
+probe_type: Sections
+size: 0 0 0 155 205 75
+fence0: 3 1 2 0 0 0 155 205 75
+nb_fences: 1
+sections: 3 1 1 86 2 1 117 3 1 36
+*painted*variable: result_s13.dt
+painted: on
+VoxetIntersectionAssociation: off
+}
+GOCAD_ORIGINAL_COORDINATE_SYSTEM
+NAME gocad
+PROJECTION Unknown
+DATUM Unknown
+AXIS_NAME X Y Z
+AXIS_UNIT m m m
+ZPOSITIVE Elevation
+END_ORIGINAL_COORDINATE_SYSTEM
+CLASSIFICATION "3D Survey" Seismic "3D Survey"
+AXIS_O -5 -5 -200 
+AXIS_U 310 0 0 
+AXIS_V 0 410 0 
+AXIS_W 0 0 150 
+AXIS_MIN 0 0 0 
+AXIS_MAX 1 1 1 
+AXIS_N 156 206 76 
+AXIS_NAME axis-1 axis-2 axis-3
+AXIS_UNIT "unitless" "unitless" "unitless" 
+AXIS_TYPE even even even
+
+
+
+
+PROPERTY 1 result_s10.dt
+PROPERTY_CLASS 1 result_s10.dt
+PROPERTY_KIND 1 " Real Number" 
+PROPERTY_CLASS_HEADER 1 result_s10.dt {
+kind: Real Number
+unit: unitless
+low_clip: -18.21204
+high_clip: 15.50703
+pclip: 99
+colormap: high_res
+
+}
+PROPERTY_SUBCLASS 1 QUANTITY Float
+PROP_ORIGINAL_UNIT 1 unitless
+PROP_UNIT 1 unitless
+PROP_NO_DATA_VALUE 1 -99999
+PROP_SAMPLE_STATS 1 1999920 -1.35251 42.8351 -32.8486 24.1522
+PROP_ESIZE 1 4
+PROP_ETYPE 1  IEEE
+PROP_FORMAT 1 RAW
+PROP_OFFSET 1 0
+PROP_FILE 1 ResultsCartesianDomain_result_s10.dt@@
+
+PROPERTY 2 result_s12.dt
+PROPERTY_CLASS 2 result_s12.dt
+PROPERTY_KIND 2 " Real Number" 
+PROPERTY_CLASS_HEADER 2 result_s12.dt {
+kind: Real Number
+unit: unitless
+low_clip: -18.94266
+high_clip: 15.57407
+pclip: 99
+colormap: high_res
+
+}
+PROPERTY_SUBCLASS 2 QUANTITY Float
+PROP_ORIGINAL_UNIT 2 unitless
+PROP_UNIT 2 unitless
+PROP_NO_DATA_VALUE 2 -99999
+PROP_SAMPLE_STATS 2 1999920 -1.6843 44.8857 -30.9785 23.4942
+PROP_ESIZE 2 4
+PROP_ETYPE 2  IEEE
+PROP_FORMAT 2 RAW
+PROP_OFFSET 2 0
+PROP_FILE 2 ResultsCartesianDomain_result_s12.dt@@
+
+PROPERTY 3 result_s13.dt
+PROPERTY_CLASS 3 result_s13.dt
+PROPERTY_KIND 3 " Real Number" 
+PROPERTY_CLASS_HEADER 3 result_s13.dt {
+kind: Real Number
+unit: unitless
+low_clip: -15.800696
+high_clip: 13.821448
+pclip: 99
+colormap: high_res
+
+}
+PROPERTY_SUBCLASS 3 QUANTITY Float
+PROP_ORIGINAL_UNIT 3 unitless
+PROP_UNIT 3 unitless
+PROP_NO_DATA_VALUE 3 -99999
+PROP_SAMPLE_STATS 3 1999920 -0.989624 33.0584 -34.172 22.8372
+PROP_ESIZE 3 4
+PROP_ETYPE 3  IEEE
+PROP_FORMAT 3 RAW
+PROP_OFFSET 3 0
+PROP_FILE 3 ResultsCartesianDomain_result_s13.dt@@
+END
