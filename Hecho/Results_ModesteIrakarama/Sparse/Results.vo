@@ -1,0 +1,133 @@
+GOCAD Voxet 1 
+HEADER {
+name: ResultBox
+use_private_colormaps: off
+probe_type: Sections
+size: 0 0 0 320 20 90
+fence0: 3 1 2 0 0 0 320 20 90
+nb_fences: 1
+sections: 3 1 1 177 2 1 11 3 1 45
+*gname*size: 6
+last_selected_folder: Info
+ascii: off
+smoothed: on
+*painted*variable: result_s13.dt
+painted: on
+VoxetIntersectionAssociation: off
+}
+GOCAD_ORIGINAL_COORDINATE_SYSTEM
+NAME " Pdgm_Epic Local" 
+PROJECTION Unknown
+DATUM Unknown
+AXIS_NAME X Y Z
+AXIS_UNIT m m m
+ZPOSITIVE Elevation
+END_ORIGINAL_COORDINATE_SYSTEM
+CLASSIFICATION "3D Survey" Seismic "3D Survey"
+AXIS_O 0 -0.5 0 
+AXIS_U 16 0 0 
+AXIS_V 0 1 0 
+AXIS_W 0 0 4.5 
+AXIS_MIN 0 0 0 
+AXIS_MAX 1 1 1 
+AXIS_N 321 21 91 
+AXIS_NAME axis-1 axis-2 axis-3
+AXIS_UNIT "unitless" "unitless" "unitless" 
+AXIS_TYPE even even even
+
+
+
+
+PROPERTY 1 Strati
+PROPERTY_CLASS 1 strati
+PROPERTY_KIND 1 " Real Number" 
+PROPERTY_CLASS_HEADER 1 strati {
+kind: Real Number
+unit: unitless
+pclip: 99
+colormap: BnBu
+*colormap*nodata: false
+low_clip: 0
+high_clip: 5
+name: strati
+*colormap*BnBu*colors: 0 0.968626976 0.988234997 0.941175997 32 0.878431022 0.952941 0.858824015 64 0.800000012 0.92156899 0.772548974 96 0.658824027 0.866666973 0.709803998 128 0.482353002 0.800000012 0.768626988 159 0.305882007 0.701960981 0.827450991 191 0.168626994 0.549019992 0.745097995 223 0.0313724987 0.407842994 0.674510002 255 0.0313724987 0.25097999 0.505882025 
+}
+PROPERTY_SUBCLASS 1 QUANTITY Float
+PROP_ORIGINAL_UNIT 1 unitless
+PROP_UNIT 1 unitless
+PROP_NO_DATA_VALUE 1 -99999
+PROP_ESIZE 1 4
+PROP_ETYPE 1  IEEE
+PROP_FORMAT 1 RAW
+PROP_OFFSET 1 0
+PROP_FILE 1 ResultsResultBox_Strati@@
+
+PROPERTY 2 result_s10.dt
+PROPERTY_CLASS 2 result_s10.dt
+PROPERTY_KIND 2 " Real Number" 
+PROPERTY_CLASS_HEADER 2 result_s10.dt {
+kind: Real Number
+unit: unitless
+low_clip: -1.013012
+high_clip: 6.325593
+pclip: 99
+colormap: high_res
+
+}
+PROPERTY_SUBCLASS 2 QUANTITY Float
+PROP_ORIGINAL_UNIT 2 unitless
+PROP_UNIT 2 unitless
+PROP_NO_DATA_VALUE 2 -99999
+PROP_SAMPLE_STATS 2 613431 2.33481 2.53098 -1.01301 6.32559
+PROP_ESIZE 2 4
+PROP_ETYPE 2  IEEE
+PROP_FORMAT 2 RAW
+PROP_OFFSET 2 0
+PROP_FILE 2 ResultsResultBox_result_s10.dt@@
+
+PROPERTY 3 result_s12.dt
+PROPERTY_CLASS 3 result_s12.dt
+PROPERTY_KIND 3 " Real Number" 
+PROPERTY_CLASS_HEADER 3 result_s12.dt {
+kind: Real Number
+unit: unitless
+low_clip: -0.848351
+high_clip: 6.193952
+pclip: 99
+colormap: high_res
+
+}
+PROPERTY_SUBCLASS 3 QUANTITY Float
+PROP_ORIGINAL_UNIT 3 unitless
+PROP_UNIT 3 unitless
+PROP_NO_DATA_VALUE 3 -99999
+PROP_SAMPLE_STATS 3 613431 2.34897 2.4749 -0.848351 6.19395
+PROP_ESIZE 3 4
+PROP_ETYPE 3  IEEE
+PROP_FORMAT 3 RAW
+PROP_OFFSET 3 0
+PROP_FILE 3 ResultsResultBox_result_s12.dt@@
+
+PROPERTY 4 result_s13.dt
+PROPERTY_CLASS 4 result_s13.dt
+PROPERTY_KIND 4 " Real Number" 
+PROPERTY_CLASS_HEADER 4 result_s13.dt {
+kind: Real Number
+unit: unitless
+low_clip: -1.100682
+high_clip: 6.376114
+pclip: 99
+colormap: high_res
+
+}
+PROPERTY_SUBCLASS 4 QUANTITY Float
+PROP_ORIGINAL_UNIT 4 unitless
+PROP_UNIT 4 unitless
+PROP_NO_DATA_VALUE 4 -99999
+PROP_SAMPLE_STATS 4 613431 2.32996 2.56051 -1.10068 6.37611
+PROP_ESIZE 4 4
+PROP_ETYPE 4  IEEE
+PROP_FORMAT 4 RAW
+PROP_OFFSET 4 0
+PROP_FILE 4 ResultsResultBox_result_s13.dt@@
+END
