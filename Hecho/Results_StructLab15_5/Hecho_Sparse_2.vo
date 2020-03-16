@@ -1,0 +1,84 @@
+GOCAD Voxet 1 
+HEADER {
+name:ResultBox
+use_private_colormaps:off
+probe_type:Sections
+size:0 0 0 320 20 90
+fence0:3 1 2 0 0 0 320 20 90
+nb_fences:1
+sections:3 2 1 20 1 1 0 3 0 59
+*gname*size:6
+last_selected_folder:Info
+ascii:off
+smoothed:on
+VoxetIntersectionAssociation:off
+*painted*variable:StructLab
+painted:on
+*regions*painted_grid:StructLab
+}
+GOCAD_ORIGINAL_COORDINATE_SYSTEM
+NAME "
+AXIS_NAME "X" "Y" "Z"
+AXIS_UNIT "m" "m" "m"
+ZPOSITIVE Elevation
+END_ORIGINAL_COORDINATE_SYSTEM
+AXIS_O 0 -0.5 0 
+AXIS_U 16 0 0 
+AXIS_V 0 1 0 
+AXIS_W 0 0 4.5 
+AXIS_MIN 0 0 0 
+AXIS_MAX 1 1 1 
+AXIS_N 321 21 91 
+AXIS_NAME "axis-1" "axis-2" "axis-3"
+AXIS_UNIT " unitless" " unitless" " unitless" 
+AXIS_TYPE even even even
+
+FLAGS_ARRAY_LENGTH 613431 
+FLAGS_BIT_LENGTH 7 
+FLAGS_ESIZE 1 
+FLAGS_OFFSET 0 
+FLAGS_FILE Hecho_Sparse_2ResultBox__flags@@
+
+
+
+
+PROPERTY 1 "StructLab"
+PROPERTY_CLASS 1 "strati"
+PROPERTY_KIND 1 "Real Number"
+PROPERTY_CLASS_HEADER 1 "strati" {
+kind:Real Number
+unit:unitless
+low_clip:0
+high_clip:5.2
+pclip:99
+name:strati
+*962503cd-1d914698-8c5c-9f84dcc07504@29a418e7-c3af4e0a-b37e-119049d836fb*colormap*use_intensity_colormap:false
+colormap:high_res
+}
+PROPERTY_SUBCLASS 1 QUANTITY Float
+PROP_ORIGINAL_UNIT 1 Mstb/Mstb
+PROP_UNIT 1 unitless
+PROP_NO_DATA_VALUE 1 -99999
+PROP_SAMPLE_STATS 1 199983 2.33489 2.48564 -0.874956 6.11556
+PROP_ESIZE 1 4
+PROP_ETYPE 1  IEEE
+PROP_PAINTED_FLAG_BIT_POS 1  6 
+PROP_FORMAT 1 RAW
+PROP_OFFSET 1 0
+PROP_FILE 1 Hecho_Sparse_2ResultBox_StructLab@@
+
+PROPERTY 2 "xprop"
+PROPERTY_CLASS 2 "xprop"
+PROPERTY_CLASS_HEADER 2 "xprop" {
+}
+PROPERTY_SUBCLASS 2 QUANTITY Float
+PROP_ORIGINAL_UNIT 2 none
+PROP_UNIT 2 none
+PROP_NO_DATA_VALUE 2 -99999
+PROP_SAMPLE_STATS 2 199983 8 21.4658 0 16
+PROP_ESIZE 2 4
+PROP_ETYPE 2  IEEE
+PROP_FORMAT 2 RAW
+PROP_OFFSET 2 0
+PROP_FILE 2 Hecho_Sparse_2ResultBox_xprop@@
+END
