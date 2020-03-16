@@ -1,0 +1,73 @@
+GOCAD Voxet 1 
+HEADER {
+name: ResultBox
+use_private_colormaps: off
+probe_type: Sections
+size: 0 0 0 320 20 90
+fence0: 3 1 2 0 0 0 320 20 90
+nb_fences: 1
+sections: 3 2 1 20 1 1 0 3 1 0
+*gname*size: 6
+last_selected_folder: Info
+ascii: off
+smoothed: on
+VoxetIntersectionAssociation: off
+*painted*variable: StructLab
+painted: on
+*channel2*grid: 
+}
+GOCAD_ORIGINAL_COORDINATE_SYSTEM
+NAME " Pdgm_Epic Local" 
+PROJECTION Unknown
+DATUM Unknown
+AXIS_NAME X Y Z
+AXIS_UNIT m m m
+ZPOSITIVE Elevation
+END_ORIGINAL_COORDINATE_SYSTEM
+CLASSIFICATION " 3D Survey"  Seismic " 3D Survey" 
+AXIS_O 0 -0.5 0 
+AXIS_U 16 0 0 
+AXIS_V 0 1 0 
+AXIS_W 0 0 4.5 
+AXIS_MIN 0 0 0 
+AXIS_MAX 1 1 1 
+AXIS_N 321 21 91 
+AXIS_NAME axis-1 axis-2 axis-3
+AXIS_UNIT "unitless" "unitless" "unitless" 
+AXIS_TYPE even even even
+
+FLAGS_ARRAY_LENGTH 613431 
+FLAGS_BIT_LENGTH 7 
+FLAGS_ESIZE 1 
+FLAGS_OFFSET 0 
+FLAGS_FILE Hecho_SparseResultBox__flags@@
+
+
+
+
+PROPERTY 1 StructLab
+PROPERTY_CLASS 1 strati
+PROPERTY_KIND 1 " Real Number" 
+PROPERTY_CLASS_HEADER 1 strati {
+kind: Real Number
+unit: unitless
+low_clip: 0
+high_clip: 5.2
+pclip: 99
+name: strati
+*962503cd-1d914698-8c5c-9f84dcc07504@29a418e7-c3af4e0a-b37e-119049d836fb*colormap*use_intensity_colormap: false
+colormap: high_res
+
+}
+PROPERTY_SUBCLASS 1 QUANTITY Float
+PROP_ORIGINAL_UNIT 1 unitless
+PROP_UNIT 1 unitless
+PROP_NO_DATA_VALUE 1 -99999
+PROP_SAMPLE_STATS 1 613431 2.30559 2.49957 -0.93106 6.1157
+PROP_ESIZE 1 4
+PROP_ETYPE 1  IEEE
+PROP_PAINTED_FLAG_BIT_POS 1  6 
+PROP_FORMAT 1 RAW
+PROP_OFFSET 1 0
+PROP_FILE 1 Hecho_SparseResultBox_StructLab@@
+END
