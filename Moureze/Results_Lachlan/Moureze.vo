@@ -1,0 +1,39 @@
+GOCAD Voxet 1 
+HEADER {
+*graphicframework*slice*visible: false
+*graphicframework*slice*smooth: false
+*graphicframework*slice*axis: 1
+*graphicframework*slice*index: 1
+*graphicframework*slice*colormap: 
+*graphicframework*slice*prop_r: 
+*graphicframework*slice*prop_g: 
+*graphicframework*slice*prop_b: 
+*graphicframework*slice*prop_a: 
+*graphicframework*timeinterval: 1
+last_selected_folder: Info
+ascii: off
+name: CartesianDomain
+}
+GOCAD_ORIGINAL_COORDINATE_SYSTEM
+NAME gocad
+PROJECTION Unknown
+DATUM Unknown
+AXIS_NAME X Y Z
+AXIS_UNIT m m m
+ZPOSITIVE Elevation
+END_ORIGINAL_COORDINATE_SYSTEM
+CLASSIFICATION " 3D Survey"  Seismic " 3D Survey" 
+AXIS_O -5 -5 -200 
+AXIS_U 310 0 0 
+AXIS_V 0 410 0 
+AXIS_W 0 0 150 
+AXIS_MIN 0 0 0 
+AXIS_MAX 1 1 1 
+AXIS_N 156 206 76 
+AXIS_NAME axis-1 axis-2 axis-3
+AXIS_UNIT "unitless" "unitless" "unitless" 
+AXIS_TYPE even even even
+
+
+
+END
