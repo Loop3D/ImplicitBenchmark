@@ -1,0 +1,8 @@
+# Inventory file written by SKUA-GOCAD Suite 2.9.5
+# Archive version: 2.9.5
+# This file is for troubleshooting purposes only.
+control.db	-1	
+data	-1	
+history.db	-1	
+project	-1	
+inventory.txt	-1	
