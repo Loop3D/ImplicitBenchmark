@@ -1,0 +1,244 @@
+<project version="2.9.5" format="2" commercial="15.5">
+	<plugins bundle="none">
+		<plugin name="Gocad" version="2.9.5" build-identifier="20151224-cl615796" option="viewer|Base|Surface|Volume|GenDataAnalysis"/>
+		<plugin name="Filters" version="2.9.5" build-identifier="20151224-cl615796" option=""/>
+		<plugin name="PluginFoundations" version="2.9.5" build-identifier="20151224-cl615796" option="PFFilters"/>
+		<plugin name="GraphableObjectViewer" version="2.9.5" build-identifier="20151224-cl615796" option="gov"/>
+		<plugin name="WorkflowFoundations" version="2.9.5" build-identifier="20151224-cl615796" option="cmw"/>
+		<plugin name="Tessellations" version="2.9.5" build-identifier="20151224-cl615796" option=""/>
+		<plugin name="Views2D" version="2.9.5" build-identifier="20151224-cl615796" option="Views2dMapViewer|Views2dXSectionViewer|Views2dLogViewer"/>
+		<plugin name="VolumeExplorer" version="2.9.5" build-identifier="20151224-cl615796" option=""/>
+		<plugin name="MiraUtilities" version="2.9.5" build-identifier="20160106" option="Mining_Export|Mining_Utilities|ISW"/>
+		<plugin name="InGrid" version="2.9.5" build-identifier="20151224-cl615796" option="InGridViewer|InGridStruct|InGridStrati"/>
+		<plugin name="InterpreterAssistant" version="2.9.5" build-identifier="20151224-cl615796" option=""/>
+		<plugin name="Stereonet" version="2.9.5" build-identifier="20151224-cl615796" option="Stereonet"/>
+		<plugin name="GIS" version="2.9.5" build-identifier="20160107" option=""/>
+		<plugin name="FilterIsatis" version="2.9.5" build-identifier="20151224-cl615796" option=""/>
+		<plugin name="SURFE15" version="1.0.0" build-identifier="20161219" option="SURFE15Function1"/>
+		<plugin name="ISW" version="2.9.5" build-identifier="20160107" option=""/>
+		<plugin name="InGridInterpretation" version="2.9.5" build-identifier="20151224-cl615796" option=""/>
+		<plugin name="Sparse" version="2.9.5" build-identifier="20160107" option=""/>
+	</plugins>
+	<objects>
+		<object>
+			<name><![CDATA[style_catalog]]></name>
+		</object>
+		<object>
+			<name><![CDATA[style_template_mgr]]></name>
+		</object>
+		<object>
+			<name><![CDATA[DPoints_p1_Exact]]></name>
+		</object>
+		<object>
+			<name><![CDATA[DPoints_p10_Exact]]></name>
+		</object>
+		<object>
+			<name><![CDATA[DPoints_p50_Exact]]></name>
+		</object>
+		<object>
+			<name><![CDATA[DPoints_p100_Exact]]></name>
+		</object>
+		<object>
+			<name><![CDATA[CPoints_p1_Exact]]></name>
+		</object>
+		<object>
+			<name><![CDATA[CPoints_p10_Exact]]></name>
+		</object>
+		<object>
+			<name><![CDATA[CPoints_p50_Exact]]></name>
+		</object>
+		<object>
+			<name><![CDATA[APoints_p50_Exact]]></name>
+		</object>
+		<object>
+			<name><![CDATA[APoints_p10_Exact]]></name>
+		</object>
+		<object>
+			<name><![CDATA[BPoints_p1_Exact]]></name>
+		</object>
+		<object>
+			<name><![CDATA[BPoints_p10_Exact]]></name>
+		</object>
+		<object>
+			<name><![CDATA[BPoints_p50_Exact]]></name>
+		</object>
+		<object>
+			<name><![CDATA[BPoints_p100_Exact]]></name>
+		</object>
+		<object>
+			<name><![CDATA[CPoints_p100_Exact]]></name>
+		</object>
+		<object>
+			<name><![CDATA[Dips_p50]]></name>
+		</object>
+		<object>
+			<name><![CDATA[Dips_p10]]></name>
+		</object>
+		<object>
+			<name><![CDATA[ABCD_Points_p50]]></name>
+		</object>
+		<object>
+			<name><![CDATA[ABCD_Points_p10]]></name>
+		</object>
+		<object>
+			<name><![CDATA[ABCD_Points_p1]]></name>
+		</object>
+		<object>
+			<name><![CDATA[DPoints_P10]]></name>
+		</object>
+		<object>
+			<name><![CDATA[DPoints_P50]]></name>
+		</object>
+		<object>
+			<name><![CDATA[DPoints_P1]]></name>
+		</object>
+		<object>
+			<name><![CDATA[CPoints_P1]]></name>
+		</object>
+		<object>
+			<name><![CDATA[CPoints_P10]]></name>
+		</object>
+		<object>
+			<name><![CDATA[CPoints_P50]]></name>
+		</object>
+		<object>
+			<name><![CDATA[BPoints_P50]]></name>
+		</object>
+		<object>
+			<name><![CDATA[BPoints_P10]]></name>
+		</object>
+		<object>
+			<name><![CDATA[BPoints_P1]]></name>
+		</object>
+		<object>
+			<name><![CDATA[APoints_p50]]></name>
+		</object>
+		<object>
+			<name><![CDATA[APoints_p10]]></name>
+		</object>
+		<object>
+			<name><![CDATA[APoints_p1_Exact]]></name>
+		</object>
+		<object>
+			<name><![CDATA[APoints_p1]]></name>
+		</object>
+		<object>
+			<name><![CDATA[APoints_p100_Exact]]></name>
+		</object>
+		<object>
+			<name><![CDATA[ABCD_XS_Points]]></name>
+		</object>
+		<object>
+			<name><![CDATA[ABCD_Points]]></name>
+		</object>
+		<object>
+			<name><![CDATA[DPoints]]></name>
+		</object>
+		<object>
+			<name><![CDATA[CPoints]]></name>
+		</object>
+		<object>
+			<name><![CDATA[BPoints]]></name>
+		</object>
+		<object>
+			<name><![CDATA[APoints]]></name>
+		</object>
+		<object>
+			<name><![CDATA[DSection]]></name>
+		</object>
+		<object>
+			<name><![CDATA[CSection]]></name>
+		</object>
+		<object>
+			<name><![CDATA[BSection]]></name>
+		</object>
+		<object>
+			<name><![CDATA[ASection]]></name>
+		</object>
+		<object>
+			<name><![CDATA[Solid100_30]]></name>
+		</object>
+		<object>
+			<name><![CDATA[Box]]></name>
+		</object>
+		<object>
+			<name><![CDATA[SmallFault]]></name>
+		</object>
+		<object>
+			<name><![CDATA[Dips]]></name>
+		</object>
+		<object>
+			<name><![CDATA[Dips_XS]]></name>
+		</object>
+		<object>
+			<name><![CDATA[Favorites]]></name>
+		</object>
+		<object>
+			<name><![CDATA[New_Column]]></name>
+		</object>
+		<object>
+			<name><![CDATA[application_objects]]></name>
+		</object>
+		<object>
+			<name><![CDATA[geobaselib]]></name>
+		</object>
+		<object>
+			<name><![CDATA[geologic_features]]></name>
+		</object>
+		<object>
+			<name><![CDATA[viewer_entity_mgr]]></name>
+		</object>
+		<object>
+			<name><![CDATA[entity_view_settings_catalog]]></name>
+		</object>
+		<object>
+			<name><![CDATA[colormap_entity_mgr]]></name>
+		</object>
+		<object>
+			<name><![CDATA[fluid_component_mgr]]></name>
+		</object>
+		<object>
+			<name><![CDATA[gpg_well_list_settings_catalog]]></name>
+		</object>
+		<object>
+			<name><![CDATA[3D Viewer]]></name>
+		</object>
+		<object>
+			<name><![CDATA[3D Viewer 1]]></name>
+		</object>
+		<object>
+			<name><![CDATA[xm_mainwindow]]></name>
+		</object>
+		<object>
+			<name><![CDATA[symbol_entity_mgr]]></name>
+		</object>
+		<object>
+			<name><![CDATA[GOLegend]]></name>
+		</object>
+		<object>
+			<name><![CDATA[GOGrid]]></name>
+		</object>
+		<object>
+			<name><![CDATA[GOPlotWindow]]></name>
+		</object>
+		<object>
+			<name><![CDATA[GOColorbar]]></name>
+		</object>
+		<object>
+			<name><![CDATA[GOPlot]]></name>
+		</object>
+		<object>
+			<name><![CDATA[GOAxis]]></name>
+		</object>
+		<object>
+			<name><![CDATA[GOCurve]]></name>
+		</object>
+		<object>
+			<name><![CDATA[ResourceTablePlotStyleCatalog]]></name>
+		</object>
+		<object>
+			<name><![CDATA[Views2D]]></name>
+		</object>
+	</objects>
+	<data/>
+</project>
