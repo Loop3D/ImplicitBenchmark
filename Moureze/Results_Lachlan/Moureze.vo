@@ -1,17 +1,5 @@
 GOCAD Voxet 1 
 HEADER {
-*graphicframework*slice*visible: false
-*graphicframework*slice*smooth: false
-*graphicframework*slice*axis: 1
-*graphicframework*slice*index: 1
-*graphicframework*slice*colormap: 
-*graphicframework*slice*prop_r: 
-*graphicframework*slice*prop_g: 
-*graphicframework*slice*prop_b: 
-*graphicframework*slice*prop_a: 
-*graphicframework*timeinterval: 1
-last_selected_folder: Info
-ascii: off
 name: CartesianDomain
 }
 GOCAD_ORIGINAL_COORDINATE_SYSTEM

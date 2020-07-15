@@ -42,10 +42,10 @@ AXIS_TYPE even even even
 
 
 
-PROPERTY 1 result
-PROPERTY_CLASS 1 result
+PROPERTY 1 result_PLI
+PROPERTY_CLASS 1 result_PLI
 PROPERTY_KIND 1 " Real Number" 
-PROPERTY_CLASS_HEADER 1 result {
+PROPERTY_CLASS_HEADER 1 result_PLI {
 kind: Real Number
 unit: unitless
 low_clip: -18.21204
@@ -63,5 +63,28 @@ PROP_ESIZE 1 4
 PROP_ETYPE 1  IEEE
 PROP_FORMAT 1 RAW
 PROP_OFFSET 1 0
-PROP_FILE 1 ResultsLoopStructural_result@@
+PROP_FILE 1 ResultsLoopStructural_result_PLI_1e5@@
+
+PROPERTY 1 result_FDI
+PROPERTY_CLASS 1 result_FDI
+PROPERTY_KIND 1 " Real Number" 
+PROPERTY_CLASS_HEADER 1 result_FDI {
+kind: Real Number
+unit: unitless
+low_clip: -18.21204
+high_clip: 15.50703
+pclip: 99
+colormap: high_res
+
+}
+PROPERTY_SUBCLASS 1 QUANTITY Float
+PROP_ORIGINAL_UNIT 1 unitless
+PROP_UNIT 1 unitless
+PROP_NO_DATA_VALUE 1 -99999
+PROP_SAMPLE_STATS 1 1999920 -1.35251 42.8351 -32.8486 24.1522
+PROP_ESIZE 1 4
+PROP_ETYPE 1  IEEE
+PROP_FORMAT 1 RAW
+PROP_OFFSET 1 0
+PROP_FILE 1 ResultsLoopStructural_result_FDI_2e4@@
 END
