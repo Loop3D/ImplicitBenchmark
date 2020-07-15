@@ -1,0 +1,60 @@
+GOCAD Voxet 1 
+HEADER {
+name: ResultBox
+smoothed: on
+use_private_colormaps: off
+probe_type: Sections
+size: 0 0 0 320 20 90
+fence0: 3 1 2 0 0 0 320 20 90
+nb_fences: 1
+sections: 3 1 1 0 2 0 0 3 1 0
+*gname*size: 6
+last_selected_folder: Info
+ascii: off
+}
+GOCAD_ORIGINAL_COORDINATE_SYSTEM
+NAME " Pdgm_Epic Local" 
+PROJECTION Unknown
+DATUM Unknown
+AXIS_NAME X Y Z
+AXIS_UNIT m m m
+ZPOSITIVE Elevation
+END_ORIGINAL_COORDINATE_SYSTEM
+CLASSIFICATION "3D Survey" Seismic "3D Survey"
+AXIS_O 0 -0.5 0 
+AXIS_U 16 0 0 
+AXIS_V 0 1 0 
+AXIS_W 0 0 4.5 
+AXIS_MIN 0 0 0 
+AXIS_MAX 1 1 1 
+AXIS_N 321 21 91 
+AXIS_NAME axis-1 axis-2 axis-3
+AXIS_UNIT "unitless" "unitless" "unitless" 
+AXIS_TYPE even even even
+
+
+
+
+PROPERTY 1 Strati
+PROPERTY_CLASS 1 strati
+PROPERTY_KIND 1 " Real Number" 
+PROPERTY_CLASS_HEADER 1 strati {
+kind: Real Number
+unit: unitless
+pclip: 99
+colormap: BnBu
+*colormap*nodata: false
+low_clip: 0
+high_clip: 5
+
+}
+PROPERTY_SUBCLASS 1 QUANTITY Float
+PROP_ORIGINAL_UNIT 1 none
+PROP_UNIT 1 unitless
+PROP_NO_DATA_VALUE 1 -99999
+PROP_ESIZE 1 4
+PROP_ETYPE 1  IEEE
+PROP_FORMAT 1 RAW
+PROP_OFFSET 1 0
+PROP_FILE 1 ResultsLoopStructural_result@@
+END
