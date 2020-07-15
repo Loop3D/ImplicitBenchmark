@@ -7,11 +7,11 @@
 		<plugin name="Tessellations" version="3.0.0" build-identifier="20180626-cl830372" option=""/>
 		<plugin name="GraphableObjectViewer" version="3.0.0" build-identifier="20180626-cl830372" option="gov"/>
 		<plugin name="InGrid" version="3.0.0" build-identifier="20180626-cl830372" option="InGridViewer|InGridStrati|InGridStruct"/>
-		<plugin name="KivSimEiBase" version="3.0.0" build-identifier="20180626-cl830372" option=""/>
 		<plugin name="Views2D" version="3.0.0" build-identifier="20180626-cl830372" option="Views2dMapViewer|Views2dXSectionViewer|Views2dLogViewer"/>
-		<plugin name="Stereonet" version="3.0.0" build-identifier="20180626-cl830372" option="Stereonet"/>
-		<plugin name="FilterIsatis" version="3.0.0" build-identifier="20180626-cl830372" option=""/>
 		<plugin name="SURFE" version="1.0.0a1" build-identifier="20200708" option=""/>
+		<plugin name="FilterIsatis" version="3.0.0" build-identifier="20180626-cl830372" option=""/>
+		<plugin name="KivSimEiBase" version="3.0.0" build-identifier="20180626-cl830372" option=""/>
+		<plugin name="Stereonet" version="3.0.0" build-identifier="20180626-cl830372" option="Stereonet"/>
 		<plugin name="AbaqusConnector" version="3.0.0" build-identifier="20180626-cl830372" option=""/>
 	</plugins>
 	<objects>
@@ -22,22 +22,19 @@
 			<name><![CDATA[style_template_mgr]]></name>
 		</object>
 		<object>
-			<name><![CDATA[Moureze_R3_Smooth_10_NS_0]]></name>
+			<name><![CDATA[Moureze_R3_Smooth_10_NS]]></name>
 		</object>
 		<object>
-			<name><![CDATA[Moureze_R3_Smooth_10_EW_0]]></name>
+			<name><![CDATA[Moureze_R3_Smooth_10_EW]]></name>
 		</object>
 		<object>
-			<name><![CDATA[Moureze_R3_Smooth_10_ocp50dp50_0]]></name>
+			<name><![CDATA[Moureze_R3_Smooth_10_ocp50dp50]]></name>
 		</object>
 		<object>
-			<name><![CDATA[Moureze_R3_Smooth_10_ocp10dp10_0]]></name>
+			<name><![CDATA[Moureze_R3_Smooth_10_ocp10dp10]]></name>
 		</object>
 		<object>
 			<name><![CDATA[Moureze_R3_Smooth_10_ocp1dp1]]></name>
-		</object>
-		<object>
-			<name><![CDATA[Moureze_R3_Smooth_10_ocp1dp1_BAD]]></name>
 		</object>
 		<object>
 			<name><![CDATA[Moureze_Points_P1]]></name>
@@ -47,9 +44,6 @@
 		</object>
 		<object>
 			<name><![CDATA[Moureze_Points_P50]]></name>
-		</object>
-		<object>
-			<name><![CDATA[Moureze_R3_Smooth_100]]></name>
 		</object>
 		<object>
 			<name><![CDATA[Sections_EW]]></name>
@@ -65,6 +59,21 @@
 		</object>
 		<object>
 			<name><![CDATA[MourezeSolid4]]></name>
+		</object>
+		<object>
+			<name><![CDATA[Moureze_MQS1000_Exact]]></name>
+		</object>
+		<object>
+			<name><![CDATA[Moureze_MQS10_smooth10]]></name>
+		</object>
+		<object>
+			<name><![CDATA[Moureze_R3_smooth10]]></name>
+		</object>
+		<object>
+			<name><![CDATA[Moureze_R3_Exact]]></name>
+		</object>
+		<object>
+			<name><![CDATA[Moureze_MQS5_Exact]]></name>
 		</object>
 		<object>
 			<name><![CDATA[AssignRandomColors]]></name>

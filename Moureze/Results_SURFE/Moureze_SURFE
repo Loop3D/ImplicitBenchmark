@@ -1,0 +1,234 @@
+GOCAD Voxet 1 
+HEADER {
+*graphicframework*slice*visible: false
+*graphicframework*slice*smooth: false
+*graphicframework*slice*axis: 1
+*graphicframework*slice*index: 1
+*graphicframework*timeinterval: 1
+last_selected_folder: Info
+ascii: off
+name: CartesianDomain
+}
+GOCAD_ORIGINAL_COORDINATE_SYSTEM
+NAME gocad
+PROJECTION Unknown
+DATUM Unknown
+AXIS_NAME X Y Z
+AXIS_UNIT m m m
+ZPOSITIVE Elevation
+END_ORIGINAL_COORDINATE_SYSTEM
+CLASSIFICATION "3D Survey" Seismic "3D Survey"
+AXIS_O -5 -5 -200 
+AXIS_U 310 0 0 
+AXIS_V 0 410 0 
+AXIS_W 0 0 150 
+AXIS_MIN 0 0 0 
+AXIS_MAX 1 1 1 
+AXIS_N 156 206 76 
+AXIS_NAME axis-1 axis-2 axis-3
+AXIS_UNIT "unitless" "unitless" "unitless" 
+AXIS_TYPE even even even
+
+
+
+
+PROPERTY 1 Moureze_R3_scalarfield
+PROPERTY_CLASS 1 moureze_r3_scalarfield
+PROPERTY_KIND 1 " Real Number" 
+PROPERTY_CLASS_HEADER 1 moureze_r3_scalarfield {
+kind: Real Number
+unit: unitless
+pclip: 99
+*colormap*standard*colors: 0 0 0 1 85 0 1 1 170 1 1 0 255 1 0 0 
+}
+PROPERTY_SUBCLASS 1 QUANTITY Float
+PROP_ORIGINAL_UNIT 1 unitless
+PROP_UNIT 1 unitless
+PROP_NO_DATA_VALUE 1 -99999
+PROP_SAMPLE_STATS 1 1999920 -4.60222 549.032 -86.4343 77.7962
+PROP_ESIZE 1 4
+PROP_ETYPE 1  IEEE
+PROP_FORMAT 1 RAW
+PROP_OFFSET 1 0
+PROP_FILE 1 Moureze_SURFECartesianDomain_Moureze_R3_scalarfield@@
+
+PROPERTY 2 Moureze_R3_Smooth_10_ocp50dp50_scalarfield
+PROPERTY_CLASS 2 moureze_r3_smooth_10_ocp50dp50_scalarfield
+PROPERTY_KIND 2 " Real Number" 
+PROPERTY_CLASS_HEADER 2 moureze_r3_smooth_10_ocp50dp50_scalarfield {
+kind: Real Number
+unit: unitless
+pclip: 99
+*colormap*standard*colors: 0 0 0 1 85 0 1 1 170 1 1 0 255 1 0 0 
+}
+PROPERTY_SUBCLASS 2 QUANTITY Float
+PROP_ORIGINAL_UNIT 2 unitless
+PROP_UNIT 2 unitless
+PROP_NO_DATA_VALUE 2 -99999
+PROP_SAMPLE_STATS 2 1999920 -4.46586 477.056 -78.9153 76.5364
+PROP_ESIZE 2 4
+PROP_ETYPE 2  IEEE
+PROP_FORMAT 2 RAW
+PROP_OFFSET 2 0
+PROP_FILE 2 Moureze_SURFECartesianDomain_Moureze_R3_Smooth_10_ocp50dp50_scalarfield@@
+
+PROPERTY 3 Moureze_R3_Smooth_10_ocp10dp10_scalarfield
+PROPERTY_CLASS 3 moureze_r3_smooth_10_ocp10dp10_scalarfield
+PROPERTY_KIND 3 " Real Number" 
+PROPERTY_CLASS_HEADER 3 moureze_r3_smooth_10_ocp10dp10_scalarfield {
+kind: Real Number
+unit: unitless
+pclip: 99
+*colormap*standard*colors: 0 0 0 1 85 0 1 1 170 1 1 0 255 1 0 0 
+}
+PROPERTY_SUBCLASS 3 QUANTITY Float
+PROP_ORIGINAL_UNIT 3 unitless
+PROP_UNIT 3 unitless
+PROP_NO_DATA_VALUE 3 -99999
+PROP_SAMPLE_STATS 3 1999920 -4.46586 477.056 -78.9153 76.5364
+PROP_ESIZE 3 4
+PROP_ETYPE 3  IEEE
+PROP_FORMAT 3 RAW
+PROP_OFFSET 3 0
+PROP_FILE 3 Moureze_SURFECartesianDomain_Moureze_R3_Smooth_10_ocp10dp10_scalarfield@@
+
+PROPERTY 4 Moureze_R3_Smooth_10_ocp1dp1_scalarfield
+PROPERTY_CLASS 4 moureze_r3_smooth_10_ocp1dp1_scalarfield
+PROPERTY_KIND 4 " Real Number" 
+PROPERTY_CLASS_HEADER 4 moureze_r3_smooth_10_ocp1dp1_scalarfield {
+kind: Real Number
+unit: unitless
+pclip: 99
+*colormap*standard*colors: 0 0 0 1 85 0 1 1 170 1 1 0 255 1 0 0 
+}
+PROPERTY_SUBCLASS 4 QUANTITY Float
+PROP_ORIGINAL_UNIT 4 unitless
+PROP_UNIT 4 unitless
+PROP_NO_DATA_VALUE 4 -99999
+PROP_SAMPLE_STATS 4 1999920 -4.46586 477.056 -78.9153 76.5364
+PROP_ESIZE 4 4
+PROP_ETYPE 4  IEEE
+PROP_FORMAT 4 RAW
+PROP_OFFSET 4 0
+PROP_FILE 4 Moureze_SURFECartesianDomain_Moureze_R3_Smooth_10_ocp1dp1_scalarfield@@
+
+PROPERTY 5 Moureze_R3_Smooth_10_ocp1dp1_scalarfield_0
+PROPERTY_CLASS 5 moureze_r3_smooth_10_ocp1dp1_scalarfield_0
+PROPERTY_KIND 5 " Real Number" 
+PROPERTY_CLASS_HEADER 5 moureze_r3_smooth_10_ocp1dp1_scalarfield_0 {
+kind: Real Number
+unit: unitless
+pclip: 99
+*colormap*standard*colors: 0 0 0 1 85 0 1 1 170 1 1 0 255 1 0 0 
+}
+PROPERTY_SUBCLASS 5 QUANTITY Float
+PROP_ORIGINAL_UNIT 5 unitless
+PROP_UNIT 5 unitless
+PROP_NO_DATA_VALUE 5 -99999
+PROP_SAMPLE_STATS 5 1999920 -4.46586 477.056 -78.9153 76.5364
+PROP_ESIZE 5 4
+PROP_ETYPE 5  IEEE
+PROP_FORMAT 5 RAW
+PROP_OFFSET 5 0
+PROP_FILE 5 Moureze_SURFECartesianDomain_Moureze_R3_Smooth_10_ocp1dp1_scalarfield_0@@
+
+PROPERTY 6 Moureze_R3_Smooth_10_ocp1dp1_scalarfield_1
+PROPERTY_CLASS 6 moureze_r3_smooth_10_ocp1dp1_scalarfield_1
+PROPERTY_KIND 6 " Real Number" 
+PROPERTY_CLASS_HEADER 6 moureze_r3_smooth_10_ocp1dp1_scalarfield_1 {
+kind: Real Number
+unit: unitless
+pclip: 99
+*colormap*standard*colors: 0 0 0 1 85 0 1 1 170 1 1 0 255 1 0 0 
+}
+PROPERTY_SUBCLASS 6 QUANTITY Float
+PROP_ORIGINAL_UNIT 6 unitless
+PROP_UNIT 6 unitless
+PROP_NO_DATA_VALUE 6 -99999
+PROP_SAMPLE_STATS 6 1999920 -1.12817 84.6259 -34.6123 31.4026
+PROP_ESIZE 6 4
+PROP_ETYPE 6  IEEE
+PROP_FORMAT 6 RAW
+PROP_OFFSET 6 0
+PROP_FILE 6 Moureze_SURFECartesianDomain_Moureze_R3_Smooth_10_ocp1dp1_scalarfield_1@@
+
+PROPERTY 7 Moureze_R3_Smooth_10_ocp10dp10_scalarfield_0
+PROPERTY_CLASS 7 moureze_r3_smooth_10_ocp10dp10_scalarfield_0
+PROPERTY_KIND 7 " Real Number" 
+PROPERTY_CLASS_HEADER 7 moureze_r3_smooth_10_ocp10dp10_scalarfield_0 {
+kind: Real Number
+unit: unitless
+pclip: 99
+*colormap*standard*colors: 0 0 0 1 85 0 1 1 170 1 1 0 255 1 0 0 
+}
+PROPERTY_SUBCLASS 7 QUANTITY Float
+PROP_ORIGINAL_UNIT 7 unitless
+PROP_UNIT 7 unitless
+PROP_NO_DATA_VALUE 7 -99999
+PROP_SAMPLE_STATS 7 1999920 -3.45391 289.657 -73.7472 69.7338
+PROP_ESIZE 7 4
+PROP_ETYPE 7  IEEE
+PROP_FORMAT 7 RAW
+PROP_OFFSET 7 0
+PROP_FILE 7 Moureze_SURFECartesianDomain_Moureze_R3_Smooth_10_ocp10dp10_scalarfield_0@@
+
+PROPERTY 8 Moureze_R3_Smooth_10_ocp50dp50_scalarfield_0
+PROPERTY_CLASS 8 moureze_r3_smooth_10_ocp50dp50_scalarfield_0
+PROPERTY_KIND 8 " Real Number" 
+PROPERTY_CLASS_HEADER 8 moureze_r3_smooth_10_ocp50dp50_scalarfield_0 {
+kind: Real Number
+unit: unitless
+pclip: 99
+*colormap*standard*colors: 0 0 0 1 85 0 1 1 170 1 1 0 255 1 0 0 
+}
+PROPERTY_SUBCLASS 8 QUANTITY Float
+PROP_ORIGINAL_UNIT 8 unitless
+PROP_UNIT 8 unitless
+PROP_NO_DATA_VALUE 8 -99999
+PROP_SAMPLE_STATS 8 1999920 -3.63772 396.092 -84.8969 67.5441
+PROP_ESIZE 8 4
+PROP_ETYPE 8  IEEE
+PROP_FORMAT 8 RAW
+PROP_OFFSET 8 0
+PROP_FILE 8 Moureze_SURFECartesianDomain_Moureze_R3_Smooth_10_ocp50dp50_scalarfield_0@@
+
+PROPERTY 9 Moureze_R3_Smooth_10_EW_scalarfield
+PROPERTY_CLASS 9 moureze_r3_smooth_10_ew_scalarfield
+PROPERTY_KIND 9 " Real Number" 
+PROPERTY_CLASS_HEADER 9 moureze_r3_smooth_10_ew_scalarfield {
+kind: Real Number
+unit: unitless
+pclip: 99
+*colormap*standard*colors: 0 0 0 1 85 0 1 1 170 1 1 0 255 1 0 0 
+}
+PROPERTY_SUBCLASS 9 QUANTITY Float
+PROP_ORIGINAL_UNIT 9 unitless
+PROP_UNIT 9 unitless
+PROP_NO_DATA_VALUE 9 -99999
+PROP_SAMPLE_STATS 9 1999920 -5.31374 454.74 -86.0311 72.2389
+PROP_ESIZE 9 4
+PROP_ETYPE 9  IEEE
+PROP_FORMAT 9 RAW
+PROP_OFFSET 9 0
+PROP_FILE 9 Moureze_SURFECartesianDomain_Moureze_R3_Smooth_10_EW_scalarfield@@
+
+PROPERTY 10 Moureze_R3_Smooth_10_NS_scalarfield
+PROPERTY_CLASS 10 moureze_r3_smooth_10_ns_scalarfield
+PROPERTY_KIND 10 " Real Number" 
+PROPERTY_CLASS_HEADER 10 moureze_r3_smooth_10_ns_scalarfield {
+kind: Real Number
+unit: unitless
+pclip: 99
+*colormap*standard*colors: 0 0 0 1 85 0 1 1 170 1 1 0 255 1 0 0 
+}
+PROPERTY_SUBCLASS 10 QUANTITY Float
+PROP_ORIGINAL_UNIT 10 unitless
+PROP_UNIT 10 unitless
+PROP_NO_DATA_VALUE 10 -99999
+PROP_SAMPLE_STATS 10 1999920 -5.03761 485.431 -83.9395 74.4525
+PROP_ESIZE 10 4
+PROP_ETYPE 10  IEEE
+PROP_FORMAT 10 RAW
+PROP_OFFSET 10 0
+PROP_FILE 10 Moureze_SURFECartesianDomain_Moureze_R3_Smooth_10_NS_scalarfield@@
+END
