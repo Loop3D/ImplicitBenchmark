@@ -1,0 +1,100 @@
+<UserObjects>
+ <LocalStratigraphicColumn version="2.0">
+  <name>Hecho_Sparse</name>
+  <classification_type>chronostratigraphy</classification_type>
+  <rank_names>
+   <rank_name>Eon</rank_name>
+  </rank_names>
+  <units use_base_names="false">
+   <unit>
+    <name>above_H1</name>
+    <color>0.827451 0.827451 0.827451 1</color>
+    <base>
+     <name>H1</name>
+     <relation>stratigraphic</relation>
+     <color>1 0 0 1</color>
+    </base>
+   </unit>
+   <unit>
+    <name>H1</name>
+    <color>1 0.270588 0 1</color>
+    <top>
+     <name>H1</name>
+     <relation>stratigraphic</relation>
+     <color>1 0 0 1</color>
+    </top>
+    <base>
+     <name>H2</name>
+     <relation>stratigraphic</relation>
+     <color>1 0.647059 0 1</color>
+    </base>
+   </unit>
+   <unit>
+    <name>H2</name>
+    <color>0.854902 0.647059 0.12549 1</color>
+    <top>
+     <name>H2</name>
+     <relation>stratigraphic</relation>
+     <color>1 0.647059 0 1</color>
+    </top>
+    <base>
+     <name>H4</name>
+     <relation>stratigraphic</relation>
+     <color>0 1 0.498039 1</color>
+    </base>
+   </unit>
+   <unit>
+    <name>H4</name>
+    <color>0.180392 0.545098 0.341176 1</color>
+    <top>
+     <name>H4</name>
+     <relation>stratigraphic</relation>
+     <color>0 1 0.498039 1</color>
+    </top>
+    <base>
+     <name>H5</name>
+     <relation>stratigraphic</relation>
+     <color>1 1 0 1</color>
+    </base>
+   </unit>
+   <unit>
+    <name>H5</name>
+    <color>1 0.843137 0 1</color>
+    <top>
+     <name>H5</name>
+     <relation>stratigraphic</relation>
+     <color>1 1 0 1</color>
+    </top>
+    <base>
+     <name>H7</name>
+     <relation>stratigraphic</relation>
+     <color>0 1 1 1</color>
+    </base>
+   </unit>
+   <unit>
+    <name>H7</name>
+    <color>0.25098 0.878431 0.815686 1</color>
+    <top>
+     <name>H7</name>
+     <relation>stratigraphic</relation>
+     <color>0 1 1 1</color>
+    </top>
+    <base>
+     <name>H9</name>
+     <relation>stratigraphic</relation>
+     <color>0 0 1 1</color>
+    </base>
+   </unit>
+   <unit>
+    <name>H9</name>
+    <color>0.392157 0.584314 0.929412 1</color>
+    <top>
+     <name>H9</name>
+     <relation>stratigraphic</relation>
+     <color>0 0 1 1</color>
+    </top>
+   </unit>
+  </units>
+ </LocalStratigraphicColumn>
+</UserObjects>
+

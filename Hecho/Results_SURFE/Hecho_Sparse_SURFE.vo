@@ -1,0 +1,392 @@
+GOCAD Voxet 1 
+HEADER {
+name: ResultBox
+smoothed: on
+use_private_colormaps: off
+probe_type: Sections
+size: 0 0 0 320 20 90
+fence0: 3 1 2 0 0 0 320 20 90
+nb_fences: 1
+sections: 3 1 0 29 2 0 17 3 0 2
+*gname*size: 6
+last_selected_folder: Info
+ascii: off
+*painted*variable: Strati
+painted: off
+}
+GOCAD_ORIGINAL_COORDINATE_SYSTEM
+NAME " Pdgm_Epic Local" 
+PROJECTION Unknown
+DATUM Unknown
+AXIS_NAME X Y Z
+AXIS_UNIT m m m
+ZPOSITIVE Elevation
+END_ORIGINAL_COORDINATE_SYSTEM
+CLASSIFICATION "3D Survey" Seismic "3D Survey"
+AXIS_O 0 -0.5 0 
+AXIS_U 16 0 0 
+AXIS_V 0 1 0 
+AXIS_W 0 0 4.5 
+AXIS_MIN 0 0 0 
+AXIS_MAX 1 1 1 
+AXIS_N 321 21 91 
+AXIS_NAME axis-1 axis-2 axis-3
+AXIS_UNIT "unitless" "unitless" "unitless" 
+AXIS_TYPE even even even
+
+
+
+
+PROPERTY 1 Strati
+PROPERTY_CLASS 1 strati
+PROPERTY_KIND 1 " Real Number" 
+PROPERTY_CLASS_HEADER 1 strati {
+kind: Real Number
+unit: unitless
+pclip: 99
+colormap: BnBu
+*colormap*nodata: false
+low_clip: 0
+high_clip: 5
+name: strati
+*colormap*BnBu*colors: 0 0.968626976 0.988234997 0.941175997 32 0.878431022 0.952941 0.858824015 64 0.800000012 0.92156899 0.772548974 96 0.658824027 0.866666973 0.709803998 128 0.482353002 0.800000012 0.768626988 159 0.305882007 0.701960981 0.827450991 191 0.168626994 0.549019992 0.745097995 223 0.0313724987 0.407842994 0.674510002 255 0.0313724987 0.25097999 0.505882025 
+}
+PROPERTY_SUBCLASS 1 QUANTITY Float
+PROP_ORIGINAL_UNIT 1 unitless
+PROP_UNIT 1 unitless
+PROP_NO_DATA_VALUE 1 -99999
+PROP_SAMPLE_STATS 1 613431 2.30559 2.49957 -0.93106 6.1157
+PROP_ESIZE 1 4
+PROP_ETYPE 1  IEEE
+PROP_FORMAT 1 RAW
+PROP_OFFSET 1 0
+PROP_FILE 1 Hecho_Sparse_SURFEResultBox_Strati@@
+
+PROPERTY 2 H1_scalarfield
+PROPERTY_CLASS 2 h1_scalarfield
+PROPERTY_KIND 2 " Real Number" 
+PROPERTY_CLASS_HEADER 2 h1_scalarfield {
+kind: Real Number
+unit: unitless
+pclip: 99
+*colormap*standard*colors: 0 0 0 1 85 0 1 1 170 1 1 0 255 1 0 0 
+}
+PROPERTY_SUBCLASS 2 QUANTITY Float
+PROP_ORIGINAL_UNIT 2 unitless
+PROP_UNIT 2 unitless
+PROP_NO_DATA_VALUE 2 -99999
+PROP_SAMPLE_STATS 2 613431 -1.66536 4.26201 -7.22412 2.14411
+PROP_ESIZE 2 4
+PROP_ETYPE 2  IEEE
+PROP_FORMAT 2 RAW
+PROP_OFFSET 2 0
+PROP_FILE 2 Hecho_Sparse_SURFEResultBox_H1_scalarfield@@
+
+PROPERTY 3 H1_scalarfield_vectorfield
+PROPERTY_CLASS 3 h1_scalarfield_vectorfield
+PROP_NUMBER_FLOAT_ELEMENTS 3  3
+PROPERTY_KIND 3 " Real Number" 
+PROPERTY_CLASS_HEADER 3 h1_scalarfield_vectorfield {
+kind: Real Number
+unit: unitless
+pclip: 99
+*colormap*standard*colors: 0 0 0 1 85 0 1 1 170 1 1 0 255 1 0 0 
+}
+PROPERTY_SUBCLASS 3 QUANTITY Float
+PROP_ORIGINAL_UNIT 3 none
+PROP_UNIT 3 unitless
+PROP_NO_DATA_VALUE 3 -99999
+PROP_SAMPLE_STATS 3 613431 0 0 0 0
+PROP_ESIZE 3 4
+PROP_ETYPE 3  IEEE
+PROP_FORMAT 3 RAW
+PROP_OFFSET 3 0
+PROP_FILE 3 Hecho_Sparse_SURFEResultBox_H1_scalarfield_vectorfield@@
+
+PROPERTY 4 H2_scalarfield
+PROPERTY_CLASS 4 h2_scalarfield
+PROPERTY_KIND 4 " Real Number" 
+PROPERTY_CLASS_HEADER 4 h2_scalarfield {
+kind: Real Number
+unit: unitless
+pclip: 99
+*colormap*standard*colors: 0 0 0 1 85 0 1 1 170 1 1 0 255 1 0 0 
+}
+PROPERTY_SUBCLASS 4 QUANTITY Float
+PROP_ORIGINAL_UNIT 4 unitless
+PROP_UNIT 4 unitless
+PROP_NO_DATA_VALUE 4 -99999
+PROP_SAMPLE_STATS 4 613431 -0.79749 4.2521 -6.3673 3.00967
+PROP_ESIZE 4 4
+PROP_ETYPE 4  IEEE
+PROP_FORMAT 4 RAW
+PROP_OFFSET 4 0
+PROP_FILE 4 Hecho_Sparse_SURFEResultBox_H2_scalarfield@@
+
+PROPERTY 5 H2_scalarfield_vectorfield
+PROPERTY_CLASS 5 h2_scalarfield_vectorfield
+PROP_NUMBER_FLOAT_ELEMENTS 5  3
+PROPERTY_KIND 5 " Real Number" 
+PROPERTY_CLASS_HEADER 5 h2_scalarfield_vectorfield {
+kind: Real Number
+unit: unitless
+pclip: 99
+*colormap*standard*colors: 0 0 0 1 85 0 1 1 170 1 1 0 255 1 0 0 
+}
+PROPERTY_SUBCLASS 5 QUANTITY Float
+PROP_ORIGINAL_UNIT 5 none
+PROP_UNIT 5 unitless
+PROP_NO_DATA_VALUE 5 -99999
+PROP_SAMPLE_STATS 5 613431 0 0 0 0
+PROP_ESIZE 5 4
+PROP_ETYPE 5  IEEE
+PROP_FORMAT 5 RAW
+PROP_OFFSET 5 0
+PROP_FILE 5 Hecho_Sparse_SURFEResultBox_H2_scalarfield_vectorfield@@
+
+PROPERTY 6 H4_scalarfield
+PROPERTY_CLASS 6 h4_scalarfield
+PROPERTY_KIND 6 " Real Number" 
+PROPERTY_CLASS_HEADER 6 h4_scalarfield {
+kind: Real Number
+unit: unitless
+pclip: 99
+*colormap*standard*colors: 0 0 0 1 85 0 1 1 170 1 1 0 255 1 0 0 
+}
+PROPERTY_SUBCLASS 6 QUANTITY Float
+PROP_ORIGINAL_UNIT 6 unitless
+PROP_UNIT 6 unitless
+PROP_NO_DATA_VALUE 6 -99999
+PROP_SAMPLE_STATS 6 613431 0.330798 4.32185 -5.37328 4.08645
+PROP_ESIZE 6 4
+PROP_ETYPE 6  IEEE
+PROP_FORMAT 6 RAW
+PROP_OFFSET 6 0
+PROP_FILE 6 Hecho_Sparse_SURFEResultBox_H4_scalarfield@@
+
+PROPERTY 7 H4_scalarfield_vectorfield
+PROPERTY_CLASS 7 h4_scalarfield_vectorfield
+PROP_NUMBER_FLOAT_ELEMENTS 7  3
+PROPERTY_KIND 7 " Real Number" 
+PROPERTY_CLASS_HEADER 7 h4_scalarfield_vectorfield {
+kind: Real Number
+unit: unitless
+pclip: 99
+*colormap*standard*colors: 0 0 0 1 85 0 1 1 170 1 1 0 255 1 0 0 
+}
+PROPERTY_SUBCLASS 7 QUANTITY Float
+PROP_ORIGINAL_UNIT 7 none
+PROP_UNIT 7 unitless
+PROP_NO_DATA_VALUE 7 -99999
+PROP_SAMPLE_STATS 7 613431 0 0 0 0
+PROP_ESIZE 7 4
+PROP_ETYPE 7  IEEE
+PROP_FORMAT 7 RAW
+PROP_OFFSET 7 0
+PROP_FILE 7 Hecho_Sparse_SURFEResultBox_H4_scalarfield_vectorfield@@
+
+PROPERTY 8 H5_scalarfield
+PROPERTY_CLASS 8 h5_scalarfield
+PROPERTY_KIND 8 " Real Number" 
+PROPERTY_CLASS_HEADER 8 h5_scalarfield {
+kind: Real Number
+unit: unitless
+pclip: 99
+*colormap*standard*colors: 0 0 0 1 85 0 1 1 170 1 1 0 255 1 0 0 
+}
+PROPERTY_SUBCLASS 8 QUANTITY Float
+PROP_ORIGINAL_UNIT 8 unitless
+PROP_UNIT 8 unitless
+PROP_NO_DATA_VALUE 8 -99999
+PROP_SAMPLE_STATS 8 613431 -0.156214 1.35838 -3.72609 2.61547
+PROP_ESIZE 8 4
+PROP_ETYPE 8  IEEE
+PROP_FORMAT 8 RAW
+PROP_OFFSET 8 0
+PROP_FILE 8 Hecho_Sparse_SURFEResultBox_H5_scalarfield@@
+
+PROPERTY 9 H5_scalarfield_vectorfield
+PROPERTY_CLASS 9 h5_scalarfield_vectorfield
+PROP_NUMBER_FLOAT_ELEMENTS 9  3
+PROPERTY_KIND 9 " Real Number" 
+PROPERTY_CLASS_HEADER 9 h5_scalarfield_vectorfield {
+kind: Real Number
+unit: unitless
+pclip: 99
+*colormap*standard*colors: 0 0 0 1 85 0 1 1 170 1 1 0 255 1 0 0 
+}
+PROPERTY_SUBCLASS 9 QUANTITY Float
+PROP_ORIGINAL_UNIT 9 none
+PROP_UNIT 9 unitless
+PROP_NO_DATA_VALUE 9 -99999
+PROP_SAMPLE_STATS 9 613431 0 0 0 0
+PROP_ESIZE 9 4
+PROP_ETYPE 9  IEEE
+PROP_FORMAT 9 RAW
+PROP_OFFSET 9 0
+PROP_FILE 9 Hecho_Sparse_SURFEResultBox_H5_scalarfield_vectorfield@@
+
+PROPERTY 10 H7_scalarfield
+PROPERTY_CLASS 10 h7_scalarfield
+PROPERTY_KIND 10 " Real Number" 
+PROPERTY_CLASS_HEADER 10 h7_scalarfield {
+kind: Real Number
+unit: unitless
+pclip: 99
+*colormap*standard*colors: 0 0 0 1 85 0 1 1 170 1 1 0 255 1 0 0 
+}
+PROPERTY_SUBCLASS 10 QUANTITY Float
+PROP_ORIGINAL_UNIT 10 unitless
+PROP_UNIT 10 unitless
+PROP_NO_DATA_VALUE 10 -99999
+PROP_SAMPLE_STATS 10 613431 2.22059 2.33085 -0.852497 5.64607
+PROP_ESIZE 10 4
+PROP_ETYPE 10  IEEE
+PROP_FORMAT 10 RAW
+PROP_OFFSET 10 0
+PROP_FILE 10 Hecho_Sparse_SURFEResultBox_H7_scalarfield@@
+
+PROPERTY 11 H7_scalarfield_vectorfield
+PROPERTY_CLASS 11 h7_scalarfield_vectorfield
+PROP_NUMBER_FLOAT_ELEMENTS 11  3
+PROPERTY_KIND 11 " Real Number" 
+PROPERTY_CLASS_HEADER 11 h7_scalarfield_vectorfield {
+kind: Real Number
+unit: unitless
+pclip: 99
+*colormap*standard*colors: 0 0 0 1 85 0 1 1 170 1 1 0 255 1 0 0 
+}
+PROPERTY_SUBCLASS 11 QUANTITY Float
+PROP_ORIGINAL_UNIT 11 none
+PROP_UNIT 11 unitless
+PROP_NO_DATA_VALUE 11 -99999
+PROP_SAMPLE_STATS 11 613431 0 0 0 0
+PROP_ESIZE 11 4
+PROP_ETYPE 11  IEEE
+PROP_FORMAT 11 RAW
+PROP_OFFSET 11 0
+PROP_FILE 11 Hecho_Sparse_SURFEResultBox_H7_scalarfield_vectorfield@@
+
+PROPERTY 12 H9_scalarfield
+PROPERTY_CLASS 12 h9_scalarfield
+PROPERTY_KIND 12 " Real Number" 
+PROPERTY_CLASS_HEADER 12 h9_scalarfield {
+kind: Real Number
+unit: unitless
+pclip: 99
+*colormap*standard*colors: 0 0 0 1 85 0 1 1 170 1 1 0 255 1 0 0 
+}
+PROPERTY_SUBCLASS 12 QUANTITY Float
+PROP_ORIGINAL_UNIT 12 unitless
+PROP_UNIT 12 unitless
+PROP_NO_DATA_VALUE 12 -99999
+PROP_SAMPLE_STATS 12 613431 0.61296 2.33472 -2.45305 4.07335
+PROP_ESIZE 12 4
+PROP_ETYPE 12  IEEE
+PROP_FORMAT 12 RAW
+PROP_OFFSET 12 0
+PROP_FILE 12 Hecho_Sparse_SURFEResultBox_H9_scalarfield@@
+
+PROPERTY 13 H9_scalarfield_vectorfield
+PROPERTY_CLASS 13 h9_scalarfield_vectorfield
+PROP_NUMBER_FLOAT_ELEMENTS 13  3
+PROPERTY_KIND 13 " Real Number" 
+PROPERTY_CLASS_HEADER 13 h9_scalarfield_vectorfield {
+kind: Real Number
+unit: unitless
+pclip: 99
+*colormap*standard*colors: 0 0 0 1 85 0 1 1 170 1 1 0 255 1 0 0 
+}
+PROPERTY_SUBCLASS 13 QUANTITY Float
+PROP_ORIGINAL_UNIT 13 none
+PROP_UNIT 13 unitless
+PROP_NO_DATA_VALUE 13 -99999
+PROP_SAMPLE_STATS 13 613431 0 0 0 0
+PROP_ESIZE 13 4
+PROP_ETYPE 13  IEEE
+PROP_FORMAT 13 RAW
+PROP_OFFSET 13 0
+PROP_FILE 13 Hecho_Sparse_SURFEResultBox_H9_scalarfield_vectorfield@@
+
+PROPERTY 14 H_ML_scalarfield
+PROPERTY_CLASS 14 h_ml_scalarfield
+PROPERTY_KIND 14 " Real Number" 
+PROPERTY_CLASS_HEADER 14 h_ml_scalarfield {
+kind: Real Number
+unit: unitless
+pclip: 99
+*colormap*standard*colors: 0 0 0 1 85 0 1 1 170 1 1 0 255 1 0 0 
+}
+PROPERTY_SUBCLASS 14 QUANTITY Float
+PROP_ORIGINAL_UNIT 14 unitless
+PROP_UNIT 14 unitless
+PROP_NO_DATA_VALUE 14 -99999
+PROP_SAMPLE_STATS 14 613431 1.97248 1.03356 -0.961016 4.6787
+PROP_ESIZE 14 4
+PROP_ETYPE 14  IEEE
+PROP_FORMAT 14 RAW
+PROP_OFFSET 14 0
+PROP_FILE 14 Hecho_Sparse_SURFEResultBox_H_ML_scalarfield@@
+
+PROPERTY 15 H_ML_scalarfield_vectorfield
+PROPERTY_CLASS 15 h_ml_scalarfield_vectorfield
+PROP_NUMBER_FLOAT_ELEMENTS 15  3
+PROPERTY_KIND 15 " Real Number" 
+PROPERTY_CLASS_HEADER 15 h_ml_scalarfield_vectorfield {
+kind: Real Number
+unit: unitless
+pclip: 99
+*colormap*standard*colors: 0 0 0 1 85 0 1 1 170 1 1 0 255 1 0 0 
+}
+PROPERTY_SUBCLASS 15 QUANTITY Float
+PROP_ORIGINAL_UNIT 15 none
+PROP_UNIT 15 unitless
+PROP_NO_DATA_VALUE 15 -99999
+PROP_SAMPLE_STATS 15 613431 0 0 0 0
+PROP_ESIZE 15 4
+PROP_ETYPE 15  IEEE
+PROP_FORMAT 15 RAW
+PROP_OFFSET 15 0
+PROP_FILE 15 Hecho_Sparse_SURFEResultBox_H_ML_scalarfield_vectorfield@@
+
+PROPERTY 16 H_ML_SH_scalarfield
+PROPERTY_CLASS 16 h_ml_sh_scalarfield
+PROPERTY_KIND 16 " Real Number" 
+PROPERTY_CLASS_HEADER 16 h_ml_sh_scalarfield {
+kind: Real Number
+unit: unitless
+pclip: 99
+*colormap*standard*colors: 0 0 0 1 85 0 1 1 170 1 1 0 255 1 0 0 
+}
+PROPERTY_SUBCLASS 16 QUANTITY Float
+PROP_ORIGINAL_UNIT 16 unitless
+PROP_UNIT 16 unitless
+PROP_NO_DATA_VALUE 16 -99999
+PROP_SAMPLE_STATS 16 613431 37.8093 293.937 10.5103 77.2448
+PROP_ESIZE 16 4
+PROP_ETYPE 16  IEEE
+PROP_FORMAT 16 RAW
+PROP_OFFSET 16 0
+PROP_FILE 16 Hecho_Sparse_SURFEResultBox_H_ML_SH_scalarfield@@
+
+PROPERTY 17 H_ML_SH_scalarfield_vectorfield
+PROPERTY_CLASS 17 h_ml_sh_scalarfield_vectorfield
+PROP_NUMBER_FLOAT_ELEMENTS 17  3
+PROPERTY_KIND 17 " Real Number" 
+PROPERTY_CLASS_HEADER 17 h_ml_sh_scalarfield_vectorfield {
+kind: Real Number
+unit: unitless
+pclip: 99
+*colormap*standard*colors: 0 0 0 1 85 0 1 1 170 1 1 0 255 1 0 0 
+}
+PROPERTY_SUBCLASS 17 QUANTITY Float
+PROP_ORIGINAL_UNIT 17 none
+PROP_UNIT 17 unitless
+PROP_NO_DATA_VALUE 17 -99999
+PROP_SAMPLE_STATS 17 613431 0 0 0 0
+PROP_ESIZE 17 4
+PROP_ETYPE 17  IEEE
+PROP_FORMAT 17 RAW
+PROP_OFFSET 17 0
+PROP_FILE 17 Hecho_Sparse_SURFEResultBox_H_ML_SH_scalarfield_vectorfield@@
+END

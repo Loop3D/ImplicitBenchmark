@@ -1,0 +1,194 @@
+<project version="3.0.0" format="2" commercial="18">
+	<plugins bundle="gocad_base">
+		<plugin name="Gocad" version="3.0.0" build-identifier="20180626-cl830372" option="viewer|Base|Surface|Volume|GenDataAnalysis"/>
+		<plugin name="Filters" version="3.0.0" build-identifier="20180626-cl830372" option=""/>
+		<plugin name="PluginFoundations" version="3.0.0" build-identifier="20180626-cl830372" option="PFFilters"/>
+		<plugin name="WorkflowFoundations" version="3.0.0" build-identifier="20180626-cl830372" option="cmw"/>
+		<plugin name="Tessellations" version="3.0.0" build-identifier="20180626-cl830372" option=""/>
+		<plugin name="GraphableObjectViewer" version="3.0.0" build-identifier="20180626-cl830372" option="gov"/>
+		<plugin name="InGrid" version="3.0.0" build-identifier="20180626-cl830372" option="InGridViewer|InGridStrati|InGridStruct"/>
+		<plugin name="KivSimEiBase" version="3.0.0" build-identifier="20180626-cl830372" option=""/>
+		<plugin name="Views2D" version="3.0.0" build-identifier="20180626-cl830372" option="Views2dMapViewer|Views2dXSectionViewer|Views2dLogViewer"/>
+		<plugin name="Stereonet" version="3.0.0" build-identifier="20180626-cl830372" option="Stereonet"/>
+		<plugin name="FilterIsatis" version="3.0.0" build-identifier="20180626-cl830372" option=""/>
+		<plugin name="SURFE" version="1.0.0a1" build-identifier="20200708" option=""/>
+		<plugin name="AbaqusConnector" version="3.0.0" build-identifier="20180626-cl830372" option=""/>
+	</plugins>
+	<objects>
+		<object>
+			<name><![CDATA[style_catalog]]></name>
+		</object>
+		<object>
+			<name><![CDATA[style_template_mgr]]></name>
+		</object>
+		<object>
+			<name><![CDATA[Moureze_R3_Smooth_10_NS_0]]></name>
+		</object>
+		<object>
+			<name><![CDATA[Moureze_R3_Smooth_10_EW_0]]></name>
+		</object>
+		<object>
+			<name><![CDATA[Moureze_R3_Smooth_10_ocp50dp50_0]]></name>
+		</object>
+		<object>
+			<name><![CDATA[Moureze_R3_Smooth_10_ocp10dp10_0]]></name>
+		</object>
+		<object>
+			<name><![CDATA[Moureze_R3_Smooth_10_ocp1dp1]]></name>
+		</object>
+		<object>
+			<name><![CDATA[Moureze_R3_Smooth_10_ocp1dp1_BAD]]></name>
+		</object>
+		<object>
+			<name><![CDATA[Moureze_Points_P1]]></name>
+		</object>
+		<object>
+			<name><![CDATA[Moureze_Points_P10]]></name>
+		</object>
+		<object>
+			<name><![CDATA[Moureze_Points_P50]]></name>
+		</object>
+		<object>
+			<name><![CDATA[Moureze_R3_Smooth_100]]></name>
+		</object>
+		<object>
+			<name><![CDATA[Sections_EW]]></name>
+		</object>
+		<object>
+			<name><![CDATA[Sections_NS]]></name>
+		</object>
+		<object>
+			<name><![CDATA[Moureze_Points]]></name>
+		</object>
+		<object>
+			<name><![CDATA[CartesianDomain]]></name>
+		</object>
+		<object>
+			<name><![CDATA[MourezeSolid4]]></name>
+		</object>
+		<object>
+			<name><![CDATA[AssignRandomColors]]></name>
+		</object>
+		<object>
+			<name><![CDATA[BulkCopyObjects]]></name>
+		</object>
+		<object>
+			<name><![CDATA[BulkRenameObjects]]></name>
+		</object>
+		<object>
+			<name><![CDATA[ComputeCurvesDipAndAzimuth]]></name>
+		</object>
+		<object>
+			<name><![CDATA[UpdateSKUAModelWithTomoPencils]]></name>
+		</object>
+		<object>
+			<name><![CDATA[ComputeDistanceToCurves]]></name>
+		</object>
+		<object>
+			<name><![CDATA[ComputeDistanceToWells]]></name>
+		</object>
+		<object>
+			<name><![CDATA[ComputeGeologicalCurvature]]></name>
+		</object>
+		<object>
+			<name><![CDATA[ExamplesDataSelectionandUI]]></name>
+		</object>
+		<object>
+			<name><![CDATA[CreateIndexPropertiesOnGrid]]></name>
+		</object>
+		<object>
+			<name><![CDATA[MatrixViewForObjectsAndProperties]]></name>
+		</object>
+		<object>
+			<name><![CDATA[TransferRegionsBetweenGrids]]></name>
+		</object>
+		<object>
+			<name><![CDATA[RescaleProperty]]></name>
+		</object>
+		<object>
+			<name><![CDATA[SubstitutePropertyValues]]></name>
+		</object>
+		<object>
+			<name><![CDATA[WellsClassification]]></name>
+		</object>
+		<object>
+			<name><![CDATA[ExtractMapPropertiesAtWellLocations]]></name>
+		</object>
+		<object>
+			<name><![CDATA[QCMeshQuality]]></name>
+		</object>
+		<object>
+			<name><![CDATA[2DMappingFromInterpretation]]></name>
+		</object>
+		<object>
+			<name><![CDATA[Favorites]]></name>
+		</object>
+		<object>
+			<name><![CDATA[application_objects]]></name>
+		</object>
+		<object>
+			<name><![CDATA[geobaselib]]></name>
+		</object>
+		<object>
+			<name><![CDATA[geologic_features]]></name>
+		</object>
+		<object>
+			<name><![CDATA[viewer_entity_mgr]]></name>
+		</object>
+		<object>
+			<name><![CDATA[entity_view_settings_catalog]]></name>
+		</object>
+		<object>
+			<name><![CDATA[colormap_entity_mgr]]></name>
+		</object>
+		<object>
+			<name><![CDATA[fluid_component_mgr]]></name>
+		</object>
+		<object>
+			<name><![CDATA[viewer_view_settings_mgr]]></name>
+		</object>
+		<object>
+			<name><![CDATA[gpg_well_list_settings_catalog]]></name>
+		</object>
+		<object>
+			<name><![CDATA[3D Viewer]]></name>
+		</object>
+		<object>
+			<name><![CDATA[3D Viewer 1]]></name>
+		</object>
+		<object>
+			<name><![CDATA[xm_mainwindow]]></name>
+		</object>
+		<object>
+			<name><![CDATA[symbol_entity_mgr]]></name>
+		</object>
+		<object>
+			<name><![CDATA[GOCurve]]></name>
+		</object>
+		<object>
+			<name><![CDATA[GOAxis]]></name>
+		</object>
+		<object>
+			<name><![CDATA[GOPlot]]></name>
+		</object>
+		<object>
+			<name><![CDATA[GOPlotWindow]]></name>
+		</object>
+		<object>
+			<name><![CDATA[GOGrid]]></name>
+		</object>
+		<object>
+			<name><![CDATA[GOColorbar]]></name>
+		</object>
+		<object>
+			<name><![CDATA[GOLegend]]></name>
+		</object>
+		<object>
+			<name><![CDATA[ResourceTablePlotStyleCatalog]]></name>
+		</object>
+		<object>
+			<name><![CDATA[Views2D]]></name>
+		</object>
+	</objects>
+	<data/>
+</project>
