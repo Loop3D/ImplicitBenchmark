@@ -1,7 +1,17 @@
 GOCAD Voxet 1 
 HEADER {
-name: Box
+name: Lachlan
 ascii: off
+smoothed: on
+use_private_colormaps: off
+probe_type: Sections
+size: 0 0 0 37 54 28
+fence0: 3 1 2 0 0 0 37 54 28
+nb_fences: 1
+sections: 3 3 1 14 1 1 24 2 1 15
+*painted*variable: result_FDI
+painted: on
+VoxetIntersectionAssociation: offn
 }
 GOCAD_ORIGINAL_COORDINATE_SYSTEM
 NAME " gocad Local" 

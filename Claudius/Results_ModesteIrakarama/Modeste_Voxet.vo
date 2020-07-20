@@ -10356,7 +10356,7 @@ PROP_ESIZE 1 4
 PROP_ETYPE 1  IEEE
 PROP_FORMAT 1 RAW
 PROP_OFFSET 1 0
-PROP_FILE 1 Modeste_VoxetClaudius_Modeste_BenchmarkResults_result_s10.dt@@
+PROP_FILE 1 ResultsBox_result_s10.dt@@
 
 PROPERTY 2 result_s12.dt
 PROPERTY_CLASS 2 result_s12.dt
@@ -10380,7 +10380,7 @@ PROP_ESIZE 2 4
 PROP_ETYPE 2  IEEE
 PROP_FORMAT 2 RAW
 PROP_OFFSET 2 0
-PROP_FILE 2 Modeste_VoxetClaudius_Modeste_BenchmarkResults_result_s12.dt@@
+PROP_FILE 2 ResultsBox_result_s12.dt@@
 
 PROPERTY 3 result_s13.dt
 PROPERTY_CLASS 3 result_s13.dt
@@ -10404,7 +10404,7 @@ PROP_ESIZE 3 4
 PROP_ETYPE 3  IEEE
 PROP_FORMAT 3 RAW
 PROP_OFFSET 3 0
-PROP_FILE 3 Modeste_VoxetClaudius_Modeste_BenchmarkResults_result_s13.dt@@
+PROP_FILE 3 ResultsBox_result_s13.dt@@
 END
 GOCAD PLine 1 
 HEADER {

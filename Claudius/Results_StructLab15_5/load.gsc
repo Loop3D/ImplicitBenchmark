@@ -41,6 +41,6 @@ CameraShow gobj "/gobj:Dips" on Camera "DefaultCamera" only "false";
 
 # Load Fault, Conformable TetMesh and Voxet
 NewGObjLoad File_names "../Fault.ts" coordinate_system_name "Default_depth"; 
-NewGObjLoad File_names "../Results_/Solid.vo" coordinate_system_name "Default_depth"; 
+NewGObjLoad File_names "../Results_/Solid.so" coordinate_system_name "Default_depth"; 
 NewGObjLoad File_names "../Results_/Box.vo" coordinate_system_name "Default_depth"; 
 
