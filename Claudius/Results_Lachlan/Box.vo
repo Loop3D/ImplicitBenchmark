@@ -1,11 +1,11 @@
 GOCAD Voxet 1 
 HEADER {
-name: Lachlan
+name: LoopStructural
 ascii: off
 smoothed: on
 use_private_colormaps: off
 probe_type: Sections
-size: 0 0 0 37 54 28
+size: 0 0 0 38 55 30
 fence0: 3 1 2 0 0 0 37 54 28
 nb_fences: 1
 sections: 3 3 1 14 1 1 24 2 1 15
@@ -25,10 +25,10 @@ CLASSIFICATION " 3D Survey"  Seismic " 3D Survey"
 AXIS_O 548800 7816600 -8400 
 AXIS_U 3700 0 0 
 AXIS_V 0 5400 0 
-AXIS_W 0 0 -2520 
+AXIS_W 0 0 -2610 
 AXIS_MIN 0 0 0 
 AXIS_MAX 1 1 1 
-AXIS_N 38 55 29 
+AXIS_N 38 55 30
 AXIS_NAME axis-1 axis-2 axis-3
 AXIS_UNIT "unitless" "unitless" "unitless" 
 AXIS_TYPE even even even
