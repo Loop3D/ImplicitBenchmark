@@ -1,0 +1,206 @@
+<UserMacroCommand version="2.0" type="UserMacroCommand">
+<Properties>
+ <Backward_15_5>true</Backward_15_5>
+</Properties>
+<Comments/>
+<Content>
+ <Command Type="JavaScript">
+  <Text>
+switch ($Separator$) {
+    case "Space": sep = " "; break;
+    case "Tab": sep = "\t"; break; 
+    case "Comma": sep = ","; break; 
+    case "Semicolon": sep = ";"; break;
+}
+var outputFile = new skua.File($File$); 
+PDGM.assert(outputFile !== undefined); 
+var ok = outputFile.openForWriting(false); 
+if(!ok){ return false; }
+outputFile.write("Object"+sep+"Region"+sep+"Property"+sep+"Min"+sep+"Max"+sep+"Mean"+sep+"Std_dev"+sep+"P10"+sep+"P20"+sep+"P30"+sep+"P40"+sep+"P50"+sep+"P60"+sep+"P70"+sep+"P80"+sep+"P90");
+outputFile.write('\n'); 
+var Regions = []; 
+if($Compute_Statistics_Per_Region$) { 
+    var Regions = $Regions$; 
+} else Regions[0] = "everywhere";
+</Text>
+  <Title>JavaScript</Title>
+ </Command>
+ <Command Type="For">
+  <Text>var o in $Objects$</Text>
+  <Command Type="For">
+   <Text>var r in Regions</Text>
+   <Command Type="For">
+    <Text>var p in $Properties$</Text>
+    <Command Type="CLIType">
+     <Text>PropertyComputeStatistics</Text>
+     <Parameters>
+      <on>
+       <Value flag="1">$Objects$[o]</Value>
+      </on>
+      <property>
+       <Value flag="1">$Properties$[p]</Value>
+      </property>
+      <region>
+       <Value flag="1">Regions[r]</Value>
+      </region>
+      <minimum>
+       <Value flag="0">"true"</Value>
+      </minimum>
+      <maximum>
+       <Value flag="0">"true"</Value>
+      </maximum>
+      <mean>
+       <Value flag="0">"true"</Value>
+      </mean>
+      <standard_deviation>
+       <Value flag="0">"true"</Value>
+      </standard_deviation>
+      <quantile>
+       <Value flag="0">"true"</Value>
+      </quantile>
+      <quantile_list_mode>
+       <Value flag="0">"false"</Value>
+      </quantile_list_mode>
+      <quantile_list>
+       <Value flag="0">10</Value>
+       <Value flag="0">50</Value>
+       <Value flag="0">90</Value>
+      </quantile_list>
+      <quantile_step_mode>
+       <Value flag="0">"true"</Value>
+      </quantile_step_mode>
+      <quantile_step>
+       <Value flag="0">10.</Value>
+      </quantile_step>
+     </Parameters>
+     <Result>
+      <ResultVariable>S</ResultVariable>
+      <ResultKey>statistics</ResultKey>
+      <ResultType>CLIStatistics</ResultType>
+      <ResultIsArray>true</ResultIsArray>
+     </Result>
+    </Command>
+    <Command Type="If">
+     <Text>S == undefined</Text>
+     <Command Type="Continue"/>
+    </Command>
+    <Command Type="EndOfScope"/>
+    <Command Type="JavaScript">
+     <Text>          
+outputFile.write(
+    $Objects$[o].title+sep+
+ Regions[r]+sep+
+ $Properties$[p]+sep+
+ S.minimum+sep+
+ S.maximum+sep+
+ S.mean+sep+
+ S.std_dev+sep+
+ S.P10+sep+
+ S.P20+sep+
+ S.P30+sep+
+ S.P40+sep+
+ S.P50+sep+
+ S.P60+sep+
+ S.P70+sep+
+ S.P80+sep+
+ S.P90);
+outputFile.write('\n');
+</Text>
+     <Title>JavaScript</Title>
+    </Command>
+   </Command>
+   <Command Type="EndOfScope"/>
+  </Command>
+  <Command Type="EndOfScope"/>
+ </Command>
+ <Command Type="EndOfScope"/>
+ <Command Type="JavaScript">
+  <Text>outputFile.close();</Text>
+  <Title>JavaScript</Title>
+ </Command>
+</Content>
+<Variables>
+ <Variable>
+  <default_value>/Objects</default_value>
+  <alias>$Objects$</alias>
+  <optional>No</optional>
+  <cmdParamEltIndex>0</cmdParamEltIndex>
+  <multi-selection>Yes</multi-selection>
+  <cmdName>PropertyComputeStatistics</cmdName>
+  <type>GObj</type>
+  <cmdParamName>GObj</cmdParamName>
+ </Variable>
+ <Variable>
+  <default_value>False</default_value>
+  <alias>$Compute_Statistics_Per_Region$</alias>
+  <optional>No</optional>
+  <type>Boolean</type>
+ </Variable>
+ <Variable>
+  <default_value>""</default_value>
+  <alias>$Regions$</alias>
+  <optional>Yes</optional>
+  <cmdParamEltIndex>0</cmdParamEltIndex>
+  <multi-selection>Yes</multi-selection>
+  <dependency>$Objects$.regions</dependency>
+  <cmdName>PropertyComputeStatistics</cmdName>
+  <dependencyDependentValue>fa33b5c4-919d4a81-b758-7cc16c718314</dependencyDependentValue>
+  <type>String</type>
+  <cmdParamName>region</cmdParamName>
+ </Variable>
+ <Variable>
+  <default_value>/Properties</default_value>
+  <alias>$Properties$</alias>
+  <optional>No</optional>
+  <cmdParamEltIndex>0</cmdParamEltIndex>
+  <multi-selection>Yes</multi-selection>
+  <dependency>
+$Objects$.properties sql::where "category!='Discrete'"
+</dependency>
+  <cmdName>PropertyComputeStatistics</cmdName>
+  <dependencyDependentValue>fa33b5c4-919d4a81-b758-7cc16c718314</dependencyDependentValue>
+  <type>String</type>
+  <cmdParamName>property</cmdParamName>
+ </Variable>
+ <Variable>
+  <default_value>Stats</default_value>
+  <alias>$File$</alias>
+  <type>OutputFileName</type>
+ </Variable>
+ <Variable>
+  <default_value>Semicolon</default_value>
+  <alias>$Separator$</alias>
+  <dependency>Tab Comma Semicolon Space</dependency>
+  <type>PredefinedItems</type>
+ </Variable>
+ <Variable>
+  <default_value>0</default_value>
+  <alias>$RUN.JR$</alias>
+  <comment>Internal variable for Jacta realizations</comment>
+  <built-in>true</built-in>
+  <type>Integer</type>
+ </Variable>
+ <Variable>
+  <default_value>1</default_value>
+  <alias>$RUN.I$</alias>
+  <comment>Internal variable for simulation index</comment>
+  <built-in>true</built-in>
+  <type>Integer</type>
+ </Variable>
+ <Variable>
+  <default_value>1</default_value>
+  <alias>$RUN.N$</alias>
+  <comment>Internal variable for number of simulations</comment>
+  <built-in>true</built-in>
+  <type>Integer</type>
+ </Variable>
+</Variables>
+<DialogSpecifications>
+ <DialogSpecification>
+  <Text>
+Extension { Separator } enable_group Compute_Statistics_Per_Region Regions; HBox {Compute_Statistics_Per_Region Regions}
+</Text>
+ </DialogSpecification>
+</DialogSpecifications>
+
+</UserMacroCommand>

@@ -1,0 +1,510 @@
+<UserMacroCommand version="2.0" type="UserMacroCommand">
+<Properties/>
+<Comments/>
+<Content>
+ <Command Type="For">
+  <Text>var implicitmethod in $scalarFields$</Text>
+  <Command Type="JSVariable">
+   <Text>cur_field</Text>
+   <VariableType>String</VariableType>
+   <VariableScoped>Yes</VariableScoped>
+   <VariableId>$scalarFields$[implicitmethod].title</VariableId>
+  </Command>
+  <Command Type="CommentType">
+   <Text>1. Compute and normalize gradient in the Voxet</Text>
+  </Command>
+  <Command Type="JSVariable">
+   <Text>gradu</Text>
+   <VariableType>String</VariableType>
+   <VariableScoped>Yes</VariableScoped>
+   <VariableId>cur_field + "u"</VariableId>
+  </Command>
+  <Command Type="JSVariable">
+   <Text>gradv</Text>
+   <VariableType>String</VariableType>
+   <VariableScoped>Yes</VariableScoped>
+   <VariableId>cur_field  + "v"</VariableId>
+   <Title/>
+  </Command>
+  <Command Type="JSVariable">
+   <Text>gradw</Text>
+   <VariableType>String</VariableType>
+   <VariableScoped>Yes</VariableScoped>
+   <VariableId>cur_field + "w"</VariableId>
+  </Command>
+  <Command Type="JSVariable">
+   <Text>gradnorm</Text>
+   <VariableType>String</VariableType>
+   <VariableScoped>Yes</VariableScoped>
+   <VariableId>cur_field  + "_gradnorm"</VariableId>
+   <Title/>
+  </Command>
+  <Command Type="CLIType">
+   <Text>VoxetCalculateDerivatives</Text>
+   <Parameters>
+    <on>
+     <Value flag="1">$voxet$</Value>
+    </on>
+    <Property>
+     <Value flag="1">cur_field</Value>
+    </Property>
+    <first_derivatives_only>
+     <Value flag="0">"true"</Value>
+    </first_derivatives_only>
+   </Parameters>
+  </Command>
+  <Command Type="CLIType">
+   <Text>PropertyCreate</Text>
+   <Parameters>
+    <gobj>
+     <Value flag="1">$voxet$</Value>
+    </gobj>
+    <property_name>
+     <Value flag="1">gradnorm</Value>
+    </property_name>
+    <property_kind>
+     <Value flag="0">"Real Number"</Value>
+    </property_kind>
+    <no_datavalue_specified>
+     <Value flag="0">"true"</Value>
+    </no_datavalue_specified>
+    <no_datavalue>
+     <Value flag="0">"default (-99999)"</Value>
+    </no_datavalue>
+    <number_of_elements>
+     <Value flag="0">1</Value>
+    </number_of_elements>
+    <storage>
+     <Value flag="0">"Memory"</Value>
+    </storage>
+    <interpolation_method>
+     <Value flag="0">"Linear"</Value>
+    </interpolation_method>
+    <property_dimension>
+     <Value flag="0">"Cells"</Value>
+    </property_dimension>
+    <force_float_property>
+     <Value flag="0">"false"</Value>
+    </force_float_property>
+    <log_set>
+     <Value flag="0">""</Value>
+    </log_set>
+    <sampling_rate>
+     <Value flag="0">"0:ft"</Value>
+    </sampling_rate>
+    <start_md>
+     <Value flag="0">"0:ft"</Value>
+    </start_md>
+    <end_md>
+     <Value flag="0">"0:ft"</Value>
+    </end_md>
+   </Parameters>
+  </Command>
+  <Command Type="CLIType">
+   <Text>GObjApplyScriptOnProperty</Text>
+   <Parameters>
+    <on>
+     <Value flag="1">$voxet$</Value>
+    </on>
+    <region>
+     <Value flag="0">"everywhere"</Value>
+    </region>
+    <properties>
+     <Value flag="0">"U:Real Number"</Value>
+     <Value flag="0">"V:Real Number"</Value>
+     <Value flag="0">"W:Real Number"</Value>
+     <Value flag="1">skua.script_macro_alias_encode({"gradnorm":gradnorm})</Value>
+     <Value flag="1">skua.script_macro_alias_encode({"gradu":gradu})</Value>
+     <Value flag="1">skua.script_macro_alias_encode({"gradv":gradv})</Value>
+     <Value flag="1">skua.script_macro_alias_encode({"gradw":gradw})</Value>
+    </properties>
+    <script>
+     <Value flag="0">"{
+// Do not normalize gradient on borders to avoid artefacts. 
+gradnorm=sqrt(gradu*gradu + gradv*gradv + gradw*gradw);
+
+if( U == 0 || U == NU-1 || V== 0 || V == NV-1 || W == 0 || W == NW-1 || gradnorm == 0. ) {
+      gradu = -99999;
+      gradv = -99999;
+      gradw = -99999;
+} else {
+      gradu /= gradnorm;
+      gradv /= gradnorm;
+      gradw /= gradnorm;
+}
+}
+"</Value>
+    </script>
+    <aliases>
+     <Value flag="0">""</Value>
+    </aliases>
+    <check_no_data_values_automatically>
+     <Value flag="0">"true"</Value>
+    </check_no_data_values_automatically>
+    <file_name>
+     <Value flag="0">"None"</Value>
+    </file_name>
+   </Parameters>
+  </Command>
+  <Command Type="CommentType">
+   <Text>2. Compute the local error as the angle between the data orientation and the scalar field orientation</Text>
+  </Command>
+  <Command Type="For">
+   <Text>var dataobj in $data$</Text>
+   <Command Type="JSVariable">
+    <Text>cur_data</Text>
+    <VariableType>Object</VariableType>
+    <VariableScoped>Yes</VariableScoped>
+    <VariableId>$data$[dataobj]</VariableId>
+   </Command>
+   <Command Type="CLIType">
+    <Text>PropertyFillPointwiseFrom</Text>
+    <Parameters>
+     <on>
+      <Value flag="1">$data$[dataobj]</Value>
+     </on>
+     <region>
+      <Value flag="0">"everywhere"</Value>
+     </region>
+     <new_property_name>
+      <Value flag="1">gradu</Value>
+     </new_property_name>
+     <from>
+      <Value flag="1">$voxet$</Value>
+     </from>
+     <from_region>
+      <Value flag="0">"everywhere"</Value>
+     </from_region>
+     <property>
+      <Value flag="1">gradu</Value>
+     </property>
+     <share_property_class>
+      <Value flag="0">"true"</Value>
+     </share_property_class>
+    </Parameters>
+   </Command>
+   <Command Type="CLIType">
+    <Text>PropertyFillPointwiseFrom</Text>
+    <Parameters>
+     <on>
+      <Value flag="1">$data$[dataobj]</Value>
+     </on>
+     <region>
+      <Value flag="0">"everywhere"</Value>
+     </region>
+     <new_property_name>
+      <Value flag="1">gradv</Value>
+     </new_property_name>
+     <from>
+      <Value flag="1">$voxet$</Value>
+     </from>
+     <from_region>
+      <Value flag="0">"everywhere"</Value>
+     </from_region>
+     <property>
+      <Value flag="1">gradv</Value>
+     </property>
+     <share_property_class>
+      <Value flag="0">"true"</Value>
+     </share_property_class>
+    </Parameters>
+   </Command>
+   <Command Type="CLIType">
+    <Text>PropertyFillPointwiseFrom</Text>
+    <Parameters>
+     <on>
+      <Value flag="1">$data$[dataobj]</Value>
+     </on>
+     <region>
+      <Value flag="0">"everywhere"</Value>
+     </region>
+     <new_property_name>
+      <Value flag="1">gradw</Value>
+     </new_property_name>
+     <from>
+      <Value flag="1">$voxet$</Value>
+     </from>
+     <from_region>
+      <Value flag="0">"everywhere"</Value>
+     </from_region>
+     <property>
+      <Value flag="1">gradw</Value>
+     </property>
+     <share_property_class>
+      <Value flag="0">"true"</Value>
+     </share_property_class>
+    </Parameters>
+   </Command>
+   <Command Type="JSVariable">
+    <Text>orientu</Text>
+    <VariableType>String</VariableType>
+    <VariableScoped>Yes</VariableScoped>
+    <VariableId>$orient$ + "[0]"</VariableId>
+   </Command>
+   <Command Type="JSVariable">
+    <Text>orientv</Text>
+    <VariableType>String</VariableType>
+    <VariableScoped>Yes</VariableScoped>
+    <VariableId>$orient$  + "[1]"</VariableId>
+    <Title/>
+   </Command>
+   <Command Type="JSVariable">
+    <Text>orientw</Text>
+    <VariableType>String</VariableType>
+    <VariableScoped>Yes</VariableScoped>
+    <VariableId>$orient$ + "[2]"</VariableId>
+   </Command>
+   <Command Type="JSVariable">
+    <Text>orientErr</Text>
+    <VariableType>String</VariableType>
+    <VariableScoped>Yes</VariableScoped>
+    <VariableId>cur_field + "_OrientationError"</VariableId>
+   </Command>
+   <Command Type="CLIType">
+    <Text>PropertyCreate</Text>
+    <Parameters>
+     <gobj>
+      <Value flag="1">$data$[dataobj]</Value>
+     </gobj>
+     <property_name>
+      <Value flag="1">orientErr</Value>
+     </property_name>
+     <property_kind>
+      <Value flag="0">"Real Number"</Value>
+     </property_kind>
+     <no_datavalue_specified>
+      <Value flag="0">"true"</Value>
+     </no_datavalue_specified>
+     <no_datavalue>
+      <Value flag="0">"default (-99999)"</Value>
+     </no_datavalue>
+     <number_of_elements>
+      <Value flag="0">1</Value>
+     </number_of_elements>
+     <storage>
+      <Value flag="0">"Memory"</Value>
+     </storage>
+     <interpolation_method>
+      <Value flag="0">"Linear"</Value>
+     </interpolation_method>
+     <property_dimension>
+      <Value flag="0">"Default"</Value>
+     </property_dimension>
+     <force_float_property>
+      <Value flag="0">"false"</Value>
+     </force_float_property>
+     <log_set>
+      <Value flag="0">""</Value>
+     </log_set>
+     <sampling_rate>
+      <Value flag="0">"0:ft"</Value>
+     </sampling_rate>
+     <start_md>
+      <Value flag="0">"0:ft"</Value>
+     </start_md>
+     <end_md>
+      <Value flag="0">"0:ft"</Value>
+     </end_md>
+    </Parameters>
+   </Command>
+   <Command Type="CLIType">
+    <Text>GObjApplyScriptOnProperty</Text>
+    <Parameters>
+     <on>
+      <Value flag="1">cur_data</Value>
+     </on>
+     <region>
+      <Value flag="0">"everywhere"</Value>
+     </region>
+     <properties>
+      <Value flag="1">skua.script_macro_alias_encode({"gradu":gradu})</Value>
+      <Value flag="1">skua.script_macro_alias_encode({"gradv":gradv})</Value>
+      <Value flag="1">skua.script_macro_alias_encode({"gradw":gradw})</Value>
+      <Value flag="1">skua.script_macro_alias_encode({"orientErr":orientErr})</Value>
+      <Value flag="1">skua.script_macro_alias_encode({"orientu":orientu})</Value>
+      <Value flag="1">skua.script_macro_alias_encode({"orientv":orientv})</Value>
+      <Value flag="1">skua.script_macro_alias_encode({"orientw":orientw})</Value>
+     </properties>
+     <script>
+      <Value flag="0">"{
+orientErr = acos(gradu*orientu + gradv*orientv + gradw*orientw) * 180./3.14159265359;
+
+}
+"</Value>
+     </script>
+     <aliases>
+      <Value flag="0">""</Value>
+     </aliases>
+     <check_no_data_values_automatically>
+      <Value flag="0">"true"</Value>
+     </check_no_data_values_automatically>
+     <file_name>
+      <Value flag="0">"None"</Value>
+     </file_name>
+    </Parameters>
+   </Command>
+   <Command Type="If">
+    <Text>$Cleanup$</Text>
+    <Command Type="CLIType">
+     <Text>PropertyRemove</Text>
+     <Parameters>
+      <on>
+       <Value flag="1">$data$[dataobj]</Value>
+      </on>
+      <name>
+       <Value flag="1">gradu</Value>
+      </name>
+     </Parameters>
+    </Command>
+    <Command Type="CLIType">
+     <Text>PropertyRemove</Text>
+     <Parameters>
+      <on>
+       <Value flag="1">$data$[dataobj]</Value>
+      </on>
+      <name>
+       <Value flag="1">gradv</Value>
+      </name>
+     </Parameters>
+    </Command>
+    <Command Type="CLIType">
+     <Text>PropertyRemove</Text>
+     <Parameters>
+      <on>
+       <Value flag="1">$data$[dataobj]</Value>
+      </on>
+      <name>
+       <Value flag="1">gradw</Value>
+      </name>
+     </Parameters>
+    </Command>
+   </Command>
+   <Command Type="EndOfScope"/>
+  </Command>
+  <Command Type="EndOfScope"/>
+  <Command Type="If">
+   <Text>$Cleanup$</Text>
+   <Command Type="CLIType">
+    <Text>PropertyRemove</Text>
+    <Parameters>
+     <on>
+      <Value flag="1">$voxet$</Value>
+     </on>
+     <name>
+      <Value flag="1">gradnorm</Value>
+     </name>
+    </Parameters>
+   </Command>
+   <Command Type="CLIType">
+    <Text>PropertyRemove</Text>
+    <Parameters>
+     <on>
+      <Value flag="1">$voxet$</Value>
+     </on>
+     <name>
+      <Value flag="1">gradu</Value>
+     </name>
+    </Parameters>
+   </Command>
+   <Command Type="CLIType">
+    <Text>PropertyRemove</Text>
+    <Parameters>
+     <on>
+      <Value flag="1">$voxet$</Value>
+     </on>
+     <name>
+      <Value flag="1">gradv</Value>
+     </name>
+    </Parameters>
+   </Command>
+   <Command Type="CLIType">
+    <Text>PropertyRemove</Text>
+    <Parameters>
+     <on>
+      <Value flag="1">$voxet$</Value>
+     </on>
+     <name>
+      <Value flag="1">gradw</Value>
+     </name>
+    </Parameters>
+   </Command>
+  </Command>
+  <Command Type="EndOfScope"/>
+ </Command>
+ <Command Type="EndOfScope"/>
+</Content>
+<Variables>
+ <Variable>
+  <alias>$voxet$</alias>
+  <type>Voxet</type>
+  <multi-selection>No</multi-selection>
+  <default_value/>
+  <cmdName>TSurfCreateFromIsovalue</cmdName>
+  <cmdParamName>grid</cmdParamName>
+  <cmdParamEltIndex>0</cmdParamEltIndex>
+  <comment>The axis-aligned Voxet bearing the interpolated scalar field</comment>
+ </Variable>
+ <Variable>
+  <alias>$scalarFields$</alias>
+  <type>String</type>
+  <default_value>/Property</default_value>
+  <multi-selection>Yes</multi-selection>
+  <cmdName>TSurfCreateFromIsovalue</cmdName>
+  <cmdParamName>grid</cmdParamName>
+  <cmdParamEltIndex>0</cmdParamEltIndex>
+  <optional>No</optional>
+  <dependency>$voxet$.properties</dependency>
+  <comment>The various scalar fields to compare</comment>
+ </Variable>
+ <Variable>
+  <alias>$data$</alias>
+  <type>AtomicGroup</type>
+  <optional>No</optional>
+  <multi-selection>Yes</multi-selection>
+  <default_value/>
+  <cmdName>PropertyFillPointwiseFrom</cmdName>
+  <cmdParamName>PointPropertyClient</cmdParamName>
+  <cmdParamEltIndex>0</cmdParamEltIndex>
+  <comment>The data points (Caution: results in edges of grid may be unstable)</comment>
+ </Variable>
+ <Variable>
+  <alias>$orient$</alias>
+  <type>String</type>
+  <dependency>$data$.properties3d</dependency>
+  <optional>No</optional>
+  <multi-selection>No</multi-selection>
+  <comment>The reference (normalized) orientation vector on the data points</comment>
+  <default_value>Orient</default_value>
+ </Variable>
+ <Variable>
+  <alias>$Cleanup$</alias>
+  <type>Boolean</type>
+  <default_value>True</default_value>
+  <multi-selection>No</multi-selection>
+  <comment>Check to remove temporary properties</comment>
+ </Variable>
+ <Variable>
+  <alias>$RUN.JR$</alias>
+  <type>Integer</type>
+  <default_value>0</default_value>
+  <comment>Internal variable for Jacta realizations</comment>
+  <built-in>true</built-in>
+ </Variable>
+ <Variable>
+  <alias>$RUN.I$</alias>
+  <type>Integer</type>
+  <default_value>1</default_value>
+  <comment>Internal variable for simulation index</comment>
+  <built-in>true</built-in>
+ </Variable>
+ <Variable>
+  <alias>$RUN.N$</alias>
+  <type>Integer</type>
+  <default_value>1</default_value>
+  <comment>Internal variable for number of simulations</comment>
+  <built-in>true</built-in>
+ </Variable>
+</Variables>
+<DialogSpecifications/>
+
+</UserMacroCommand>
