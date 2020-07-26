@@ -1,0 +1,717 @@
+<UserMacroCommand version="2.0" type="UserMacroCommand">
+<Properties/>
+<Comments>
+ <Comment>
+  <Text><![CDATA[<html>
+<h3> Implicit Modeling benchmark Macro: Imposed isovalues and errors </h3>
+<p> This macro is designed to analyze implicit surfaces computed from known values.</p>
+<p><b>Input:</b></p>
+<ul>
+<li>One or several Voxet scalar field(s)</li>
+<li>One or several objects with known constant scalar field value</li>
+</ul>
+
+<p><b>Output:</b></p>
+<ul>
+<li>One equipotential isosurface corresponding to the average scalar field value of each object</li>
+<li>[optional] A measure approximation of error (in m) on each object</li>
+</ul>
+<p>
+NB: The gradient computation has artifacts on the boundary voxels of the Voxet. <br/>
+Results on points in these voxels may be inaccurate. <br/>
+The error approximation may be inaccurate for large distances. <br/>
+</p>
+</html>]]></Text>
+ </Comment>
+</Comments>
+<Content>
+ <Command Type="If">
+  <Text>$Save_Statistics$ </Text>
+  <Command Type="JavaScript">
+   <Text>if( $Save_Statistics$ ) {
+    var outputFile = new skua.File($Statistics_File$); 
+    var sep =";"
+    PDGM.assert(outputFile !== undefined); 
+    var ok = outputFile.openForWriting(false); 
+    if(!ok){ 
+        fileErrorMessage = "Cannot open file " + $Statistics_File$
+            +" for writing... exiting";
+        skua.logFatal( fileErrorMessage );
+        return false; 
+    }
+    var Regions = []; 
+    Regions[0] = "everywhere";
+
+    outputFile.write(
+        "Object"+sep+"Property"+sep+
+        "Min"+sep+"Max"+sep+"Mean"+sep+"Std_dev"+sep+
+        "P10"+sep+"P20"+sep+"P30"+sep+"P40"+sep+
+        "P50"+sep+"P60"+sep+"P70"+sep+"P80"+sep+"P90"
+    );
+    outputFile.write('\n'); 
+}
+</Text>
+   <Title>JavaScript</Title>
+   <Comment>Create Stats file</Comment>
+  </Command>
+ </Command>
+ <Command Type="EndOfScope"/>
+ <Command Type="For">
+  <Text>var implicitmethod in $Scalar_Fields$</Text>
+  <Command Type="JSVariable">
+   <Text>cur_field</Text>
+   <VariableType>String</VariableType>
+   <VariableScoped>Yes</VariableScoped>
+   <VariableId>$Scalar_Fields$[implicitmethod].title</VariableId>
+  </Command>
+  <Command Type="CommentType">
+   <Text>1. Compute gradient norm</Text>
+  </Command>
+  <Command Type="JSVariable">
+   <Text>gradu</Text>
+   <VariableType>String</VariableType>
+   <VariableScoped>Yes</VariableScoped>
+   <VariableId>cur_field + "u"</VariableId>
+  </Command>
+  <Command Type="JSVariable">
+   <Text>gradv</Text>
+   <VariableType>String</VariableType>
+   <VariableScoped>Yes</VariableScoped>
+   <VariableId>cur_field  + "v"</VariableId>
+   <Title/>
+  </Command>
+  <Command Type="JSVariable">
+   <Text>gradw</Text>
+   <VariableType>String</VariableType>
+   <VariableScoped>Yes</VariableScoped>
+   <VariableId>cur_field + "w"</VariableId>
+  </Command>
+  <Command Type="JSVariable">
+   <Text>gradnorm</Text>
+   <VariableType>String</VariableType>
+   <VariableScoped>Yes</VariableScoped>
+   <VariableId>cur_field  + "_gradnorm"</VariableId>
+   <Title/>
+  </Command>
+  <Command Type="If">
+   <Text>$Compute_Error$</Text>
+   <Command Type="CLIType">
+    <Text>VoxetCalculateDerivatives</Text>
+    <Parameters>
+     <on>
+      <Value flag="1">$Voxet$</Value>
+     </on>
+     <Property>
+      <Value flag="1">cur_field</Value>
+     </Property>
+     <first_derivatives_only>
+      <Value flag="0">"true"</Value>
+     </first_derivatives_only>
+    </Parameters>
+   </Command>
+   <Command Type="CLIType">
+    <Text>PropertyCreate</Text>
+    <Parameters>
+     <gobj>
+      <Value flag="1">$Voxet$</Value>
+     </gobj>
+     <property_name>
+      <Value flag="1">gradnorm</Value>
+     </property_name>
+     <property_kind>
+      <Value flag="0">"Real Number"</Value>
+     </property_kind>
+     <no_datavalue_specified>
+      <Value flag="0">"true"</Value>
+     </no_datavalue_specified>
+     <no_datavalue>
+      <Value flag="0">"default (-99999)"</Value>
+     </no_datavalue>
+     <number_of_elements>
+      <Value flag="0">1</Value>
+     </number_of_elements>
+     <storage>
+      <Value flag="0">"Memory"</Value>
+     </storage>
+     <interpolation_method>
+      <Value flag="0">"Linear"</Value>
+     </interpolation_method>
+     <property_dimension>
+      <Value flag="0">"Nodes"</Value>
+     </property_dimension>
+     <force_float_property>
+      <Value flag="0">"false"</Value>
+     </force_float_property>
+     <log_set>
+      <Value flag="0">""</Value>
+     </log_set>
+     <sampling_rate>
+      <Value flag="0">"0:ft"</Value>
+     </sampling_rate>
+     <start_md>
+      <Value flag="0">"0:ft"</Value>
+     </start_md>
+     <end_md>
+      <Value flag="0">"0:ft"</Value>
+     </end_md>
+    </Parameters>
+   </Command>
+   <Command Type="JSVariable">
+    <Text>gradnormNDV</Text>
+    <VariableType>String</VariableType>
+    <VariableScoped>Yes</VariableScoped>
+    <VariableId>gradnorm+"_NDV"</VariableId>
+   </Command>
+   <Command Type="CLIType">
+    <Text>GObjApplyScriptOnProperty</Text>
+    <Parameters>
+     <on>
+      <Value flag="1">$Voxet$</Value>
+     </on>
+     <region>
+      <Value flag="0">"everywhere"</Value>
+     </region>
+     <properties>
+      <Value flag="1">skua.script_macro_alias_encode({"gradnorm":gradnorm})</Value>
+      <Value flag="1">skua.script_macro_alias_encode({"gradnormNDV":gradnormNDV})</Value>
+      <Value flag="1">skua.script_macro_alias_encode({"gradu":gradu})</Value>
+      <Value flag="1">skua.script_macro_alias_encode({"gradv":gradv})</Value>
+      <Value flag="1">skua.script_macro_alias_encode({"gradw":gradw})</Value>
+     </properties>
+     <script>
+      <Value flag="0">"{
+// Do not compute on borders to avoid artefacts. 
+if(U != 0 || U != NU-1 || V != 0 || V != NV-1 || W != 0 || W != NW-1 ){
+    gradnorm=sqrt(gradu*gradu + gradv*gradv + gradw*gradw);
+} else {
+ gradnorm=gradnormNDV;
+}
+
+}
+"</Value>
+     </script>
+     <aliases>
+      <Value flag="0">""</Value>
+     </aliases>
+     <check_no_data_values_automatically>
+      <Value flag="0">"true"</Value>
+     </check_no_data_values_automatically>
+     <file_name>
+      <Value flag="0">"None"</Value>
+     </file_name>
+    </Parameters>
+   </Command>
+   <Command Type="If">
+    <Text>$Cleanup$</Text>
+    <Command Type="CLIType">
+     <Text>PropertyRemove</Text>
+     <Parameters>
+      <on>
+       <Value flag="1">$Voxet$</Value>
+      </on>
+      <name>
+       <Value flag="1">gradu</Value>
+      </name>
+     </Parameters>
+    </Command>
+    <Command Type="CLIType">
+     <Text>PropertyRemove</Text>
+     <Parameters>
+      <on>
+       <Value flag="1">$Voxet$</Value>
+      </on>
+      <name>
+       <Value flag="1">gradv</Value>
+      </name>
+     </Parameters>
+    </Command>
+    <Command Type="CLIType">
+     <Text>PropertyRemove</Text>
+     <Parameters>
+      <on>
+       <Value flag="1">$Voxet$</Value>
+      </on>
+      <name>
+       <Value flag="1">gradw</Value>
+      </name>
+     </Parameters>
+    </Command>
+   </Command>
+   <Command Type="EndOfScope"/>
+  </Command>
+  <Command Type="EndOfScope"/>
+  <Command Type="CommentType">
+   <Text>2.Extract the current iso-surfaces</Text>
+  </Command>
+  <Command Type="For">
+   <Text>var dataobj in $Reference_Objects$</Text>
+   <Command Type="JSVariable">
+    <Text>cur_data</Text>
+    <VariableType>Object</VariableType>
+    <VariableScoped>Yes</VariableScoped>
+    <VariableId>$Reference_Objects$[dataobj].title</VariableId>
+   </Command>
+   <Command Type="CLIType">
+    <Text>PropertyComputeStatistics</Text>
+    <Parameters>
+     <on>
+      <Value flag="1">cur_data</Value>
+     </on>
+     <property>
+      <Value flag="1">$Reference_Values$</Value>
+     </property>
+     <region>
+      <Value flag="0">"everywhere"</Value>
+     </region>
+     <minimum>
+      <Value flag="0">"false"</Value>
+     </minimum>
+     <maximum>
+      <Value flag="0">"false"</Value>
+     </maximum>
+     <mean>
+      <Value flag="0">"true"</Value>
+     </mean>
+     <standard_deviation>
+      <Value flag="0">"false"</Value>
+     </standard_deviation>
+     <quantile>
+      <Value flag="0">"false"</Value>
+     </quantile>
+     <quantile_list_mode>
+      <Value flag="0">"false"</Value>
+     </quantile_list_mode>
+     <quantile_list>
+      <Value flag="0">10</Value>
+      <Value flag="0">25</Value>
+      <Value flag="0">50</Value>
+      <Value flag="0">75</Value>
+      <Value flag="0">90</Value>
+     </quantile_list>
+     <quantile_step_mode>
+      <Value flag="0">"true"</Value>
+     </quantile_step_mode>
+     <quantile_step>
+      <Value flag="0">10.</Value>
+     </quantile_step>
+    </Parameters>
+    <Result>
+     <ResultVariable>stats</ResultVariable>
+     <ResultKey>statistics</ResultKey>
+     <ResultType>CLIStatistics</ResultType>
+     <ResultIsArray>true</ResultIsArray>
+    </Result>
+   </Command>
+   <Command Type="If">
+    <Text>stats !== undefined</Text>
+    <Command Type="JSVariable">
+     <Text>average</Text>
+     <VariableType>String</VariableType>
+     <VariableScoped>Yes</VariableScoped>
+     <VariableId>stats.mean.value</VariableId>
+    </Command>
+    <Command Type="JSVariable">
+     <Text>surface</Text>
+     <VariableType>String</VariableType>
+     <VariableScoped>Yes</VariableScoped>
+     <VariableId>"H_" + cur_field + average.toFixed(3)</VariableId>
+    </Command>
+    <Command Type="CLIType">
+     <Text>TSurfCreateFromIsovalue</Text>
+     <Parameters>
+      <name>
+       <Value flag="1">surface</Value>
+      </name>
+      <grid>
+       <Value flag="1">$Voxet$</Value>
+      </grid>
+      <property>
+       <Value flag="1">cur_field</Value>
+      </property>
+      <iso_value>
+       <Value flag="1">average</Value>
+      </iso_value>
+      <close>
+       <Value flag="0">"none"</Value>
+      </close>
+      <snap_to_centers>
+       <Value flag="0">"false"</Value>
+      </snap_to_centers>
+      <check_normals>
+       <Value flag="0">"false"</Value>
+      </check_normals>
+      <beautify_triangles>
+       <Value flag="0">"false"</Value>
+      </beautify_triangles>
+      <print_statistics>
+       <Value flag="0">"false"</Value>
+      </print_statistics>
+     </Parameters>
+     <Result>
+      <ResultVariable>Surf</ResultVariable>
+      <ResultKey>created</ResultKey>
+      <ResultType>TSurf</ResultType>
+      <ResultIsArray>false</ResultIsArray>
+     </Result>
+    </Command>
+   </Command>
+   <Command Type="EndOfScope"/>
+   <Command Type="Else">
+    <Command Type="JavaScript">
+     <Text>skua.logFatal( "Could not get average value of " + $Reference_Scalar-Field$ );
+continue;</Text>
+     <Title>JavaScript</Title>
+    </Command>
+   </Command>
+   <Command Type="EndOfScope"/>
+   <Command Type="If">
+    <Text>$Compute_Error$</Text>
+    <Command Type="CLIType">
+     <Text>PropertyFillPointwiseFrom</Text>
+     <Parameters>
+      <on>
+       <Value flag="1">cur_data</Value>
+      </on>
+      <region>
+       <Value flag="0">"everywhere"</Value>
+      </region>
+      <new_property_name>
+       <Value flag="1">cur_field</Value>
+      </new_property_name>
+      <from>
+       <Value flag="1">$Voxet$</Value>
+      </from>
+      <from_region>
+       <Value flag="0">"everywhere"</Value>
+      </from_region>
+      <property>
+       <Value flag="1">cur_field</Value>
+      </property>
+      <share_property_class>
+       <Value flag="0">"true"</Value>
+      </share_property_class>
+     </Parameters>
+     <Comment>Transfer scalar field</Comment>
+    </Command>
+    <Command Type="CLIType">
+     <Text>PropertyFillPointwiseFrom</Text>
+     <Parameters>
+      <on>
+       <Value flag="1">cur_data</Value>
+      </on>
+      <region>
+       <Value flag="0">"everywhere"</Value>
+      </region>
+      <new_property_name>
+       <Value flag="1">gradnorm</Value>
+      </new_property_name>
+      <from>
+       <Value flag="1">$Voxet$</Value>
+      </from>
+      <from_region>
+       <Value flag="0">"everywhere"</Value>
+      </from_region>
+      <property>
+       <Value flag="1">gradnorm</Value>
+      </property>
+      <share_property_class>
+       <Value flag="0">"true"</Value>
+      </share_property_class>
+     </Parameters>
+     <Comment>Transfer gradient norm</Comment>
+    </Command>
+    <Command Type="JSVariable">
+     <Text>cur_error</Text>
+     <VariableType>String</VariableType>
+     <VariableScoped>Yes</VariableScoped>
+     <VariableId>cur_field  + "_error_m"</VariableId>
+     <Title>var cur_error = cur_field  + "_error"</Title>
+    </Command>
+    <Command Type="CLIType">
+     <Text>PropertyCreate</Text>
+     <Parameters>
+      <gobj>
+       <Value flag="1">cur_data</Value>
+      </gobj>
+      <property_name>
+       <Value flag="1">cur_error</Value>
+      </property_name>
+      <property_kind>
+       <Value flag="0">"Length"</Value>
+      </property_kind>
+      <no_datavalue_specified>
+       <Value flag="0">"true"</Value>
+      </no_datavalue_specified>
+      <no_datavalue>
+       <Value flag="0">"default (-99999)"</Value>
+      </no_datavalue>
+      <number_of_elements>
+       <Value flag="0">1</Value>
+      </number_of_elements>
+      <storage>
+       <Value flag="0">"Memory"</Value>
+      </storage>
+      <interpolation_method>
+       <Value flag="0">"Linear"</Value>
+      </interpolation_method>
+      <property_dimension>
+       <Value flag="0">"Default"</Value>
+      </property_dimension>
+      <force_float_property>
+       <Value flag="0">"false"</Value>
+      </force_float_property>
+      <log_set>
+       <Value flag="0">""</Value>
+      </log_set>
+      <sampling_rate>
+       <Value flag="0">"0:ft"</Value>
+      </sampling_rate>
+      <start_md>
+       <Value flag="0">"0:ft"</Value>
+      </start_md>
+      <end_md>
+       <Value flag="0">"0:ft"</Value>
+      </end_md>
+     </Parameters>
+    </Command>
+    <Command Type="CLIType">
+     <Text>GObjApplyScriptOnProperty</Text>
+     <Parameters>
+      <on>
+       <Value flag="1">cur_data</Value>
+      </on>
+      <region>
+       <Value flag="0">"everywhere"</Value>
+      </region>
+      <properties>
+       <Value flag="1">skua.script_macro_alias_encode({"average":average})</Value>
+       <Value flag="1">skua.script_macro_alias_encode({"cur_error":cur_error})</Value>
+       <Value flag="1">skua.script_macro_alias_encode({"cur_field":cur_field})</Value>
+       <Value flag="1">skua.script_macro_alias_encode({"gradnorm":gradnorm})</Value>
+       <Value flag="1">skua.script_macro_alias_encode({"gradnormNDV":gradnormNDV})</Value>
+      </properties>
+      <script>
+       <Value flag="0">"{
+if( gradnorm != gradnormNDV ){
+  cur_error = (cur_field - average)/gradnorm;
+} else {
+  cur_error =round(-99999);
+
+}
+}
+"</Value>
+      </script>
+      <aliases>
+       <Value flag="0">""</Value>
+      </aliases>
+      <check_no_data_values_automatically>
+       <Value flag="0">"true"</Value>
+      </check_no_data_values_automatically>
+      <file_name>
+       <Value flag="0">"None"</Value>
+      </file_name>
+     </Parameters>
+    </Command>
+    <Command Type="CLIType">
+     <Text>PropertyComputeStatistics</Text>
+     <Parameters>
+      <on>
+       <Value flag="1">cur_data</Value>
+      </on>
+      <property>
+       <Value flag="1">cur_error</Value>
+      </property>
+      <region>
+       <Value flag="0">"everywhere"</Value>
+      </region>
+      <minimum>
+       <Value flag="0">"true"</Value>
+      </minimum>
+      <maximum>
+       <Value flag="0">"true"</Value>
+      </maximum>
+      <mean>
+       <Value flag="0">"true"</Value>
+      </mean>
+      <standard_deviation>
+       <Value flag="0">"true"</Value>
+      </standard_deviation>
+      <quantile>
+       <Value flag="0">"true"</Value>
+      </quantile>
+      <quantile_list_mode>
+       <Value flag="0">"false"</Value>
+      </quantile_list_mode>
+      <quantile_list>
+       <Value flag="0">10</Value>
+       <Value flag="0">50</Value>
+       <Value flag="0">90</Value>
+      </quantile_list>
+      <quantile_step_mode>
+       <Value flag="0">"true"</Value>
+      </quantile_step_mode>
+      <quantile_step>
+       <Value flag="0">10.</Value>
+      </quantile_step>
+     </Parameters>
+     <Result>
+      <ResultVariable>S</ResultVariable>
+      <ResultKey>statistics</ResultKey>
+      <ResultType>CLIStatistics</ResultType>
+      <ResultIsArray>true</ResultIsArray>
+     </Result>
+    </Command>
+    <Command Type="If">
+     <Text><![CDATA[$Save_Statistics$ && S !== undefined ]]></Text>
+     <Command Type="JavaScript">
+      <Text>unit = S.minimum.uom;
+
+outputFile.write(
+   cur_data+sep+cur_error+" ("+unit+")"+sep+
+   S.minimum.value+sep+S.maximum.value+sep+
+   S.mean.value+sep+S.std_dev.value+sep+S.P10.value+sep+S.P20.value+sep+
+   S.P30.value+sep+S.P40.value+sep+S.P50.value+sep+S.P60.value+sep+
+   S.P70.value+sep+S.P80.value+sep+S.P90.value
+);
+    
+outputFile.write('\n');
+         </Text>
+      <Title>JavaScript</Title>
+     </Command>
+    </Command>
+    <Command Type="EndOfScope"/>
+   </Command>
+   <Command Type="EndOfScope"/>
+  </Command>
+  <Command Type="EndOfScope"/>
+  <Command Type="If">
+   <Text>$Cleanup$</Text>
+   <Command Type="CLIType">
+    <Text>PropertyRemove</Text>
+    <Parameters>
+     <on>
+      <Value flag="1">$Voxet$</Value>
+     </on>
+     <name>
+      <Value flag="1">gradnorm</Value>
+     </name>
+    </Parameters>
+   </Command>
+  </Command>
+  <Command Type="EndOfScope"/>
+ </Command>
+ <Command Type="EndOfScope"/>
+ <Command Type="If">
+  <Text>$Save_Statistics$ </Text>
+  <Command Type="JavaScript">
+   <Text>outputFile.close();</Text>
+   <Title>JavaScript</Title>
+  </Command>
+ </Command>
+ <Command Type="EndOfScope"/>
+</Content>
+<Variables>
+ <Variable>
+  <alias>$Voxet$</alias>
+  <type>Voxet</type>
+  <multi-selection>No</multi-selection>
+  <default_value>/Voxets</default_value>
+  <cmdName>TSurfCreateFromIsovalue</cmdName>
+  <cmdParamName>grid</cmdParamName>
+  <cmdParamEltIndex>0</cmdParamEltIndex>
+  <comment>The Voxet carrying the scalarfields to analyze</comment>
+ </Variable>
+ <Variable>
+  <alias>$Scalar_Fields$</alias>
+  <type>String</type>
+  <default_value>/Property</default_value>
+  <multi-selection>Yes</multi-selection>
+  <cmdName>TSurfCreateFromIsovalue</cmdName>
+  <cmdParamName>grid</cmdParamName>
+  <cmdParamEltIndex>0</cmdParamEltIndex>
+  <optional>No</optional>
+  <dependency>$Voxet$.properties</dependency>
+  <comment>The scalar field(s) to be analyzed</comment>
+ </Variable>
+ <Variable>
+  <alias>$Reference_Objects$</alias>
+  <type>AtomicGroup</type>
+  <optional>No</optional>
+  <multi-selection>Yes</multi-selection>
+  <default_value></default_value>
+  <cmdName>PropertyFillPointwiseFrom</cmdName>
+  <cmdParamName>PointPropertyClient</cmdParamName>
+  <cmdParamEltIndex>0</cmdParamEltIndex>
+  <comment>The reference objects on which the scalar fields should be constant</comment>
+  <dependency></dependency>
+ </Variable>
+ <Variable>
+  <alias>$Reference_Values$</alias>
+  <type>String</type>
+  <default_value>/Property</default_value>
+  <optional>No</optional>
+  <dependency>$Reference_Objects$.properties</dependency>
+  <comment>The reference scalar properties (asseumed constant per object)</comment>
+  <multi-selection>No</multi-selection>
+  <cmdName>PropertyComputeStatistics</cmdName>
+  <cmdParamName>property</cmdParamName>
+  <cmdParamEltIndex>0</cmdParamEltIndex>
+ </Variable>
+ <Variable>
+  <alias>$Compute_Error$</alias>
+  <type>Boolean</type>
+  <default_value>True</default_value>
+  <optional>No</optional>
+  <comment>Check to compute the error on the reference objects</comment>
+ </Variable>
+ <Variable>
+  <alias>$Cleanup$</alias>
+  <type>Boolean</type>
+  <default_value>True</default_value>
+  <comment>Check to remove temporary properties</comment>
+ </Variable>
+ <Variable>
+  <alias>$Save_Statistics$</alias>
+  <type>Boolean</type>
+  <default_value>True</default_value>
+  <comment>Check to save statistics of local errors in an external CSV file</comment>
+ </Variable>
+ <Variable>
+  <alias>$Statistics_File$</alias>
+  <type>OutputFileName</type>
+  <default_value>ScalarFieldValidationStats.csv</default_value>
+  <optional>Yes</optional>
+ </Variable>
+ <Variable>
+  <alias>$RUN.JR$</alias>
+  <type>Integer</type>
+  <default_value>0</default_value>
+  <comment>Internal variable for Jacta realizations</comment>
+  <built-in>true</built-in>
+ </Variable>
+ <Variable>
+  <alias>$RUN.I$</alias>
+  <type>Integer</type>
+  <default_value>1</default_value>
+  <comment>Internal variable for simulation index</comment>
+  <built-in>true</built-in>
+ </Variable>
+ <Variable>
+  <alias>$RUN.N$</alias>
+  <type>Integer</type>
+  <default_value>1</default_value>
+  <comment>Internal variable for number of simulations</comment>
+  <built-in>true</built-in>
+ </Variable>
+</Variables>
+<DialogSpecifications>
+ <DialogSpecification>
+  <Text>enable_group Save_Statistics Statistics_File; 
+IndentBox { label="Volume data" Voxet Scalar_Fields}
+IndentBox { label="Validation data" Reference_Objects Reference_Values}
+IndentBox { label="Options"  Cleanup Save_Statistics Statistics_File}
+</Text>
+ </DialogSpecification>
+</DialogSpecifications>
+
+</UserMacroCommand>

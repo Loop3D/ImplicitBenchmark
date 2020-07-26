@@ -1,17 +1,75 @@
 <UserMacroCommand version="2.0" type="UserMacroCommand">
 <Properties/>
-<Comments/>
+<Comments>
+ <Comment>
+  <Text><![CDATA[<html>
+<h3> Implicit Modeling benchmark Macro: orientation errors </h3>
+<p>
+<b>Input:</b>
+</p>
+<ul>
+<li />One or several Voxet scalar field(s)
+<li />One or several objects which carry the stratigraphic orientation (normal vectors)
+</ul>
+
+<p><b>Output:</b></p>
+<ul>
+<li> For each scalar field, an Orientation Error property on each reference object, <br />
+giving the angle between the reference gradient of each scalar field <br />
+and the reference plane orientation (in degrees, [-90, 90]). </li>
+<li> For each scalar field, a Direction Error property on each reference object, <br />
+giving the angle between the reference gradient of each scalar field and the reference direction (in degrees [0, 180]).</li>
+</ul>
+<p>
+NB: The gradient computation has artifacts on the boundary voxels of the Voxet. <br/>
+Results on points in these voxels may be inaccurate. <br/>
+<br/>
+</p>
+</html>]]></Text>
+ </Comment>
+</Comments>
 <Content>
+ <Command Type="If">
+  <Text>$Save_Statistics$ </Text>
+  <Command Type="JavaScript">
+   <Text>if( $Save_Statistics$ ) {
+    var outputFile = new skua.File($Statistics_File$); 
+    var sep =";"
+    PDGM.assert(outputFile !== undefined); 
+    var ok = outputFile.openForWriting(false); 
+    if(!ok){ 
+        fileErrorMessage = "Cannot open file " + $Statistics_File$
+            +" for writing... exiting";
+        skua.logFatal( fileErrorMessage );
+        return false; 
+    }
+    var Regions = []; 
+    Regions[0] = "everywhere";
+
+    outputFile.write(
+        "Object"+sep+"Property"+sep+
+        "Min"+sep+"Max"+sep+"Mean"+sep+"Std_dev"+sep+
+        "P10"+sep+"P20"+sep+"P30"+sep+"P40"+sep+
+        "P50"+sep+"P60"+sep+"P70"+sep+"P80"+sep+"P90"
+    );
+    outputFile.write('\n'); 
+}
+</Text>
+   <Title>JavaScript</Title>
+   <Comment>Create Stats file</Comment>
+  </Command>
+ </Command>
+ <Command Type="EndOfScope"/>
+ <Command Type="CommentType">
+  <Text>1. Compute and normalize gradient in the Voxet</Text>
+ </Command>
  <Command Type="For">
-  <Text>var implicitmethod in $scalarFields$</Text>
+  <Text>var implicitmethod in $Scalar_Fields$</Text>
   <Command Type="JSVariable">
    <Text>cur_field</Text>
    <VariableType>String</VariableType>
    <VariableScoped>Yes</VariableScoped>
-   <VariableId>$scalarFields$[implicitmethod].title</VariableId>
-  </Command>
-  <Command Type="CommentType">
-   <Text>1. Compute and normalize gradient in the Voxet</Text>
+   <VariableId>$Scalar_Fields$[implicitmethod].title</VariableId>
   </Command>
   <Command Type="JSVariable">
    <Text>gradu</Text>
@@ -43,7 +101,7 @@
    <Text>VoxetCalculateDerivatives</Text>
    <Parameters>
     <on>
-     <Value flag="1">$voxet$</Value>
+     <Value flag="1">$Voxet$</Value>
     </on>
     <Property>
      <Value flag="1">cur_field</Value>
@@ -57,7 +115,7 @@
    <Text>PropertyCreate</Text>
    <Parameters>
     <gobj>
-     <Value flag="1">$voxet$</Value>
+     <Value flag="1">$Voxet$</Value>
     </gobj>
     <property_name>
      <Value flag="1">gradnorm</Value>
@@ -104,15 +162,15 @@
    <Text>GObjApplyScriptOnProperty</Text>
    <Parameters>
     <on>
-     <Value flag="1">$voxet$</Value>
+     <Value flag="1">$Voxet$</Value>
     </on>
     <region>
      <Value flag="0">"everywhere"</Value>
     </region>
     <properties>
-     <Value flag="0">"U:Real Number"</Value>
-     <Value flag="0">"V:Real Number"</Value>
-     <Value flag="0">"W:Real Number"</Value>
+     <Value flag="1">skua.script_macro_alias_encode({"U":"local"})</Value>
+     <Value flag="1">skua.script_macro_alias_encode({"V":"local"})</Value>
+     <Value flag="1">skua.script_macro_alias_encode({"W":"local"})</Value>
      <Value flag="1">skua.script_macro_alias_encode({"gradnorm":gradnorm})</Value>
      <Value flag="1">skua.script_macro_alias_encode({"gradu":gradu})</Value>
      <Value flag="1">skua.script_macro_alias_encode({"gradv":gradv})</Value>
@@ -150,18 +208,18 @@ if( U == 0 || U == NU-1 || V== 0 || V == NV-1 || W == 0 || W == NW-1 || gradnorm
    <Text>2. Compute the local error as the angle between the data orientation and the scalar field orientation</Text>
   </Command>
   <Command Type="For">
-   <Text>var dataobj in $data$</Text>
+   <Text>var dataobj in $Reference_Data$</Text>
    <Command Type="JSVariable">
     <Text>cur_data</Text>
     <VariableType>Object</VariableType>
     <VariableScoped>Yes</VariableScoped>
-    <VariableId>$data$[dataobj]</VariableId>
+    <VariableId>$Reference_Data$[dataobj].title</VariableId>
    </Command>
    <Command Type="CLIType">
     <Text>PropertyFillPointwiseFrom</Text>
     <Parameters>
      <on>
-      <Value flag="1">$data$[dataobj]</Value>
+      <Value flag="1">$Reference_Data$[dataobj]</Value>
      </on>
      <region>
       <Value flag="0">"everywhere"</Value>
@@ -170,7 +228,7 @@ if( U == 0 || U == NU-1 || V== 0 || V == NV-1 || W == 0 || W == NW-1 || gradnorm
       <Value flag="1">gradu</Value>
      </new_property_name>
      <from>
-      <Value flag="1">$voxet$</Value>
+      <Value flag="1">$Voxet$</Value>
      </from>
      <from_region>
       <Value flag="0">"everywhere"</Value>
@@ -187,7 +245,7 @@ if( U == 0 || U == NU-1 || V== 0 || V == NV-1 || W == 0 || W == NW-1 || gradnorm
     <Text>PropertyFillPointwiseFrom</Text>
     <Parameters>
      <on>
-      <Value flag="1">$data$[dataobj]</Value>
+      <Value flag="1">$Reference_Data$[dataobj]</Value>
      </on>
      <region>
       <Value flag="0">"everywhere"</Value>
@@ -196,7 +254,7 @@ if( U == 0 || U == NU-1 || V== 0 || V == NV-1 || W == 0 || W == NW-1 || gradnorm
       <Value flag="1">gradv</Value>
      </new_property_name>
      <from>
-      <Value flag="1">$voxet$</Value>
+      <Value flag="1">$Voxet$</Value>
      </from>
      <from_region>
       <Value flag="0">"everywhere"</Value>
@@ -213,7 +271,7 @@ if( U == 0 || U == NU-1 || V== 0 || V == NV-1 || W == 0 || W == NW-1 || gradnorm
     <Text>PropertyFillPointwiseFrom</Text>
     <Parameters>
      <on>
-      <Value flag="1">$data$[dataobj]</Value>
+      <Value flag="1">$Reference_Data$[dataobj]</Value>
      </on>
      <region>
       <Value flag="0">"everywhere"</Value>
@@ -222,7 +280,7 @@ if( U == 0 || U == NU-1 || V== 0 || V == NV-1 || W == 0 || W == NW-1 || gradnorm
       <Value flag="1">gradw</Value>
      </new_property_name>
      <from>
-      <Value flag="1">$voxet$</Value>
+      <Value flag="1">$Voxet$</Value>
      </from>
      <from_region>
       <Value flag="0">"everywhere"</Value>
@@ -239,20 +297,20 @@ if( U == 0 || U == NU-1 || V== 0 || V == NV-1 || W == 0 || W == NW-1 || gradnorm
     <Text>orientu</Text>
     <VariableType>String</VariableType>
     <VariableScoped>Yes</VariableScoped>
-    <VariableId>$orient$ + "[0]"</VariableId>
+    <VariableId>$Reference_Orientation$ + "[0]"</VariableId>
    </Command>
    <Command Type="JSVariable">
     <Text>orientv</Text>
     <VariableType>String</VariableType>
     <VariableScoped>Yes</VariableScoped>
-    <VariableId>$orient$  + "[1]"</VariableId>
+    <VariableId>$Reference_Orientation$  + "[1]"</VariableId>
     <Title/>
    </Command>
    <Command Type="JSVariable">
     <Text>orientw</Text>
     <VariableType>String</VariableType>
     <VariableScoped>Yes</VariableScoped>
-    <VariableId>$orient$ + "[2]"</VariableId>
+    <VariableId>$Reference_Orientation$ + "[2]"</VariableId>
    </Command>
    <Command Type="JSVariable">
     <Text>orientErr</Text>
@@ -260,17 +318,24 @@ if( U == 0 || U == NU-1 || V== 0 || V == NV-1 || W == 0 || W == NW-1 || gradnorm
     <VariableScoped>Yes</VariableScoped>
     <VariableId>cur_field + "_OrientationError"</VariableId>
    </Command>
+   <Command Type="JSVariable">
+    <Text>directionErr</Text>
+    <VariableType>String</VariableType>
+    <VariableScoped>Yes</VariableScoped>
+    <VariableId>cur_field + "_DirectionError"</VariableId>
+    <Title></Title>
+   </Command>
    <Command Type="CLIType">
     <Text>PropertyCreate</Text>
     <Parameters>
      <gobj>
-      <Value flag="1">$data$[dataobj]</Value>
+      <Value flag="1">$Reference_Data$[dataobj]</Value>
      </gobj>
      <property_name>
       <Value flag="1">orientErr</Value>
      </property_name>
      <property_kind>
-      <Value flag="0">"Real Number"</Value>
+      <Value flag="0">"Angle"</Value>
      </property_kind>
      <no_datavalue_specified>
       <Value flag="0">"true"</Value>
@@ -288,7 +353,54 @@ if( U == 0 || U == NU-1 || V== 0 || V == NV-1 || W == 0 || W == NW-1 || gradnorm
       <Value flag="0">"Linear"</Value>
      </interpolation_method>
      <property_dimension>
-      <Value flag="0">"Default"</Value>
+      <Value flag="0">"Nodes"</Value>
+     </property_dimension>
+     <force_float_property>
+      <Value flag="0">"false"</Value>
+     </force_float_property>
+     <log_set>
+      <Value flag="0">""</Value>
+     </log_set>
+     <sampling_rate>
+      <Value flag="0">"0:ft"</Value>
+     </sampling_rate>
+     <start_md>
+      <Value flag="0">"0:ft"</Value>
+     </start_md>
+     <end_md>
+      <Value flag="0">"0:ft"</Value>
+     </end_md>
+    </Parameters>
+   </Command>
+   <Command Type="CLIType">
+    <Text>PropertyCreate</Text>
+    <Parameters>
+     <gobj>
+      <Value flag="1">$Reference_Data$[dataobj]</Value>
+     </gobj>
+     <property_name>
+      <Value flag="1">directionErr</Value>
+     </property_name>
+     <property_kind>
+      <Value flag="0">"Angle"</Value>
+     </property_kind>
+     <no_datavalue_specified>
+      <Value flag="0">"true"</Value>
+     </no_datavalue_specified>
+     <no_datavalue>
+      <Value flag="0">"default (-99999)"</Value>
+     </no_datavalue>
+     <number_of_elements>
+      <Value flag="0">1</Value>
+     </number_of_elements>
+     <storage>
+      <Value flag="0">"Memory"</Value>
+     </storage>
+     <interpolation_method>
+      <Value flag="0">"Linear"</Value>
+     </interpolation_method>
+     <property_dimension>
+      <Value flag="0">"Nodes"</Value>
      </property_dimension>
      <force_float_property>
       <Value flag="0">"false"</Value>
@@ -317,6 +429,7 @@ if( U == 0 || U == NU-1 || V== 0 || V == NV-1 || W == 0 || W == NW-1 || gradnorm
       <Value flag="0">"everywhere"</Value>
      </region>
      <properties>
+      <Value flag="1">skua.script_macro_alias_encode({"directionErr":directionErr})</Value>
       <Value flag="1">skua.script_macro_alias_encode({"gradu":gradu})</Value>
       <Value flag="1">skua.script_macro_alias_encode({"gradv":gradv})</Value>
       <Value flag="1">skua.script_macro_alias_encode({"gradw":gradw})</Value>
@@ -326,11 +439,15 @@ if( U == 0 || U == NU-1 || V== 0 || V == NV-1 || W == 0 || W == NW-1 || gradnorm
       <Value flag="1">skua.script_macro_alias_encode({"orientw":orientw})</Value>
      </properties>
      <script>
-      <Value flag="0">"{
+      <Value flag="0"><![CDATA["{
 orientErr = acos(gradu*orientu + gradv*orientv + gradw*orientw) * 180./3.14159265359;
+directionErr = orientErr;
+if(orientErr > 90) { 
+  orientErr -=180;
+}
 
 }
-"</Value>
+"]]></Value>
      </script>
      <aliases>
       <Value flag="0">""</Value>
@@ -343,13 +460,81 @@ orientErr = acos(gradu*orientu + gradv*orientv + gradw*orientw) * 180./3.1415926
      </file_name>
     </Parameters>
    </Command>
+   <Command Type="CLIType">
+    <Text>PropertyComputeStatistics</Text>
+    <Parameters>
+     <on>
+      <Value flag="1">cur_data</Value>
+     </on>
+     <property>
+      <Value flag="1">orientErr</Value>
+     </property>
+     <region>
+      <Value flag="0">"everywhere"</Value>
+     </region>
+     <minimum>
+      <Value flag="0">"true"</Value>
+     </minimum>
+     <maximum>
+      <Value flag="0">"true"</Value>
+     </maximum>
+     <mean>
+      <Value flag="0">"true"</Value>
+     </mean>
+     <standard_deviation>
+      <Value flag="0">"true"</Value>
+     </standard_deviation>
+     <quantile>
+      <Value flag="0">"true"</Value>
+     </quantile>
+     <quantile_list_mode>
+      <Value flag="0">"false"</Value>
+     </quantile_list_mode>
+     <quantile_list>
+      <Value flag="0">10</Value>
+      <Value flag="0">50</Value>
+      <Value flag="0">90</Value>
+     </quantile_list>
+     <quantile_step_mode>
+      <Value flag="0">"true"</Value>
+     </quantile_step_mode>
+     <quantile_step>
+      <Value flag="0">10.</Value>
+     </quantile_step>
+    </Parameters>
+    <Result>
+     <ResultVariable>S</ResultVariable>
+     <ResultKey>statistics</ResultKey>
+     <ResultType>CLIStatistics</ResultType>
+     <ResultIsArray>true</ResultIsArray>
+    </Result>
+   </Command>
+   <Command Type="If">
+    <Text><![CDATA[$Save_Statistics$ && S !== undefined ]]></Text>
+    <Command Type="JavaScript">
+     <Text>unit = S.minimum.uom;
+
+outputFile.write(
+   cur_data+sep+orientErr+" ("+unit+")"+sep+
+   S.minimum.value+sep+S.maximum.value+sep+
+   S.mean.value+sep+S.std_dev.value+sep+S.P10.value+sep+S.P20.value+sep+
+   S.P30.value+sep+S.P40.value+sep+S.P50.value+sep+S.P60.value+sep+
+   S.P70.value+sep+S.P80.value+sep+S.P90.value
+);
+    
+outputFile.write('\n');
+         </Text>
+     <Title>JavaScript</Title>
+    </Command>
+   </Command>
+   <Command Type="EndOfScope"/>
    <Command Type="If">
     <Text>$Cleanup$</Text>
     <Command Type="CLIType">
      <Text>PropertyRemove</Text>
      <Parameters>
       <on>
-       <Value flag="1">$data$[dataobj]</Value>
+       <Value flag="1">$Reference_Data$[dataobj]</Value>
       </on>
       <name>
        <Value flag="1">gradu</Value>
@@ -360,7 +545,7 @@ orientErr = acos(gradu*orientu + gradv*orientv + gradw*orientw) * 180./3.1415926
      <Text>PropertyRemove</Text>
      <Parameters>
       <on>
-       <Value flag="1">$data$[dataobj]</Value>
+       <Value flag="1">$Reference_Data$[dataobj]</Value>
       </on>
       <name>
        <Value flag="1">gradv</Value>
@@ -371,7 +556,7 @@ orientErr = acos(gradu*orientu + gradv*orientv + gradw*orientw) * 180./3.1415926
      <Text>PropertyRemove</Text>
      <Parameters>
       <on>
-       <Value flag="1">$data$[dataobj]</Value>
+       <Value flag="1">$Reference_Data$[dataobj]</Value>
       </on>
       <name>
        <Value flag="1">gradw</Value>
@@ -388,7 +573,7 @@ orientErr = acos(gradu*orientu + gradv*orientv + gradw*orientw) * 180./3.1415926
     <Text>PropertyRemove</Text>
     <Parameters>
      <on>
-      <Value flag="1">$voxet$</Value>
+      <Value flag="1">$Voxet$</Value>
      </on>
      <name>
       <Value flag="1">gradnorm</Value>
@@ -399,7 +584,7 @@ orientErr = acos(gradu*orientu + gradv*orientv + gradw*orientw) * 180./3.1415926
     <Text>PropertyRemove</Text>
     <Parameters>
      <on>
-      <Value flag="1">$voxet$</Value>
+      <Value flag="1">$Voxet$</Value>
      </on>
      <name>
       <Value flag="1">gradu</Value>
@@ -410,7 +595,7 @@ orientErr = acos(gradu*orientu + gradv*orientv + gradw*orientw) * 180./3.1415926
     <Text>PropertyRemove</Text>
     <Parameters>
      <on>
-      <Value flag="1">$voxet$</Value>
+      <Value flag="1">$Voxet$</Value>
      </on>
      <name>
       <Value flag="1">gradv</Value>
@@ -421,7 +606,7 @@ orientErr = acos(gradu*orientu + gradv*orientv + gradw*orientw) * 180./3.1415926
     <Text>PropertyRemove</Text>
     <Parameters>
      <on>
-      <Value flag="1">$voxet$</Value>
+      <Value flag="1">$Voxet$</Value>
      </on>
      <name>
       <Value flag="1">gradw</Value>
@@ -432,10 +617,18 @@ orientErr = acos(gradu*orientu + gradv*orientv + gradw*orientw) * 180./3.1415926
   <Command Type="EndOfScope"/>
  </Command>
  <Command Type="EndOfScope"/>
+ <Command Type="If">
+  <Text>$Save_Statistics$ </Text>
+  <Command Type="JavaScript">
+   <Text>outputFile.close();</Text>
+   <Title>JavaScript</Title>
+  </Command>
+ </Command>
+ <Command Type="EndOfScope"/>
 </Content>
 <Variables>
  <Variable>
-  <alias>$voxet$</alias>
+  <alias>$Voxet$</alias>
   <type>Voxet</type>
   <multi-selection>No</multi-selection>
   <default_value/>
@@ -445,7 +638,7 @@ orientErr = acos(gradu*orientu + gradv*orientv + gradw*orientw) * 180./3.1415926
   <comment>The axis-aligned Voxet bearing the interpolated scalar field</comment>
  </Variable>
  <Variable>
-  <alias>$scalarFields$</alias>
+  <alias>$Scalar_Fields$</alias>
   <type>String</type>
   <default_value>/Property</default_value>
   <multi-selection>Yes</multi-selection>
@@ -453,11 +646,11 @@ orientErr = acos(gradu*orientu + gradv*orientv + gradw*orientw) * 180./3.1415926
   <cmdParamName>grid</cmdParamName>
   <cmdParamEltIndex>0</cmdParamEltIndex>
   <optional>No</optional>
-  <dependency>$voxet$.properties</dependency>
+  <dependency>$Voxet$.properties</dependency>
   <comment>The various scalar fields to compare</comment>
  </Variable>
  <Variable>
-  <alias>$data$</alias>
+  <alias>$Reference_Data$</alias>
   <type>AtomicGroup</type>
   <optional>No</optional>
   <multi-selection>Yes</multi-selection>
@@ -468,9 +661,9 @@ orientErr = acos(gradu*orientu + gradv*orientv + gradw*orientw) * 180./3.1415926
   <comment>The data points (Caution: results in edges of grid may be unstable)</comment>
  </Variable>
  <Variable>
-  <alias>$orient$</alias>
+  <alias>$Reference_Orientation$</alias>
   <type>String</type>
-  <dependency>$data$.properties3d</dependency>
+  <dependency>$Reference_Data$.properties3d</dependency>
   <optional>No</optional>
   <multi-selection>No</multi-selection>
   <comment>The reference (normalized) orientation vector on the data points</comment>
@@ -482,6 +675,18 @@ orientErr = acos(gradu*orientu + gradv*orientv + gradw*orientw) * 180./3.1415926
   <default_value>True</default_value>
   <multi-selection>No</multi-selection>
   <comment>Check to remove temporary properties</comment>
+ </Variable>
+ <Variable>
+  <alias>$Save_Statistics$</alias>
+  <type>Boolean</type>
+  <default_value>True</default_value>
+  <comment>Check to export angle error statistics in output file</comment>
+ </Variable>
+ <Variable>
+  <alias>$Statistics_File$</alias>
+  <type>OutputFileName</type>
+  <default_value>OrientationStats.csv</default_value>
+  <comment>Caution: file will be overwritten</comment>
  </Variable>
  <Variable>
   <alias>$RUN.JR$</alias>
@@ -505,6 +710,14 @@ orientErr = acos(gradu*orientu + gradv*orientv + gradw*orientw) * 180./3.1415926
   <built-in>true</built-in>
  </Variable>
 </Variables>
-<DialogSpecifications/>
+<DialogSpecifications>
+ <DialogSpecification>
+  <Text>enable_group Save_Statistics Statistics_File; 
+IndentBox { label="Volume data" Voxet Scalar_Fields}
+IndentBox { label="Validation data" Reference_Data Reference_Orientation}
+IndentBox { label="Options" Cleanup Save_Statistics Statistics_File}
+HBox{Save_Statistics Statistics_File}</Text>
+ </DialogSpecification>
+</DialogSpecifications>
 
 </UserMacroCommand>

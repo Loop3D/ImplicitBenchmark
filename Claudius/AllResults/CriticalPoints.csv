@@ -1,0 +1,14 @@
+Object;Property;Local Minima;Saddle 1;Saddle 2;Local Maxima;
+result_FDISolid100_30CriticalPoints;CriticalPointOrder;0;2;0;2;
+result_PLISolid100_30CriticalPoints;CriticalPointOrder;0;7;3;5;
+GemPySolid100_30CriticalPoints;CriticalPointOrder;18;65;76;0;
+JulienBendingMLSSolid100_30CriticalPoints;CriticalPointOrder;0;9;1;7;
+JulienBendingMLS_FineSolid100_30CriticalPoints;CriticalPointOrder;0;7;1;8;
+SIGMA_s10Solid100_30CriticalPoints;CriticalPointOrder;0;6;2;6;
+SIGMA_s12Solid100_30CriticalPoints;CriticalPointOrder;0;6;0;6;
+SIGMA_s13Solid100_30CriticalPoints;CriticalPointOrder;0;8;1;7;
+StructuralLabSolid100_30CriticalPoints;CriticalPointOrder;0;10;1;8;
+SurfE_MQ1_ExactSolid100_30CriticalPoints;CriticalPointOrder;20;53;67;10;
+SurfE_MQ1_SmoothSolid100_30CriticalPoints;CriticalPointOrder;3;17;21;0;2 multiple saddles points considered as order 2
+SurfE_R3_ExactSolid100_30CriticalPoints;CriticalPointOrder;63;453;426;83;
+SurfE_R3_Smooth100Solid100_30CriticalPoints;CriticalPointOrder;3;17;21;0;

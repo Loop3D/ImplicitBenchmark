@@ -1,0 +1,328 @@
+<UserMacroCommand version="2.0" type="UserMacroCommand">
+<Properties/>
+<Comments>
+ <Comment>
+  <Text><![CDATA[<html>
+Counts the Critical points (Needs RINGToolKit)
+
+<i>Unfinished</i>
+</html>]]></Text>
+ </Comment>
+</Comments>
+<Content>
+ <Command Type="If">
+  <Text>$Save_Statistics$ </Text>
+  <Command Type="JavaScript">
+   <Text>
+    var outputFile = new skua.File($Statistics_File$); 
+    var sep =";"
+    PDGM.assert(outputFile !== undefined); 
+    var ok = outputFile.openForWriting(false); 
+    if(!ok){ 
+        fileErrorMessage = "Cannot open file " + $Statistics_File$
+            +" for writing... exiting";
+        skua.logFatal( fileErrorMessage );
+        return false; 
+    }
+    outputFile.write(
+        "Object"+sep+"Property"+sep+
+        "Local Minima"+sep+"Saddle 1"+sep+"Saddle 2"+sep+
+        "Local Maxima"
+    );
+    outputFile.write('\n'); 
+
+</Text>
+   <Title>JavaScript</Title>
+   <Comment>Create Stats file</Comment>
+  </Command>
+ </Command>
+ <Command Type="EndOfScope"/>
+ <Command Type="For">
+  <Text>var ip in $Scalar_Field$</Text>
+  <Command Type="JSVariable">
+   <Text>curField</Text>
+   <VariableType>String</VariableType>
+   <VariableScoped>Yes</VariableScoped>
+   <VariableId>$Scalar_Field$[ip].title</VariableId>
+  </Command>
+  <Command Type="CLIType">
+   <Text>FindTSolidCriticalPoints</Text>
+   <Parameters>
+    <on>
+     <Value flag="1">$Solid$</Value>
+    </on>
+    <property>
+     <Value flag="1">$Scalar_Field$[ip]</Value>
+    </property>
+    <ignore_borders>
+     <Value flag="0">"true"</Value>
+    </ignore_borders>
+   </Parameters>
+  </Command>
+  <Command Type="JSVariable">
+   <Text>pointsName</Text>
+   <VariableType>String</VariableType>
+   <VariableScoped>Yes</VariableScoped>
+   <VariableId>$Solid$.title + "CriticalPoints"</VariableId>
+  </Command>
+  <Command Type="JSVariable">
+   <Text>newPointsName</Text>
+   <VariableType>String</VariableType>
+   <VariableScoped>Yes</VariableScoped>
+   <VariableId>curField + pointsName</VariableId>
+  </Command>
+  <Command Type="CLIType">
+   <Text>GObjRename</Text>
+   <Parameters>
+    <gobj>
+     <Value flag="1">pointsName</Value>
+    </gobj>
+    <new_name>
+     <Value flag="1">newPointsName</Value>
+    </new_name>
+   </Parameters>
+  </Command>
+  <Command Type="JSVariable">
+   <Text>criticalName</Text>
+   <VariableType>String</VariableType>
+   <VariableScoped>No</VariableScoped>
+   <VariableId>"CriticalPointOrder"</VariableId>
+   <Title/>
+  </Command>
+  <Command Type="CLIType">
+   <Text>PropertyRename</Text>
+   <Parameters>
+    <on>
+     <Value flag="1">newPointsName</Value>
+    </on>
+    <old_name>
+     <Value flag="1">"CriticalPointOrder"</Value>
+    </old_name>
+    <new_name>
+     <Value flag="1">criticalName</Value>
+    </new_name>
+   </Parameters>
+   <Used>No</Used>
+  </Command>
+  <Command Type="CLIType">
+   <Text>PropertyEditPropertyKind</Text>
+   <Parameters>
+    <on>
+     <Value flag="1">newPointsName</Value>
+    </on>
+    <property>
+     <Value flag="1">criticalName</Value>
+    </property>
+    <property_type>
+     <Value flag="0">"CriticalPointOrder"</Value>
+    </property_type>
+    <unit>
+     <Value flag="0">"none"</Value>
+    </unit>
+    <property_class>
+     <Value flag="0">"CriticalPointOrder"</Value>
+    </property_class>
+    <interpolation_method>
+     <Value flag="0">"Default"</Value>
+    </interpolation_method>
+   </Parameters>
+  </Command>
+  <Command Type="CLIType">
+   <Text>BitRegionManagerDiscreteRegion</Text>
+   <Parameters>
+    <on>
+     <Value flag="1">newPointsName</Value>
+    </on>
+    <region_prefix>
+     <Value flag="1">curField</Value>
+    </region_prefix>
+    <property>
+     <Value flag="1">criticalName</Value>
+    </property>
+    <dynamic>
+     <Value flag="0">"false"</Value>
+    </dynamic>
+   </Parameters>
+  </Command>
+  <Command Type="JSVariable">
+   <Text>Regions</Text>
+   <VariableType>Array</VariableType>
+   <VariableScoped>Yes</VariableScoped>
+   <VariableId>[curField+"LocalMin", curField+"Saddle1", curField+"Saddle2", curField+"LocalMax"]</VariableId>
+  </Command>
+  <Command Type="JavaScript">
+   <Text>if( $Save_Statistics$ ) {
+    outputFile.write( newPointsName + sep + criticalName + sep );
+}
+</Text>
+   <Title>JavaScript</Title>
+   <Comment>Create Stats file</Comment>
+  </Command>
+  <Command Type="For">
+   <Text>var ireg in Regions</Text>
+   <Command Type="CLIType">
+    <Text>BitRegionManagerGetRegionElementsNumber</Text>
+    <Parameters>
+     <on>
+      <Value flag="1">newPointsName</Value>
+     </on>
+     <region>
+      <Value flag="1">Regions[ireg]</Value>
+     </region>
+     <exclude_dead_elements>
+      <Value flag="0">"true"</Value>
+     </exclude_dead_elements>
+    </Parameters>
+    <Result>
+     <ResultVariable>nbPoints</ResultVariable>
+     <ResultKey>element_number</ResultKey>
+     <ResultType>TypedQuantity</ResultType>
+     <ResultIsArray>true</ResultIsArray>
+    </Result>
+   </Command>
+   <Command Type="JavaScript">
+    <Text>if( $Save_Statistics$ ) {
+    outputFile.write( nbPoints.value + sep );
+}
+</Text>
+    <Title>JavaScript</Title>
+    <Comment>Create Stats file</Comment>
+   </Command>
+  </Command>
+  <Command Type="EndOfScope"/>
+  <Command Type="JavaScript">
+   <Text>if( $Save_Statistics$ ) {
+    outputFile.write('\n'); 
+}
+</Text>
+   <Title>JavaScript</Title>
+   <Comment>Create Stats file</Comment>
+  </Command>
+  <Command Type="CLIType">
+   <Text>StyleSetAttribute</Text>
+   <Parameters>
+    <on>
+     <Value flag="1">"/"+newPointsName</Value>
+    </on>
+    <viewer>
+     <Value flag="0">"/viewer:3D Viewer"</Value>
+    </viewer>
+    <attribute>
+     <Value flag="0">"*atoms*symbol"</Value>
+    </attribute>
+    <value>
+     <Value flag="0">"sphere"</Value>
+    </value>
+   </Parameters>
+  </Command>
+  <Command Type="CLIType">
+   <Text>StyleUpdate</Text>
+   <Parameters>
+    <on>
+     <Value flag="1">newPointsName</Value>
+    </on>
+    <viewer>
+     <Value flag="0">"/viewer:3D Viewer"</Value>
+    </viewer>
+   </Parameters>
+  </Command>
+  <Command Type="CLIType">
+   <Text>CameraDisplayExclusiveSubEntities</Text>
+   <Parameters>
+    <on>
+     <Value flag="0">"DefaultCamera"</Value>
+    </on>
+    <objects>
+     <Value flag="1">"/"+newPointsName+"/property:"+criticalName</Value>
+    </objects>
+    <show>
+     <Value flag="0">"true"</Value>
+    </show>
+    <parent_level>
+     <Value flag="0">1</Value>
+    </parent_level>
+    <exclusive_attr>
+     <Value flag="0">"*painted*variable"</Value>
+    </exclusive_attr>
+    <ctrler_attr>
+     <Value flag="0">"*painted"</Value>
+    </ctrler_attr>
+   </Parameters>
+  </Command>
+ </Command>
+ <Command Type="EndOfScope"/>
+ <Command Type="CLIType">
+  <Text>CameraUpdateAll</Text>
+  <Parameters/>
+ </Command>
+ <Command Type="If">
+  <Text>$Save_Statistics$ </Text>
+  <Command Type="JavaScript">
+   <Text>outputFile.close();</Text>
+   <Title>JavaScript</Title>
+  </Command>
+ </Command>
+ <Command Type="EndOfScope"/>
+</Content>
+<Variables>
+ <Variable>
+  <alias>$Solid$</alias>
+  <type>TSolid</type>
+  <default_value/>
+  <cmdName>FindTSolidCriticalPoints</cmdName>
+  <cmdParamName>TSolid</cmdParamName>
+  <cmdParamEltIndex>0</cmdParamEltIndex>
+ </Variable>
+ <Variable>
+  <alias>$Scalar_Field$</alias>
+  <type>String</type>
+  <dependency>$Solid$.properties</dependency>
+  <default_value/>
+  <cmdName>EditPropertySettings</cmdName>
+  <cmdParamName>property_names</cmdParamName>
+  <cmdParamEltIndex>0</cmdParamEltIndex>
+  <optional>No</optional>
+  <multi-selection>Yes</multi-selection>
+ </Variable>
+ <Variable>
+  <alias>$Save_Statistics$</alias>
+  <type>Boolean</type>
+  <default_value>True</default_value>
+  <comment>Check to save statistics of local errors in an external CSV file</comment>
+ </Variable>
+ <Variable>
+  <alias>$Statistics_File$</alias>
+  <type>OutputFileName</type>
+  <default_value>CriticalPoints.csv</default_value>
+  <optional>Yes</optional>
+ </Variable>
+ <Variable>
+  <alias>$RUN.JR$</alias>
+  <type>Integer</type>
+  <default_value>0</default_value>
+  <comment>Internal variable for Jacta realizations</comment>
+  <built-in>true</built-in>
+ </Variable>
+ <Variable>
+  <alias>$RUN.I$</alias>
+  <type>Integer</type>
+  <default_value>1</default_value>
+  <comment>Internal variable for simulation index</comment>
+  <built-in>true</built-in>
+ </Variable>
+ <Variable>
+  <alias>$RUN.N$</alias>
+  <type>Integer</type>
+  <default_value>1</default_value>
+  <comment>Internal variable for number of simulations</comment>
+  <built-in>true</built-in>
+ </Variable>
+</Variables>
+<DialogSpecifications>
+ <DialogSpecification>
+  <Text>enable_group Save_Statistics Statistics_File; 
+IndentBox { label="Options"  Cleanup Save_Statistics Statistics_File}</Text>
+ </DialogSpecification>
+</DialogSpecifications>
+
+</UserMacroCommand>
