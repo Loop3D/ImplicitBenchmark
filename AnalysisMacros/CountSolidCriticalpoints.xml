@@ -46,13 +46,13 @@ Counts the Critical points (Needs RINGToolKit)
    <VariableId>$Scalar_Field$[ip].title</VariableId>
   </Command>
   <Command Type="CLIType">
-   <Text>FindTSolidCriticalPoints</Text>
+   <Text>CreateVSetFromSolidCriticalPoints</Text>
    <Parameters>
-    <on>
+    <solid>
      <Value flag="1">$Solid$</Value>
-    </on>
+    </solid>
     <property>
-     <Value flag="1">$Scalar_Field$[ip]</Value>
+     <Value flag="1">curField</Value>
     </property>
     <ignore_borders>
      <Value flag="0">"true"</Value>
@@ -254,6 +254,7 @@ Counts the Critical points (Needs RINGToolKit)
  <Command Type="CLIType">
   <Text>CameraUpdateAll</Text>
   <Parameters/>
+  <Used>No</Used>
  </Command>
  <Command Type="If">
   <Text>$Save_Statistics$ </Text>
