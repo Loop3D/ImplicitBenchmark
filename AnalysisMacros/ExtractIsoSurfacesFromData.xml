@@ -57,6 +57,27 @@ The error approximation may be inaccurate for large distances. <br/>
  </Command>
  <Command Type="EndOfScope"/>
  <Command Type="For">
+  <Text>var iref in $Reference_Iso_Data$</Text>
+  <Command Type="JSVariable">
+   <Text>featureName</Text>
+   <VariableType>String</VariableType>
+   <VariableScoped>Yes</VariableScoped>
+   <VariableId>"Result_" + $Reference_Iso_Data$[iref].title</VariableId>
+  </Command>
+  <Command Type="CLIType">
+   <Text>CreateGeologicalFeature</Text>
+   <Parameters>
+    <name>
+     <Value flag="1">featureName</Value>
+    </name>
+    <geologic_type>
+     <Value flag="0">"Horizon"</Value>
+    </geologic_type>
+   </Parameters>
+  </Command>
+ </Command>
+ <Command Type="EndOfScope"/>
+ <Command Type="For">
   <Text>var implicitmethod in $Scalar_Fields$</Text>
   <Command Type="JSVariable">
    <Text>cur_field</Text>
@@ -379,6 +400,36 @@ if(U != 0 || U != NU-1 || V != 0 || V != NV-1 || W != 0 || W != NW-1 ){
       <ResultType>TSurf</ResultType>
       <ResultIsArray>false</ResultIsArray>
      </Result>
+    </Command>
+    <Command Type="CLIType">
+     <Text>GObjAssignGeologicalFeature</Text>
+     <Parameters>
+      <on>
+       <Value flag="1">surface</Value>
+      </on>
+      <feature>
+       <Value flag="1">featureName</Value>
+      </feature>
+     </Parameters>
+    </Command>
+    <Command Type="CLIType">
+     <Text>TSurfSetFcp</Text>
+     <Parameters>
+      <on>
+       <Value flag="1">surface</Value>
+      </on>
+      <control_points>
+       <Value flag="1">cur_data</Value>
+      </control_points>
+      <optimize_shooting_direction>
+       <Value flag="0">"true"</Value>
+      </optimize_shooting_direction>
+      <dir_shoot>
+       <Value flag="0">0.</Value>
+       <Value flag="0">0.</Value>
+       <Value flag="0">1.</Value>
+      </dir_shoot>
+     </Parameters>
     </Command>
    </Command>
    <Command Type="EndOfScope"/>

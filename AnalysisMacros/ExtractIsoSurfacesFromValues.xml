@@ -57,6 +57,27 @@ The error approximation may be inaccurate for large distances. <br/>
  </Command>
  <Command Type="EndOfScope"/>
  <Command Type="For">
+  <Text>var iref in $Reference_Objects$</Text>
+  <Command Type="JSVariable">
+   <Text>featureName</Text>
+   <VariableType>String</VariableType>
+   <VariableScoped>Yes</VariableScoped>
+   <VariableId>"Result_" + $Reference_Objects$[iref].title</VariableId>
+  </Command>
+  <Command Type="CLIType">
+   <Text>CreateGeologicalFeature</Text>
+   <Parameters>
+    <name>
+     <Value flag="1">featureName</Value>
+    </name>
+    <geologic_type>
+     <Value flag="0">"Horizon"</Value>
+    </geologic_type>
+   </Parameters>
+  </Command>
+ </Command>
+ <Command Type="EndOfScope"/>
+ <Command Type="For">
   <Text>var implicitmethod in $Scalar_Fields$</Text>
   <Command Type="JSVariable">
    <Text>cur_field</Text>
@@ -251,6 +272,12 @@ if(U != 0 || U != NU-1 || V != 0 || V != NV-1 || W != 0 || W != NW-1 ){
     <VariableScoped>Yes</VariableScoped>
     <VariableId>$Reference_Objects$[dataobj].title</VariableId>
    </Command>
+   <Command Type="JSVariable">
+    <Text>featureName</Text>
+    <VariableType>String</VariableType>
+    <VariableScoped>Yes</VariableScoped>
+    <VariableId>"Result_" + cur_data</VariableId>
+   </Command>
    <Command Type="CLIType">
     <Text>PropertyComputeStatistics</Text>
     <Parameters>
@@ -353,6 +380,36 @@ if(U != 0 || U != NU-1 || V != 0 || V != NV-1 || W != 0 || W != NW-1 ){
       <ResultType>TSurf</ResultType>
       <ResultIsArray>false</ResultIsArray>
      </Result>
+    </Command>
+    <Command Type="CLIType">
+     <Text>GObjAssignGeologicalFeature</Text>
+     <Parameters>
+      <on>
+       <Value flag="1">surface</Value>
+      </on>
+      <feature>
+       <Value flag="1">featureName</Value>
+      </feature>
+     </Parameters>
+    </Command>
+    <Command Type="CLIType">
+     <Text>TSurfSetFcp</Text>
+     <Parameters>
+      <on>
+       <Value flag="1">surface</Value>
+      </on>
+      <control_points>
+       <Value flag="1">cur_data</Value>
+      </control_points>
+      <optimize_shooting_direction>
+       <Value flag="0">"true"</Value>
+      </optimize_shooting_direction>
+      <dir_shoot>
+       <Value flag="0">0.</Value>
+       <Value flag="0">0.</Value>
+       <Value flag="0">1.</Value>
+      </dir_shoot>
+     </Parameters>
     </Command>
    </Command>
    <Command Type="EndOfScope"/>
@@ -638,12 +695,12 @@ outputFile.write('\n');
   <type>AtomicGroup</type>
   <optional>No</optional>
   <multi-selection>Yes</multi-selection>
-  <default_value></default_value>
+  <default_value/>
   <cmdName>PropertyFillPointwiseFrom</cmdName>
   <cmdParamName>PointPropertyClient</cmdParamName>
   <cmdParamEltIndex>0</cmdParamEltIndex>
   <comment>The reference objects on which the scalar fields should be constant</comment>
-  <dependency></dependency>
+  <dependency/>
  </Variable>
  <Variable>
   <alias>$Reference_Values$</alias>
