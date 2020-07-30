@@ -98,6 +98,22 @@
 }
 
 
+@inproceedings{Carr2001,
+  title = {Reconstruction and Representation of {{3D}} Objects with Radial Basis Functions},
+  booktitle = {Proceedings of the 28th Annual Conference on {{Computer}} Graphics and Interactive Techniques  - {{SIGGRAPH}} '01},
+  author = {Carr, J. C. and Beatson, R. K. and Cherrie, J. B. and Mitchell, T. J. and Fright, W. R. and McCallum, B. C. and Evans, T. R.},
+  year = {2001},
+  pages = {67--76},
+  publisher = {{ACM Press}},
+  address = {{Not Known}},
+  doi = {10.1145/383259.383266},
+  abstract = {We use polyharmonic Radial Basis Functions (RBFs) to reconstruct smooth, manifold surfaces from point-cloud data and to repair incomplete meshes. An object's surface is defined implicitly as the zero set of an RBF fitted to the given surface data. Fast methods for fitting and evaluating RBFs allow us to model large data sets, consisting of millions of surface points, by a single RBF \textemdash{} previously an impossible task. A greedy algorithm in the fitting process reduces the number of RBF centers required to represent a surface and results in significant compression and further computational advantages. The energy-minimisation characterisation of polyharmonic splines result in a ``smoothest'' interpolant. This scale-independent characterisation is well-suited to reconstructing surfaces from nonuniformly sampled data. Holes are smoothly filled and surfaces smoothly extrapolated. We use a non-interpolating approximation when the data is noisy. The functional representation is in effect a solid model, which means that gradients and surface normals can be determined analytically. This helps generate uniform meshes and we show that the RBF representation has advantages for mesh simplification and remeshing applications. Results are presented for real-world rangefinder data.},
+  isbn = {978-1-58113-374-5},
+  language = {en}
+}
+
+
+
 
 @article{Caumon2013GaRSITo,
   title = {Three-{{Dimensional Implicit Stratigraphic Model Building From Remote Sensing Data}} on {{Tetrahedral Meshes}}: {{Theory}} and {{Application}} to a {{Regional Model}} of {{La Popa Basin}}, {{NE Mexico}}},
@@ -129,6 +145,21 @@
   author = {Calcagno, Philippe and Chil\`es, Jean-Paul and Courrioux, Gabriel and Guillen, Antonio},
   year = {2008},
   pages = {147-157}
+}
+
+
+@article{Dubrule1984CG,
+  title = {Comparing Splines and Kriging},
+  author = {Dubrule, Olivier},
+  year = {1984},
+  month = jan,
+  volume = {10},
+  pages = {327--338},
+  issn = {00983004},
+  doi = {10.1016/0098-3004(84)90030-X},
+  journal = {Computers \& Geosciences},
+  language = {en},
+  number = {2-3}
 }
 
 @article{Hillier2014MG,
@@ -213,7 +244,7 @@
   pages = {6318-6333}
 }
 
-@article{Maxelon2009C&G,
+@article{Maxelon2009CG,
   title = {A Workflow to Facilitate Three-Dimensional Geometrical Modelling of Complex Poly-Deformed Geological Units},
   volume = {35},
   issn = {00983004},
@@ -313,6 +344,22 @@
   month = dec,
   year = {2017},
   pages = {1-15}
+}
+
+@article{Park2006ITVCG,
+  ids = {park\_discrete\_2006},
+  title = {Discrete {{Sibson}} Interpolation},
+  author = {Park, S.W. and Linsen, L. and Kreylos, O. and Owens, J.D. and Hamann, B.},
+  year = {2006},
+  month = mar,
+  volume = {12},
+  pages = {243--253},
+  issn = {1077-2626},
+  doi = {10.1109/TVCG.2006.27},
+  abstract = {Natural-neighbor interpolation methods, such as Sibson's method, are well-known schemes for multivariate data fitting and reconstruction. Despite its many desirable properties, Sibson's method is computationally expensive and difficult to implement, especially when applied to higher-dimensional data. The main reason for both problems is the method's implementation based on a Voronoi diagram of all data points. We describe a discrete approach to evaluating Sibson's interpolant on a regular grid, based solely on finding nearest neighbors and rendering and blending d-dimensional spheres. Our approach does not require us to construct an explicit Voronoi diagram, is easily implemented using commodity three-dimensional graphics hardware, leads to a significant speed increase compared to traditional approaches, and generalizes easily to higher dimensions. For large scattered data sets, we achieve two-dimensional (2D) interpolation at interactive rates and 3D interpolation (3D) with computation times of a few seconds.},
+  journal = {IEEE Transactions on Visualization and Computer Graphics},
+  language = {en},
+  number = {2}
 }
 
 @inproceedings{Renaudeau2019BEMRMX,
@@ -522,7 +569,7 @@ The proposed framework introduces a new modeling paradigm, which enables the bui
 }
 
 
-@article{Manchuk2019C&G,
+@article{Manchuk2019CG,
   title = {Boundary Modeling with Moving Least Squares},
   volume = {126},
   issn = {00983004},

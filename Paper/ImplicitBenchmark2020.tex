@@ -104,27 +104,26 @@ Authors: list and order to be discussed. }
 
 \todo[inline]{Eric: "I was thinking of developing  further a 3d matrix with principal axis indicating model  level of complexity (dimension+properties, geological events, cumulative spatial features) as well as a matrix indicating data complexity (density, number of types, clustering)  . Each test case could fit into these two matrices and could be increased in dimensionality but is at least more intuitive where the case examples fall visually. Each case would get a complexity badge or glyph classifying it."}
 
-\textit{This paper an update from the 2019 RING Meeting version. It includes the first results from 6 different implicit modeling codes.}
+\textit{This paper an update from the 2019 RING Meeting version. The main changes are in the introduction and the description of the model comparison 
+metrics (Section \ref{sec:results}).}
 
 \section*{Introduction}
 
-The formation and deformation of rocks at geological time scales generate a large variety of geological structure shapes. Three-dimensional structural modeling aims at reconstructing these structures from spatial samples created from field observations and/or from geophysical images of the subsurface. Historically, structural modeling first meant computing the depth contours of a particular geological interface \citep[e.g.,][]{Walters1969AB,Hardy1971JGR,Briggs1974G,Bolondi1976G}. During the 1990's surface-based models using polygonal or parametric surfaces emerged as a more powerful way to represent complex structures such as recumbent folds or salt diapirs \citep{Mallet1992CD,deKemp1999CG}. However, these explicit modeling approaches are difficult to automate in complex geological settings, and call for various degrees of interactive input to generate the structures. Since then, progress in memory and computational capabilities have led to implicit modeling formulations, in which geological interfaces between rock units are defined by isovalues of a three-dimensional scalar field \citep{Lajaunie1997MG,Cowan2002ASGMEM,Calcagno2008PEPI,Frank2007CG,Caumon2013GaRSITo,Souche20137ECEISE2,Hillier2014MG,Laurent2016MG,Laurent2016EaPSL,Martin2017CG,Grose2017JSG,delaVarga2018GMDD,Irakarama2018EAGE,Grose2019JoSG,Renaudeau2019BEMRMX,Renaudeau2019MG,Manchuk2019C&G}.
+The formation and deformation of rocks at geological time scales generate a large variety of geological structure shapes. Three-dimensional structural modeling aims at reconstructing these structures from spatial samples created from field observations and/or from geophysical images of the subsurface. Historically, structural modeling first meant computing the depth contours of a particular geological interface \citep[e.g.,][]{Walters1969AB,Hardy1971JGR,Briggs1974G,Bolondi1976G}. During the 1990's surface-based models using polygonal or parametric surfaces emerged as a more powerful way to represent complex structures such as recumbent folds or salt diapirs \citep{Mallet1992CD,deKemp1999CG}. However, these explicit modeling approaches are difficult to automate in complex geological settings, and call for various degrees of interactive input to generate the structures. Since then, progress in memory and computational capabilities have led to implicit modeling formulations, in which geological interfaces between rock units are defined by isovalues of a three-dimensional scalar field \citep{Lajaunie1997MG,Cowan2002ASGMEM,Calcagno2008PEPI,Frank2007CG,Caumon2013GaRSITo,Souche20137ECEISE2,Hillier2014MG,Laurent2016MG,Laurent2016EaPSL,Martin2017CG,Grose2017JSG,delaVarga2018GMDD,Irakarama2018EAGE,Grose2019JoSG,Renaudeau2019BEMRMX,Renaudeau2019MG,Manchuk2019CG}.
 
 Implicit modeling provides a high degree of automation even for complex geological shapes, and can also account for various types of structural data such as off-contact orientation  measurements. As a result of these methodological advances, three-dimensional structural modeling is increasingly becoming part of the geologist's toolbox. By integrating sparse data into a consistent graphical model, the promise of computational structural modeling is to help geologists to analyze their data, to develop conceptual interpretive models, and to make subsurface forecasts based on model outcomes. 
 
-Automation of three-dimensional structural modeling is essential to meet these needs effectively, especially when several possible models need to be considered to appropriately characterize subsurface uncertainty \citep{Wellmann2018AiG}. However, ``seeing is believing'', so a risk is that applied geologists believe that a particular structural model is true, whereas it is only determined from the available spatial data (whose reliability may vary) and from mathematical or numerical terms telling what the three-dimensional model should look like away from the data points. Indeed, in general, the data points are not numerous enough to fully characterize the structural geometry, hence the need for some sort of regularization \citep[e.g.,][]{Renaudeau2019MG}. The parameters involved in the regularization term influence the results, but may not be easy to determine by layman users. These parameters oftentimes correspond to abstract mathematical terms (e.g., least-squares weights, variogram ranges, basis function parameters) which can be intuitively translated into model features (e.g., degree of data fit, stiffness of the surface) but not so easily into classical structural concepts, which generally involve a blend of geometric, kinematic, and mechanical reasoning. Analyzing and understanding the results of a particular method can be difficult, as it may call for the practitioner to delve into the theory of partial differential equations, numerical optimization, or geostatistics. Another approach to deal with data ambiguity and uncertainty is to actually consider multiple structural models. However, all structural uncertainty modeling approaches rely on a deterministic structural interpolation engine \citep[see ][ and references therein]{Wellmann2018AiG}.
+Automation of three-dimensional structural modeling is essential to meet these needs effectively, especially when several possible models need to be considered to appropriately characterize subsurface uncertainty \citep{Wellmann2018AiG}. However, ``seeing is believing'', so a risk is that applied geologists believe that a particular structural model is true, whereas it is only determined from the available spatial data (whose reliability may vary) and from mathematical or numerical terms telling what the three-dimensional model should look like away from the data points. Indeed, in general, the data points are not numerous enough to fully characterize the structural geometry, hence the need for some sort of regularization \citep[e.g.,][]{Renaudeau2019MG}. The parameters involved in the regularization term influence the results, but may not be easy to determine by layman users. These parameters oftentimes correspond to abstract mathematical terms (e.g., least-squares weights, variogram ranges, basis function parameters) which can be intuitively translated into model features (e.g., degree of data fit, stiffness of the surface) but not so easily into classical structural concepts, which generally involve a blend of geometric, kinematic, and mechanical reasoning. Analyzing and understanding the results of a particular method can be difficult, as it may call for the practitioner to delve into the theory of partial differential equations, numerical optimization, or geostatistics. Another approach to deal with data ambiguity and uncertainty is to actually consider multiple structural models. However, all structural uncertainty modeling approaches rely on a deterministic structural modeling engine \citep[see ][ and references therein]{Wellmann2018AiG}.
 
-To address these challenges, several authors have proposed to more directly integrate structural concepts into modeling methods \citep{DeKemp2003G,Maxelon2009C&G,MassiotGM2010,Laurent2016EaPSL,Grose2017JSG,Grose2018JGRSE,Grose2019JoSG}. This can be achieved either by manually or automatically adding new interpretive ``data'' such as fold hinges, or by integrating new mathematical terms in the interpolation problem. Another recent line of research has been on the mathematical formulation and the discretization of the regularization term \citep{Laurent2016MG,Martin2017CG,Irakarama2018EAGE,Renaudeau2019MG}. In this frame, theoretical comparisons between the various published methods can be made, but they may be of limited use to practitioners. Practical comparisons are delicate because they rely on software packages whose implementation is not necessarily available. The level of implementation descriptions may also vary from one paper to another, making it difficult for graduate students to reproduce previous work. More fundamentally, comparing methods generally calls for defining a goodness criterion, which is not immediate in the case of geological models. As in machine learning, tuning method parameters against some validation data can be achieved in principle. However, the lack of data may entail a poor predictive ability for parameter-rich models (overfitting); conversely, parsimonious models may be more stable but have a lower fit. Moreover, hyper-parameter tuning is seldom done in the practice of three dimensional structural modeling. This may be because the number of observations is not necessarily sufficient in the absence of reflection seismic data. Another reason is that geologists are trained to decide on the quality of a particular model based on their expertise, and are often reluctant to use purely data-driven methods for that. Expressing in mathematical terms the ``geological realism'' of a particular structural model is possible under some conditions, but it can be difficult to automate and, in general, is still an open problem \citep{Caumon2010MG}. 
+To address these challenges, several authors have proposed to more directly integrate structural concepts into modeling methods \citep{DeKemp2003G,Maxelon2009CG,MassiotGM2010,Laurent2016EaPSL,Grose2017JSG,Grose2018JGRSE,Grose2019JoSG}. This can be achieved either by manually or automatically adding new interpretive ``data'' such as fold hinges, or by integrating new mathematical terms in the interpolation problem. Another recent line of research has been on the mathematical formulation and the discretization of the regularization term \citep{Laurent2016MG,Martin2017CG,Irakarama2018EAGE,Renaudeau2019MG}. In this frame, theoretical comparisons between the various published methods can be made, but they may be of limited use to practitioners. Practical comparisons between method are delicate, because they rely on software packages whose implementation is not necessarily available. The level of implementation descriptions may also vary from one paper to another, making it difficult for graduate students to reproduce previous work. 
 
-The above remarks motivate the realization of the present benchmark study, which is the first community effort of its kind in the field of three dimensional structural modeling. The goal of this benchmark is not to provide a general ranking of the various existing methods. Rather, the goal is to gain insights about the various methods on a set of specific problems. In Section \ref{sec:results}, we describe some metrics applied on the various results. The goal of these metrics is to measure some aspects of the results quality, which we hope to provide insights about the methods and some avenues for future research. Whereas a global ranking of methods based on these metrics could be tempting, it is clearly not the goal of this paper and we do not recommend it, as metrics are incomplete and results obtained are case-specific and far from exhaustive. For example, we deliberately chose in this paper to reflect the current practice of geological modeling by a applying a set of implicit modeling methods without parameter or hyperparameter tuning. Again, we expect that such an application can bring insights about the methods and their suitability to provide a reasonable approximation of three geological domains from incomplete observations. Generalization of the results to other application domains or data configurations should not be taken as granted.  
+In this paper (Section \ref{sec:methods}), we proposes a synthetic review of the various interpolation methods which form the basis of implicit structural modeling software. We briefly summarize the features and variants of six computer implementations of these methods, and stress the main parameters which can be used to adapt them to a particular geological setting. As in machine learning, tuning these method parameters using validation data can be achieved in principle. However, the general lack of data may entail a poor predictive ability for parameter-rich models (overfitting); conversely, parsimonious models may be more stable but have a lower fit. This may explain why, in practice, parameter tuning is seldom done in three dimensional structural modeling. Another reason is that defining a goodness criterion is not immediate in the case of geological models. Geologists are trained to decide on the quality of a particular model based on their expertise, and are often reluctant to use purely data-driven methods for that. Expressing in mathematical terms the ``geological realism'' of a particular structural model is possible under some conditions, but it can be difficult to automate and, in general, is still an open problem \citep{Caumon2010MG}. 
+
+The above remarks motivate the realization of the present benchmark study, which is the first community effort of its kind in the field of three dimensional structural modeling. To keep this first study tractable, we limit ourselves to three benchmark data sets in various geological contexts. Similar benchmark data exist in the computer graphics community \citep[e.g.,][]{BLNTS13}, but they generally aim at reconstructing only one single manifold surface from a relatively dense point cloud. In geosciences, the difficulty to access the subsurface generally entails more sparsity and more diversity in the field data. In particular, stratigraphic orientations are often available from fieldwork and dipmeter measurements in boreholes. Another difficulty specific to geological modeling is the presence of faults, and the simultaneous reconstruction of several conformable stratigraphic surfaces with just one scalar field, which raises questions about the management of thickness variation \citep{Laurent2016MG}. The data sets presented in this paper (Section \ref{sec:data}) account for these geological peculiarities and propose several test cases of variable complexity. Each case includes basic data types (points and orientations). To keep the comparison simple, more advanced data types such as fold axis, foliation data, and structural lineations are not considered in the present paper. Some faults are present in two data sets because they we observed, but they are local and only have a limited displacement. Considering how the various interpolation methods manage faults is outside the scope of this paper. 
+
+In Section \ref{sec:results}, we propose a set of metrics to compare results, and explain why and how these metrics were selected. The goal of this benchmark is not to provide a general ranking of the various interpolation methods. Rather, the goal is to gain insights about the various methods on a set of specific problems. Indeed, measuring some aspects of the results quality is always useful and may help defining avenues for future research. Whereas a global ranking of methods based on these metrics could be tempting, we do not recommend it, because metrics are incomplete and results obtained are case-specific and non-exhaustive. For example, we deliberately chose in this paper to reflect the current practice of geological modeling by a applying a set of implicit modeling methods without parameter or hyperparameter tuning. Again, we expect that such an application can bring insights about the methods and their suitability to provide a reasonable approximation of three geological domains from incomplete observations. Generalization of the method's performance to other application domains or data configurations should not be taken for granted. For extensibility and completeness, the three-dimensional models obtained with the various codes are available on a public repository \footnote{\url{https://github.com/Loop3D/ImplicitBenchmark/}}. This makes it possible to scrutinize the results, to add new assessment metrics and also to add new modeling results and new data sets in the future. SKUA Macros implementing the proposed analysis metrics and some Jupyter notebooks are also available on the repository to help with the reproducibility of the metrics computation. 
 
 %Software availablility and usability are important, sability issues, even though they can important, but we will focus on  Among these, the ability of a particular interpolation method to interpolate or extrapolate correct structural geometries away from data points can always be challenged. The adequacy of automatic methods has been debated since the early times of automatic map contouring \citep{Walters1969AB}. The data density should be such that results are well constrained.  ideally, a good method should be able produce results similar to those of a skilled structural geologist.  but this can be difficult to quantify.  . In principle, the goodness of an interpolated structural geometry can be measured on a particular data set by cross-validation (ie: computing the error between the forecasted geometry and some randomly chosen data points). However, as in machine learning, the tuning parameters of a particular method can be optimized using cross-validation, raising the risk of overfitting. Philosophically, 
-
-To keep this first study tractable, we propose a set of three benchmark data sets in various geological contexts. Similar benchmark data exist in the computer graphics community \citep[e.g.,][]{BLNTS13}, but they generally aim at reconstructing only one single manifold surface from a relatively dense point cloud. In geosciences, the difficulty to access the subsurface generally entails more sparsity and more diversity in the field data. In particular, stratigraphic orientations are often available from fieldwork and dipmeter measurements in boreholes. Another difficulty specific to geological modeling is the presence of faults, and the simultaneous reconstruction of several conformable stratigraphic surfaces with just one scalar field, which raises questions about the management of thickness variation \citep{Laurent2016MG}. The data sets presented in this paper (Section \ref{sec:data}) account for these geological peculiarities and propose several test cases of variable complexity. Each case includes basic data types (points and orientations). To keep the comparison simple, more advanced data types such as fold axis, foliation data, and structural lineations are not considered in the present paper. Some faults are present  in two data sets, but they have limited displacement and so they may be ignored, as fault management in the various techniques is outside the scope of this paper. 
-
-Before presenting the evaluation metrics and the results, Section \ref{sec:methods} proposes a synthetic review of the various existing implicit modeling methods. We briefly describe six computer implementations used in this benchmark study, and provide the main parameters which can be used to adapt them to a particular geological setting. In Section \ref{sec:results}, we propose a set of simple metrics to compare results, and explain why and how these metrics were selected. The three-dimensional models obtained with the various codes are available on a public repository \footnote{\url{https://github.com/Loop3D/ImplicitBenchmark/}}, which make it possible to scrutinize the results and also to add new results or new data sets in the future. SKUA Macros implementing the proposed analysis metrics and some Jupyter notebooks are also available on the repository to help with the reproducibility of the metrics computation.  
-
-Section \ref{sec:conclu} discusses the main findings of the application and highlights some avenues for future research. 
 
 \todo[inline]{
 Previous comments: 
@@ -138,97 +137,13 @@ MI: "- What is "quality" in this context and how do we measure it?
   In practice, I can think of two cases: (1) Either we have an a priori on that reference surface away from the data  and therefore we should provide that information to our interpolator.
   Otherwise we know in advance that the interpolator will most likely not predict the surface away from the data because we explicitly ask the interpolator for a "smooth" surface.
   (2) Either we do not have an a priori on that reference surface and therefore we just have to accept what the interpolator gives us. In this second case, different interpolators
-  might give different results. We can certainly compare and comment on these results but I don't see how we can decide which are "better" since we are in a case of no apriori. " 
+  might give different results. We can certainly compare and comment on these results but I don't see how we can decide which are "better" since we are in a case of no a priori. " 
 }
 
-\section{Benchmark data sets}\label{sec:data}
-
-We have selected three geological data sets to illustrate some typical features that structural modeling methods typically struggle with. In particular, we considered relatively complex geometric shapes generated by different types of geological processes: folding (Hecho data, Section \ref{sec:Hecho}) and hydrothermal alteration (Moureze synthetic data, Section \ref{sec:Moureze}), which can generate convoluted surfaces and stratigraphic series. The goal of the third data set (Claudius, Section \ref{sec:Claudius}) is to test ability of modeling methods to handle lateral thickness variations. Indeed, although isopach hypothesis is often a convenient modeling assumption, stratigraphic thickness may vary quite rapidly lateraly due to the independent or combined effect of depositional and tectonic processes (e.g., growth strata, differential compaction, sedimentary clinoforms, etc.). 
-
-For all three data sets, we propose a brief description of the geological settings, and we describe the available data. Each data set was prepared so as to serve both as a test of two-dimensional and three-dimensional codes. Therefore, each data set generally comes both with cross-section lines and unstructured point clouds.
-
-% QUESTION: Shall we also include some (correlated or uncorrelated) noise / outliers to check the ability of methods to resist these problems? I don't think this is necessary (noise could be added in future papers, but I prefer asking). 
-
-\subsection{Hecho: Folded lobes, Hecho Group, Aragon, Spain}
-\label{sec:Hecho}
-
-\begin{figure}
-\centering\begin{tabular}{cc}
-a & \includegraphics[width=0.8\textwidth]{Hecho1}\\
-b & \includegraphics[width=0.8\textwidth]{Hecho2} \\
-c & \includegraphics[width=0.8\textwidth]{Hecho3} \\
-\end{tabular}
-\caption{Folded turbidite lobes outcrop (a) and interpretation with the ``Full'' data set (b) and the ``sparse'' data set (c). 
-Tangent and orientation data are shown as black lines and arrows.}
-\label{fig:FLH2D}
-\end{figure}
-
-The Hecho [het'cho] data set (Fig. \ref{fig:FLH2D}) corresponds to a folded and faulted turbidite outcrop of approximately $16 \times 4$ m located close to Arag\"u\'es del Puerto, Arag\'on, Spain. The layers correspond to Eocene turbidite lobes deposited in the Pyrenean foreland basin (Hecho Group) and then affected by north/south shortening \citep{Bastida2012JSG}. The interbedding of sandstone and shale beds is a source of mechanical heterogeneities which affected the localization of deformation during folding. On this outcrop, most of the shortening is accommodated by flexural slip of sandstone beds; shale beds follow a more ductile deformation between sandstone beds. The fold style (vergence, aperture) changes laterally and vertically, and probably results from variations in the relative thicknesses for the two main rock types. Some minor faults are visible and interpreted on the outcrop. The faults are provided as polygonal lines and triangulated surfaces extrapolated orthogonally 50 cm to the outcrop picture. The mesh resolution of the fault surfaces is approximately 15 cm. The sand lobes only display minor thickness variations at the scale of the outcrop, but some mild apparent thickness variation appears due to perspective. We chose to keep this artifact in the benchmark data set, as thickness variations management challenges have been documented for some implicit structural modeling methods \citep{Laurent2016EaPSL}. 
-
-Nine horizons (H1 to H9) were interpreted on the image plane (XZ) as polygonal lines (Fig. \ref{fig:FLH2D}b). For each of these lines, a random Y coordinate was sampled from a uniform law between -0.5 and 0.5 m to avoid singularities in the three-dimensional case. Some stratal traces and the associated slopes were also obtained by picking some segments parallel to the bedding on the surface. In addition to the ``full'' interpretation, a sparse interpretation is provided to test the ability of the methods to extrapolate away from the data (Fig. \ref{fig:FLH2D}c). This sparse data set only contains the faults and the horizons H1, H2, H4, H5, H7 and H9; only the subhorizontal part of H4 and H5 is provided. As a result, a significant data gap exists at the center of the outcrop between H7 and H2, where the observed layers are overall subvertical. 
-
-The main goal of this data set is to test the ability of the structural modeling methods to honor conformable series affected by strong and laterally variable folds. 
-
-\subsection{Claudius Data: carbonate mounds from NE Australia}
-
-\begin{figure}
-
-\centering\begin{tabular}{cc}
-a & \includegraphics[width=0.7\textwidth,height=6cm]{Claudius}\\
-b & \includegraphics[width=0.8\textwidth]{Claudius1} \\
-\end{tabular}
-\caption{Interpreted stratigraphic series in the Claudius data set: sections (a) and points in side view (b). A is in blue, B in green, C in yellow and D in violet. In b, the Z Color scale bounds are set for each horizon. Orientation data (normal vectors) in black.}
-\label{fig:ClaudiusData}
-\end{figure}
-\todo[inline]{Add legend and a figure with the reference surfaces and the data only + size details}
-
-
-The second data set was taken from the offshore Carnarvon Basin, NW Australia. The Claudius area is imaged with a 3D seismic survey acquired by WesternGeco and provided by GeoScienceAustralia. We extracted a small stratigraphic section that displays several carbonate mounds and the associated slope and offshore deposits (Fig. \ref{fig:ClaudiusData}). We interpreted four main horizons named A to D. The most shallow horizon A is relatively flat, whereas D (the top of upper triassic carbonate build-ups) displays significant relief. The intermediate horizons B and C are slightly deformed maybe due to differential compaction. Overall, significant layer thickness variations exist between these stratigraphic surfaces. The detail of the seismic data set shows multiple slope deposits and onlaps, but at the scale of interest, we choose to consider here that the series is globally conformable. 
-
-The main goal of this data set is to test the ability of implicit methods to model a stratigraphic series having strong thickness variations with one single continuous scalar field. 
-
-
-\subsection{The Moureze 3D synthetic surface}
-
-\begin{figure}
-\centering\includegraphics[width=\textwidth]{Moureze}
-\caption{Synthetic complex surface generated by a perturbed distance field.}
-\label{fig:Moureze}
-\end{figure}
-\todo[inline]{Add legend and a figure with the reference surfaces and the data only + size details}
-
-To study the behavior of implicit interpolation methods for very complex structural geometries as encountered in salt tectonic studies and ore body delineation, we created a synthetic reference surface using the ODSIM (Object-Distance Simulation) method \citep{Henrion2010MG}. This method was initially introduced to model karsts and hydrothermal alteration bodies \citep{Henrion2008PEIGC,Rongier2014G} and was recently adapted to generate salt surfaces \citep{Clausolles20188ECE2}. In this study, we emulated a hydrothermal alteration body by defining a basement where several subvertical fractures are rooted. The fractures and the basement were simply defined by manual picking. The distance to the basement and the fracture set was then computed and perturbed by a spatially correlated random field (normal distribution of average 10 m and standard deviation equal to 36 m and Gaussian variogram model of a 36 m horizontal range (isotropic) and 20 m vertical range). Finally, the surface was obtained 
-by thresholding (value of 28 m) the perturbed distance field and extracting the surface using Marching Cubes. Some additional cleaning was made to remove isolated bubbles and locally smooth and locally perturb (manually) the obtained geometry. This reference surface is made of one single connected component, but it has three handles.  
-
-From this surface, we extracted two sets of seven E/W and thirteen N/S parallel cross-sections These sections only contain polygonal lines, some of which consist of several connected components. We also created an unstructured point set by decimating the nodes of the reference surface. The decimation strategy both performed by random sampling and by manual removal of nodes. The manual removal targeted some bumps so that only a very limited number of points remained to constrain the surface geometry. The resulting data points have a heterogeneous density in order to evaluate at once the ability of the reconstruction methods to retrieve the reference shape, both in the case of dense and sparse sampling conditions. A (randomly chosen) fraction of these nodes also provides information about the reference surface orientation. Both the section lines and the points are exactly on the reference surface, so data noise can be considered as negligible. 
-
-\todo[inline]{
-Discuss SIVAS (Pauline) or multi-phase fold (Eric). 
-
-GC: The danger if there are too many data sets is that we will have too many results to present, making the paper complex. We can also propose other data sets and concentrate the results presentation on just a subset. }
-
-%\subsection{Highly deformed series}
-
-Options to be discussed: Maxelon's data base (https://doi.org/10.3929/ethz-a-004833149) and paper \citep{Maxelon2009C&G} could be a good test. and it would be nice to give credit to this seminal paper to bring in more geological concepts. The minus side is that some data preparation would be needed. 
-
-We could also use some other challenging data sets in \citep{Laurent2016EaPSL,Grose2019JoSG,Sprague2005Ga}. 
-
-Some remarks, to be discussed: 
-\begin{enumerate}
-\item As compared to the 2D cases, the challenge of a full 3D data set is that we don't have a picture to check results away from the data. the consequence is that we should decimate the data to keep some points as a test set. 
-
-\item A criterion for selection is that the case study should be relatively simple to be illustrated in a paper. (even though it would be good to have a fairly large supplemental material with WebGL or some other 3D standard output). 
-
-\item There should be at least a few contact data points so that all methods can be tried (and break again. It is good to break methods :-) 
-This would help demonstrate the benefit of integrating S1, S2, etc. Possibly some optional inequality data could be used also. 
-
-\end{enumerate}
-
-
-
-\section{Methods}
+\section{A review of implicit modeling methods}
 \label{sec:methods}
 
+We now propose a review of the main methods proposed to compute three-dimensional scalar fields in implicit geological structural modeling. 
 Consider $S$ as the set of three-dimensional positions {x} where a three-dimensional scalar field $f(\mathbf{x})$ takes the value $f_S$: 
 
 \begin{equation}
@@ -236,7 +151,7 @@ Consider $S$ as the set of three-dimensional positions {x} where a three-dimensi
   S = \{\mathbf{x} | f(\mathbf{x}) = f_S\}.
 \end{equation}
 
-In the general case of a spatially variable scalar field $f$ these positions form a two-dimensional manifold surface called iso-surface or level set, which represents geological surfaces in implicit methods. 
+In the general case of a spatially variable scalar field $f$, these positions form a two-dimensional manifold surface called iso-surface or level set, which represents geological surfaces in implicit methods. 
 
 The expression (\ref{eq:levelset}) is easily extended to represent 
 at once a stratigraphic series of $K$ conformable horizons 
@@ -263,26 +178,166 @@ f(\mathbf{x}_{N_K}^K) & = & f_K \\
 Based on this principle, several methods have been proposed to compute a stratigraphic function at any spatial location $\mathbf{x}$. Essentially, these methods make different choices about:
  
 \begin{enumerate}
-\item \textbf{The handling of data}. For instance, dual cokriging \citep[DcK, ][]{Lajaunie1997MG,Chiles04OMSMP,Calcagno2008PEPI} performs a substitution in System (\ref{eq:datasystem}) so as to consider (unknown) increments of the scalar field as compared to one reference horizon instead of the absolute isovalues. This makes it possible to automatically compute the iso-values $f_k$ instead of using them as input to the interpolation problem, but it calls for at least one gradient data point to be included in the cokriging system. All methods can also take orientation data as input information, as the normal vector to the strata is collinear to the gradient $\nabla f$ of the stratigraphic function, see for instance \citet{Frank2007CG,Hillier2014MG}. Other possible data terms that have been integrated in the interpolation system relate for instance to fold axis \citep{MassiotGM2010,Hillier2014MG}, vergence \citep{Laurent2016EaPSL,Grose2017JSG} and thickness \citep{Laurent2016MG}.
+\item \textbf{The handling of data}. For instance, dual cokriging \citep[DcK, ][]{Lajaunie1997MG,Chiles04OMSMP,Calcagno2008PEPI} performs a substitution in System (\ref{eq:datasystem}) so as to consider (unknown) increments of the scalar field as compared to one reference horizon instead of the absolute isovalues. This makes it possible to automatically compute the isovalues $f_k$ instead of using them as input to the interpolation problem, but it calls for at least one gradient data point to be included in the cokriging system. All methods can also take orientation data as input information, as the normal vector to the strata is collinear to the gradient $\nabla f$ of the stratigraphic function, see for instance \citet{Frank2007CG,Hillier2014MG}. Other possible data terms that have been integrated in the interpolation system relate for instance to fold axis \citep{MassiotGM2010,Hillier2014MG}, vergence \citep{Laurent2016EaPSL,Grose2017JSG} and thickness \citep{Laurent2016MG}.
 
-\item The basis functions $\varphi_i(\mathbf{x})$ used to express $f(\mathbf{x})$ as a linear combination \citep[e.g., ][]{Renaudeau2019MG,Wellmann2018AiG}: 
+\item \textbf{The basis functions} $\varphi_i(\mathbf{x})$ used to express $f(\mathbf{x})$ as a linear combination \citep[e.g., ][]{Renaudeau2019MG,Wellmann2018AiG}: 
 
 \begin{equation}
 \label{eq:basis}
   f(\mathbf{x}) = \sum_{i=1}^{N}{v_i\varphi_i(\mathbf{x})}.
 \end{equation}
 
-In radial basis function interpolation \citep[RBF, ][]{Cowan2002ASGMEM,Hillier2014MG} and dual co-kriging \citep[][]{Calcagno2008PEPI}, the basis functions are centered on the data points. In this case, $N$ refers to the total number of data points ($N = \sum_{k=1}^{K}{N_k}$). In discrete smooth interpolation \citep[DSI, ][]{Frank2007CG,Caumon2013GaRSITo,Souche20137ECEISE2,Irakarama2018EAGE}, $N$ refers to the number of nodes of the mesh used to approximate the solution. As recently discussed by \citet{Renaudeau2019MG}, these choices have a strong impact on the structure of the linear system that needs to be solved to evaluate the coefficients $v_i$ in Eq. (\ref{eq:basis}): a relatively small but dense system is formed in the case of RBF and DcK, whereas a larger but sparse system is formed in the case of DSI. Recently, \citet{Renaudeau2019MG} and \citet{Manchuk2019C&G} proposed to use moving least squares 
+In radial basis function interpolation \citep[RBF, ][]{Cowan2002ASGMEM,Hillier2014MG} and dual co-kriging \citep[][]{Lajaunie1997MG,Calcagno2008PEPI}, the basis functions are centered on the data points, and a few global polynomial functions are added to reproduce the overall trend over the domain. In this case, $N$ is equal to the total number of data points plus the number of terms $N_p$ of the gobal polynomial ($N = N_p + \sum_{k=1}^{K}{N_k}$). In discrete smooth interpolation \citep[DSI, ][]{Frank2007CG,Caumon2013GaRSITo,Souche20137ECEISE2,Laurent2016MG,Irakarama2018EAGE}, $N$ refers to the number of nodes of the mesh used to approximate the solution. In existing tetrahedral formulations, each basis function $\varphi_i$ is a piecewise linear ``hat function'' (equal to 1 at node $i$, linearly decreasing on the tetrahedra surrounding node $i$ and equal to zero at all the other nodes). As recently discussed by \citet{Renaudeau2019MG}, these choices have a strong impact on the structure of the linear system that needs to be solved to evaluate the coefficients $v_i$ in Eq. (\ref{eq:basis}): a relatively small but dense system is formed in the case of RBF and DcK, whereas a larger but sparse system is formed in the case of piecewise linear DSI. Recently, \citet{Renaudeau2019MG} and \citet{Manchuk2019CG} proposed to use moving least squares (MLS) basis functions centered on some interpolation points. As MLS functions have a local support, data points only influence a finite number of interpolation points, and the solution does not explicitly depend on a mesh.
 
-\item \textbf{The mathematical principle to ensure the uniqueness of the solution}. In kriging, this terms comes from the minimization of the estimation variance, which depends on the chosen variogram model. In dual kriging and RBF, the number of unknowns is such that the problem is well-posed, but the equivalence with thin plate energy has been made for spline basis functions. In DSI, the regularization is based on a minimization of the local variation of the gradient $\nabla f$ of the stratigraphic function $f$. This amounts to minimizing the deviations of the iso-surface from a plane. In general, all approaches implicitly or explicitly minimize some second order derivative of the scalar field, which may be the discrete Laplacian, the curvature energy or some other function of directional second derivatives. For more details, we refer to the review and discussion of \citet{Renaudeau2019MG}.
+\item \textbf{The mathematical principle to ensure the uniqueness of the solution}. All methods rely to some extent on optimization (or contrained optimization) and generalized regression to interpolate or approximate the scalar field. Classically, kriging estimates the unknown value as a linear combination of surrounding known values; the coefficients then depend on the chosen variogram model and are obtained by minimizing the estimation variance under the unbiasedness condition. Dual kriging is based on a rewriting of the kriging estimator in the same for as (\ref{eq:basis}), which calls for explicitly inverting the covariance matrix \citep{Lajaunie1997MG,Calcagno2008PEPI}. The form of that system is similar to that of RBF interpolation \citep{Dubrule1984CG,Hillier2014MG}. The latter is obtained by applying (\ref{eq:basis}) to all data points, under the constraint that the solution should be orthogonal to the polynomial term \citep{Carr2001,Hillier2014MG}. \todo[inline]{Michael, Miguel: please check the above)} In the DcK and RBF systems, the number of unknowns is such that the problem is well-posed. It should be noted that the RBF solution can, in some cases, be efficiently approximated on a discrete Cartesian mesh by a simple iterative algorithm \citep{Park2006ITVCG}. In DSI, the solution is obtained by a weighted least-squares approximation directly approximated with the mesh-based basis functions. The least-squares regularization is based on a minimization of the local variation of the gradient $\nabla f$ of the stratigraphic function $f$. This amounts to minimizing the deviations of the iso-surface from a plane. In general, all approaches implicitly or explicitly minimize second order quantity, for example the discrete Laplacian, the curvature energy or some other function of directional second derivatives of the scalar field. In that sense, discrete interpolation have ties with numerical methods that solve partial differential equations, such as the finite element method (FEM); data then play the role of boundary conditions. An example of an FEM adaptive implicit modeling formulation and further discussion is available in \citet{Renaudeau2019MG}.
+
+\item \textbf{The type of function / regularization}. Many RBF or covariance functions can be used in DcK / RBF interpolation, see \citet{Hillier2014MG}. Some of these choices correspond to the fundamental solutions of partial differential equations. For instance, it has been shown that choosing a linear RBF is equivalent to minimizing the isotropic biharmonic thin spline energy \citep{Carr2001}. However, the relations between the type of basis function and the corresponding physical energy is not always available. Continuous energy terms can be discretized on a mesh using numerical analysis techniques \citep{Renaudeau2019MG}. In most DSI cases, the formulation of the regularization term is directly formulated at the mesh level \citep{Frank2007CG,Souche20137ECEISE2}. 
+
+\item \textbf{The visualization / evaluation}. DcK and RBF approaches are meshless approaches, in the sense that the solution is defined everywhere in space. Once the system has been solved, the evaluation for a given position is given directly by Eq. \ref{eq:basis}. It only involves to compute the distance between the evaluation point and the data points. For visualization and further processing, the solution is generally evaluated at the vertices of a Cartesian grid or unstructured mesh. Conversely, DSI-based methods directly run the computation on a discrete support. Changing the support implies running the computation again. In both cases, the visualization of geological surfaces can be achieved using polygonal isosurface extraction algorithms such as the marching cubes \citep{Calcagno2008PEPI} or marching terahedra method \citep{Frank2007CG}. \todo[inline]{Did anyone try ray tracing with meshless approaches ?}
 
 \end{enumerate}
 
 \todo[inline]{Expand the method's descriptions. Create an table explaining the main parameters for each method}
+In this study, we applied several implementations of DcK, RBF and DSI to the data sets described in Section \ref{sec:data}. The names, main features and references 
+for the corresponding codes are summarized in Table \ref{tab:codes}. 
+\begin{table}
+\centerline{\begin{tabular}{|p{15mm}|p{15mm}|p{15mm}|p{20mm}|p{3cm}|p{20mm}|l|p{3cm}|}
+\hline
+Name & Method & Computa\-tion & Visualiz\-ation & Reference(s) & Main language / dependency & License & Main parameters \\
+\hline
+GemPy & DcK & Meshless & Marching cubes & \citet{delaVarga2018GMDD} & Python / Theano & LGPL & Type and parameters of variogram model \\
+\hline
+LoopStru\-ctural & DSI & Cartesian & Marching cubes & In prep. & Python & MIT & Least squares weights for data / regularization \\
+\hline 
+MSS & FEM / DSI & Points & Marching cubes & \citep{Renaudeau2019BEMRMX,Renaudeau2019MG} & C++ & Proprietary & Least squares weights for data / regularization \\
+\hline 
+SIGMA & DSI & Cartesian & Marching cubes & \citet{Irakarama2018EAGE} & C++/CUDA & RING & Least squares weights for data / regularization \\
+\hline
+StructuralLab & DSI & Tet.
+ mesh & Marching tetra & \citet{Frank2007CG,Caumon2013GaRSITo} & C++ / SKUA-GOCAD & RING & Least squares weights for data / regularization \\
+\hline
+SurfE & DcK & Cartesian & Marching cubes & \citet{Hillier2014MG} & C++ & MIT & Type and coefficients of RBF functions; interpolation or approximation \\ 
+\hline
+\end{tabular}}
+\caption{Approximate thicknesses and relative geological time values values chosen for the Hecho Data Set. }
+\label{tab:codes}
+\end{table}
 
-\section{Results}\label{sec:results}
 
-\todo[inline]{General idea: Put everyone's results on a shared server. Results mean: scalar fields (sampled on a fine Cartesian Grid) + iso-surfaces (triangulated) in some common format. Gocad ? OBJ ? We should probably decide very soon about the Cartesian grid extent and resolution for each data set.  }
+
+\section{Benchmark data sets}\label{sec:data}
+
+We have selected three geological data sets to illustrate some typical features that structural modeling methods typically struggle with. In particular, we considered relatively complex geometric shapes generated by different types of geological processes: folding (Hecho data, Section \ref{sec:Hecho}) and hydrothermal alteration (Moureze synthetic data, Section \ref{sec:Moureze}), which can generate convoluted surfaces and stratigraphic series. The goal of the third data set (Claudius, Section \ref{sec:Claudius}) is to test ability of modeling methods to handle lateral thickness variations. Indeed, although isopach hypothesis is often a convenient modeling assumption, stratigraphic thickness may vary quite rapidly lateraly due to the independent or combined effect of depositional and tectonic processes (e.g., growth strata, differential compaction, sedimentary clinoforms, etc.). 
+
+For all three data sets, we propose a brief description of the geological settings, and we describe the available data. Each data set was prepared so as to serve both as a test of two-dimensional and three-dimensional codes. Therefore, each data set generally comes both with cross-section lines and unstructured point clouds.
+
+% QUESTION: Shall we also include some (correlated or uncorrelated) noise / outliers to check the ability of methods to resist these problems? I don't think this is necessary (noise could be added in future papers, but I prefer asking). 
+
+\subsection{Hecho: Folded lobes, Hecho Group, Aragon, Spain}
+\label{sec:Hecho}
+
+\begin{figure}
+\centering\begin{tabular}{cc}
+a & \includegraphics[width=0.8\textwidth]{Hecho1}\\
+b & \includegraphics[width=0.8\textwidth]{Hecho2} \\
+c & \includegraphics[width=0.8\textwidth]{Hecho3} \\
+\end{tabular}
+\caption{Folded turbidite lobes outcrop (a) and interpretation with the ``Full'' data set (b) and the ``sparse'' data set (c). 
+Tangent and orientation data are shown as black lines and arrows.}
+\label{fig:FLH2D}
+\end{figure}
+
+The Hecho [het'cho] data set (Fig. \ref{fig:FLH2D}) corresponds to a folded and faulted turbidite outcrop of approximately $16 \times 4$ m located close to Arag\"u\'es del Puerto, Arag\'on, Spain. The layers correspond to Eocene turbidite lobes deposited in the Pyrenean foreland basin (Hecho Group) and then affected by north/south shortening \citep{Bastida2012JSG}. The interbedding of sandstone and shale beds is a source of mechanical heterogeneities which affected the localization of deformation during folding. On this outcrop, most of the shortening is accommodated by flexural slip of sandstone beds; shale beds follow a more ductile deformation between sandstone beds. The fold style (vergence, aperture) changes laterally and vertically, and probably results from variations in the relative thicknesses for the two main rock types. Some minor faults are visible and interpreted on the outcrop. The faults are provided as polygonal lines and triangulated surfaces extrapolated orthogonally 50 cm to the outcrop picture. The mesh resolution of the fault surfaces is approximately 15 cm. The sand lobes only display minor thickness variations at the scale of the outcrop, but some mild apparent thickness variation appears due to perspective. We chose to keep this artifact in the benchmark data set, as thickness variations management challenges have been documented for some implicit structural modeling methods \citep{Laurent2016EaPSL}. 
+
+Nine horizons (H1 to H9) were interpreted on the image plane (XZ) as polygonal lines (Fig. \ref{fig:FLH2D}b). For each of these lines, a random Y coordinate was sampled from a uniform law between -0.5 and 0.5 m to avoid singularities in the three-dimensional case. Some stratal traces and the associated slopes were also obtained by picking some segments parallel to the bedding on the surface. In addition to the ``full'' interpretation, a sparse interpretation is provided to test the ability of the methods to extrapolate away from the data (Fig. \ref{fig:FLH2D}c). This sparse data set only contains the faults and the horizons H1, H2, H4, H5, H7 and H9; only the subhorizontal part of H4 and H5 is provided. As a result, a significant data gap exists at the center of the outcrop between H7 and H2, where the observed layers are overall subvertical.
+
+As some of the implicit modeling methods start with imposed values at the scalar field, we have proposed reference scalar field values (relative geological time) to be equal to a rough estimate of the layer thickness on the interpretation points(Table\ref{tab:Hecho}.
+
+\begin{table}
+\centerline{\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|}
+\hline
+Horizon                       & H1 & H2   & H3 & H4  & H5  & H6 & H7   & H8  & H9  \\
+\hline
+Scalar value (arbitrary unit) & 0. & 0.78 & 1.15 & 1.9 & 2.5 & 3.1 & 3.9 & 4.4 & 5.2 \\
+\hline
+\end{tabular}}
+\caption{Approximate thicknesses and relative geological time values values chosen for the Hecho Data Set. }
+\label{tab:Hecho}
+\end{table}
+
+The main goal of this data set is to test the ability of the structural modeling methods to honor conformable series affected by strong and laterally variable folds. 
+
+\subsection{Claudius Data: carbonate mounds from NE Australia}
+
+\begin{figure}
+
+\centering\begin{tabular}{cc}
+a & \includegraphics[width=0.7\textwidth,height=6cm]{Claudius}\\
+b & \includegraphics[width=0.8\textwidth]{Claudius1} \\
+\end{tabular}
+\caption{Interpreted stratigraphic series in the Claudius data set: sections (a) and points in side view (b). A is in blue, B in green, C in yellow and D in violet. In b, the Z Color scale bounds are set for each horizon. Orientation data (normal vectors) in black.}
+\label{fig:ClaudiusData}
+\end{figure}
+\todo[inline]{Add legend and a figure with the reference surfaces and the data only + size details}
+
+
+The second data set was taken from the offshore Carnarvon Basin, NW Australia. The Claudius area is imaged with a 3D seismic survey acquired by WesternGeco and provided by GeoScienceAustralia. We extracted a small stratigraphic section that displays several carbonate mounds and the associated slope and offshore deposits (Fig. \ref{fig:ClaudiusData}). We interpreted four main horizons named A to D. The most shallow horizon A is relatively flat, whereas D (the top of upper triassic carbonate build-ups) displays significant relief. The intermediate horizons B and C are slightly deformed maybe due to differential compaction. Overall, significant layer thickness variations exist between these stratigraphic surfaces. The detail of the seismic data set shows multiple slope deposits and onlaps, but at the scale of interest, we choose to consider here that the series is globally conformable. The isochore (vertical) thickness of the layer bounded by the C and D seismic reflectors varies between 131~m and 966~m, with an average of 598~m. 
+
+As in the Hecho data set, we did a rough estimate of average layer thicknesses to choose the reference relative geological time values given in Table \ref{tab:Claudius}. 
+
+\begin{table}
+\centerline{\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|}
+\hline
+Horizon                       & A   & B   & C   & D \\
+\hline
+Scalar value (arbitrary unit) & 0 & 60 & 250 & 320 \\
+\hline
+\end{tabular}}
+\caption{Approximate thicknesses and relative geological time values values chosen for the Hecho Data Set. }
+\label{tab:Claudius}
+\end{table}
+
+The main goal of this data set is to test the ability of implicit methods to model a stratigraphic series having strong thickness variations with one single continuous scalar field. 
+
+\subsection{The Moureze 3D synthetic surface}
+
+\begin{figure}
+\centering\includegraphics[width=\textwidth]{Moureze}
+\caption{Synthetic complex surface generated by a perturbed distance field.}
+\label{fig:Moureze}
+\end{figure}
+\todo[inline]{Add legend and a figure with the reference surfaces and the data only + size details}
+
+To study the behavior of implicit interpolation methods for very complex structural geometries as encountered in salt tectonic studies and ore body delineation, we created a synthetic reference surface using the ODSIM (Object-Distance Simulation) method \citep{Henrion2010MG}. This method was initially introduced to model karsts and hydrothermal alteration bodies \citep{Henrion2008PEIGC,Rongier2014G} and was recently adapted to generate salt surfaces \citep{Clausolles20188ECE2}. In this study, we emulated a hydrothermal alteration body by defining a basement where several subvertical fractures are rooted. The fractures and the basement were defined by manual picking. The distance to the basement and the fracture set was then computed and perturbed by a spatially correlated random field (normal distribution of average 10 m and standard deviation equal to 36 m and Gaussian variogram model of a 36 m horizontal range (isotropic) and 20 m vertical range). Finally, the surface was obtained 
+by thresholding (value of 28 m) the perturbed distance field and extracting the surface using Marching Cubes. Some additional cleaning was made to remove isolated bubbles and locally smooth and locally perturb (manually) the obtained geometry. This reference surface is made of one single connected component, but it has three handles. 
+
+From this surface, we extracted two sets of seven E/W and thirteen N/S parallel cross-sections. These sections only contain polygonal lines, some of which consist of several connected components. We also created an unstructured point set by decimating the nodes of the reference surface. The decimation strategy both performed by random sampling and by manual removal of nodes. The manual removal targeted some bumps so that only a very limited number of points remained to constrain the surface geometry. The resulting data points have a heterogeneous density in order to evaluate at once the ability of the reconstruction methods to retrieve the reference shape, both in the case of dense and sparse sampling conditions. A (randomly chosen) fraction of these nodes also provides information about the reference surface orientation. Both the section lines and the points are exactly on the reference surface, so data noise can be considered as negligible. 
+
+\todo[inline]{
+Discuss SIVAS (Pauline) or multi-phase fold (Eric). 
+
+GC: The danger if there are too many data sets is that we will have too many results to present, making the paper complex. We can also propose other data sets and concentrate the results presentation on just a subset. }
+
+%\subsection{Highly deformed series}
+
+Options to be discussed: Maxelon's data base (https://doi.org/10.3929/ethz-a-004833149) and paper \citep{Maxelon2009CG} could be a good test. and it would be nice to give credit to this seminal paper to bring in more geological concepts. The minus side is that some data preparation would be needed. 
+
+We could also use some other challenging data sets in \citep{Laurent2016EaPSL,Grose2019JoSG,Sprague2005Ga}. 
+
+Some remarks, to be discussed: 
+\begin{enumerate}
+\item As compared to the 2D cases, the challenge of a full 3D data set is that we don't have a picture to check results away from the data. the consequence is that we should decimate the data to keep some points as a test set. 
+
+\item A criterion for selection is that the case study should be relatively simple to be illustrated in a paper. (even though it would be good to have a fairly large supplemental material with WebGL or some other 3D standard output). 
+
+\item There should be at least a few contact data points so that all methods can be tried (and break again. It brings insight to break methods :-) 
+This would help demonstrate the benefit of integrating S1, S2, etc. Possibly some optional inequality data could be used also. 
+
+\end{enumerate}
+
+\section{Evaluation Metrics}\label{sec:results}
+
+
 
 To present the results, we plan to use a summary table with the main parameters retained for each method and each test case, and explain the rationale about the choice of these parameter values. The modeling results will be put on an open server, together with the scripts and software version information to allow the licensees of each considered software to reproduce the results. 
 
