@@ -1,0 +1,53 @@
+Energy type     Bending MLS
+Sample Points   Total = 2442336 | [156, 206, 76]
+Visu   Points   Total = 2442336 | [156, 206, 76]
+MLS Supports    [3.8, 3.8, 3.8]
+Grid spaces S   [2, 2, 2]
+Grid spaces V   [2, 2, 2]
+Data     weight 20
+Energy   weight 1
+Gradient weight 1
+Gradient type   Normal gradient
+Number Disc     0
+Number Hori     1
+Hard Data       Not Used
+IsoVal tech     Explicit inputs
+Input iso-val   0
+
+                COMPUTATION
+initPoints ------------> Done: 0.713
+findNeighbors begins
+  initDiscontinuities ----------------> Done: 0
+  findDataNeighborsSample ------------> Done: 0.003
+  findGradientNeighborsSample --------> Done: 0.001
+  findEvaluationNeighborsEvaluation --> Done: 0.082
+  System size: [14659472, 2442336]
+findNeighbors done: 0.255
+computeShapeFunctions begins
+  computeData --------------> Done: 0.022
+  computeGradient ----------> Done: 0.022
+computeShapeFunctions Done: 0.046
+computeSystem
+  fillSystem ----------------> Done: 1.03
+  solveSystem --------------->
+                Time to compress M:     2.288
+                Time to compute MtM:    3.494
+                Eigen ConjugateGradient
+
+#iterations:     13553
+estimated error: 9.99876e-07
+Done: 653.863
+computeSystem Done: 654.899
+========== Total time for computation ==========
+                655.917
+
+                VISUALIZATION
+computeVisualization
+  initVisuPoints ---------------------> Done: 0.444
+  initDiscontinuitiesForVisu ---------> Done: 0
+  findVisuNeighborsSample ------------> Done: 0.163
+  computeVisuShapeFunction -----------> Done: 0.517
+Done: 1.128
+  printVisualization -----------------> Done: 0.565
+========== Total time for visualization ==========
+                1.695
