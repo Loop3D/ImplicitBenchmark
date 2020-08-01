@@ -24,8 +24,8 @@
 {./Figures/}%
 }
 
-%\usepackage[disable]{todonotes}
-\usepackage[]{todonotes}
+\usepackage[disable]{todonotes}
+%\usepackage[]{todonotes}
 
 \newcommand{\bx}{\mathbf{x}}
 \newcommand{\bn}{\mathbf{n}}
@@ -106,8 +106,7 @@ Authors: list and order to be discussed. }
 
 \todo[inline]{Eric: "I was thinking of developing  further a 3d matrix with principal axis indicating model  level of complexity (dimension+properties, geological events, cumulative spatial features) as well as a matrix indicating data complexity (density, number of types, clustering)  . Each test case could fit into these two matrices and could be increased in dimensionality but is at least more intuitive where the case examples fall visually. Each case would get a complexity badge or glyph classifying it."}
 
-\textit{This paper an update from the 2019 RING Meeting version. As compared to last year' version, the introduction has been edited to better frame the objectives, the theoretical review of the methods has been enriched, and the evaluation criteria have been added.  
-metrics (Section \ref{sec:results}).}
+\textit{This paper an update from the 2019 RING Meeting version. As compared to last year' version, the introduction has been edited to better frame the objectives, the theoretical review of the methods has been enriched, and the evaluation criteria have been added. Please note that this version of the has not yet been reviewed by all co-authors. Updates will be available at \url{https://github.com/Loop3D/ImplicitBenchmark/tree/master/Paper}.}
 
 \section*{Introduction}
 
@@ -144,6 +143,8 @@ MI: "- What is "quality" in this context and how do we measure it?
 
 \section{A review of implicit modeling methods}
 \label{sec:methods}
+
+\todo[inline]{GC: I have expanded this section as compared to last year, but not up to a very detailed description of every method. Instead, I have tried to summarize the main ideas and give the key equations. This section may still contains some approximations and errors, and probably need editing to improve clarity by a general readership. Please have a read and comment and don't hesitate to make (constructive) suggestions. } 
 
 We now propose a brief review of the main methods proposed to compute three-dimensional scalar fields in implicit geological structural modeling. 
 Consider $S$ as the set of three-dimensional positions {x} where a three-dimensional scalar field $f(\mathbf{x})$ takes the value $f_S$: 
@@ -184,7 +185,7 @@ From this information, several methods have been proposed to compute a stratigra
  
 \subsection {Data handling}
 
-In most approaches, the scalar field values $f_k$ need to be chosen before the interpolation and are imposed in the interpolation problem \citep[e.g., ][]{Frank2007CG,Hillier2014MG,Renaudeau2019MG}. In practice, these values can be chosen using a rough estimate of the cumulative thickness between each horizon and some reference horizon, or any other convenient value proportional to that cumulative thickness \citep{Caumon2013GaRSITo,Collon2016I}. Orientation information can be integrated either by equating the normal to the scalar field gradient ($\nabla f_{\bx_i} = \mathbf{n}_i$, which  carries information about the stratigraphic polarity and assumes that the interpolated scalar field approximates the signed distance to some reference horizon), or by equating the dot products between the scalar field gradient and strike and dip gradients ($\nabla f_{\bx_i} \cdot \mathbf{s}_i = \nabla f_{\bx_i} \cdot \mathbf{d}_i = 0$, which does not use polarity and does not carry any assumption on the norm of the scalar field gradient). 
+In most approaches, the scalar field values $f_k$ need to be chosen before the interpolation and are imposed in the interpolation problem \citep[e.g., ][]{Frank2007CG,Hillier2014MG,Renaudeau2019MG}. In practice, these values can be chosen using a rough estimate of the cumulative thickness between each horizon and some reference horizon, or any other convenient value proportional to that cumulative thickness \citep{Caumon2013GaRSITo,Collon2016I}. Orientation information can be integrated either by equating the normal to the scalar field gradient ($\nabla f_{\bx_o} = \mathbf{n}_o$, which  carries information about the stratigraphic polarity and assumes that the interpolated scalar field approximates the signed distance to some reference horizon), or by equating the dot products between the scalar field gradient and strike and dip gradients ($\nabla f_{\bx_o} \cdot \mathbf{s}_o = \nabla f_{\bx_o} \cdot \mathbf{d}_o = 0$, which does not use polarity and does not carry any assumption on the norm of the scalar field gradient). 
 
 To avoid the pre-estimation of the horizon values $f_k$, dual cokriging \citep[DcK, ][]{Lajaunie1997MG,Chiles04OMSMP} performs a substitution in System (\ref{eq:datasystem}) so as to consider (unknown) increments of the scalar field as compared to one reference horizon instead of the absolute isovalues. The primal form of the cokriging system reads
 
@@ -209,7 +210,7 @@ The data terms described above only provide information at data location. To eva
  
 In radial basis function interpolation \citep[RBF, ][]{Carr2001,Cowan2002ASGMEM,Hillier2014MG} and in the dual co-kriging, the basis functions (or covariance functions)are centered on the data points, and a global polynomial term is often considered to capture the overall trend over the domain. In this case, $N$ is equal to the total number of data points plus the number of terms $N_P$ of the polynomial ($N = N_P + N_O + \sum_{k=1}^{K}{N_k}$). In both cases, the choice of the basis function will govern the shape of the iso-surfaces of the interpolated scalar field. As opposed to classical applications of Kriging, inferring the type and parameters of the covariance function from the data is difficult by the non-stationarity and the increment formulation. Therefore, the choice of the covariance function is mainly heuristic, with the mathematical requirement that the covariance function must be twice differentiable to compute the covariances $Cov\left(f(\bx), \nabla {f}(\bx+\mathbf{h})\right)$ and $Cov\left(\nabla f(\bx), \nabla f(\bx+\mathbf{h})\right)$. 
 
-In this study, we use code GemPy \cite{delaVarga2018GMDD}, https://www.gempy.org, implements DcK, and uses the cubic covariance function for its  robustness and its ability to provide coherent results in many studies: 
+In this study, we use the code GemPy \cite{delaVarga2018GMDD} which implements DcK, and uses the cubic covariance function for its  robustness and its ability to provide coherent results in many studies: 
 
 \begin{equation}
 C(r) = \begin{cases}
@@ -225,7 +226,7 @@ and $C_0$ the variance of the data. In GemPy, it is recommended to choose a rang
 maximum model extent avoids mathematical artifacts in the solution. There is no strong guideline 
 to choose the values of the covariance at 0, as changing this value only weights the relative influence of the values and of the gradient data, hence does not affect the shape of the isosurfaces. As in classical kriging, it is also possible to add a nugget effect to the covariance function to transform the exact interpolation as an approximation. In this case, the nugget value relatively to $C_0$ controls the degree of approximation (exact if zero, polynomial if equal to $C_0$. This feature is used in two other codes used in this study: SurfE \citep{Hillier2014MG} and MSS {\citep{Renaudeau2019MG}. 
 
-The SurfE code \citep{Hillier2014MG} (https://github.com/MichaelHillier/surfe) used in this study also implements the increments interpolation approach. It allows for testing many different types of basis function. When applying SurfE to the benchmark data sets, we tested the cubic basis function 
+The SurfE code \citep{Hillier2014MG}, used in this study also implements the increments interpolation approach. It allows for testing many different types of basis function. When applying SurfE to the benchmark data sets, we tested the cubic basis function 
 \begin{equation}
 \varphi_{C}(r) = r^3
 \end{equation}
@@ -236,7 +237,7 @@ and a multiqudric basis function
 
 where $\epsilon$ controls the flatness of the basis function as the distance $r$ increases. 
 
-In discrete smooth interpolation \citep[DSI, ][]{Frank2007CG,Caumon2013GaRSITo,Souche20137ECEISE2,Laurent2016MG,Irakarama2018EAGE}, the number of basis functions $N$ refers to the number of nodes of the mesh used to approximate the solution. In tetrahedral formulations, each basis function $\varphi_i$ is a piecewise linear ``hat function'' (equal to 1 at node $i$, linearly decreasing on the tetrahedra surrounding node $i$ and equal to zero at all the other nodes). These basis functions imply a piecewise constant gradient of the scalar field. They are used in two codes used in this study: StructuralLab \citep{Frank2007CG,Caumon2013GaRSITo} and LoopStructural (https://loop3d.github.io/LoopStructural/index.html). 
+In discrete smooth interpolation \citep[DSI, ][]{Frank2007CG,Caumon2013GaRSITo,Souche20137ECEISE2,Laurent2016MG,Irakarama2018EAGE}, the number of basis functions $N$ refers to the number of nodes of the mesh used to approximate the solution. In tetrahedral formulations, each basis function $\varphi_i$ is a piecewise linear ``hat function'' (equal to 1 at node $i$, linearly decreasing on the tetrahedra surrounding node $i$ and equal to zero at all the other nodes). These basis functions imply a piecewise constant gradient of the scalar field. They are used in two codes used in this study: StructuralLab \citep{Frank2007CG,Caumon2013GaRSITo} and LoopStructural. 
 In the SIGMA code \cite{Irakarama2018EAGE}, Lagrange polynomials defined on a Cartesian grid are used to discretize the data. The basis functions which control the smoothing term are estimated using finite differences operator. LoopStructural and MSS also implement some finite difference operators, for which the type of basis function is not explicitly defined. 
 
 As recently discussed by \citet{Renaudeau2019MG}, the choice of the basis function used have a strong impact on the structure of the linear system that needs to be solved to evaluate the coefficients $v_i$ in Eq. (\ref{eq:basis}): a relatively small but dense system is formed in the case of RBF and DcK, whereas a larger but sparse system is formed in the case of piecewise linear DSI. Recently, \citet{Renaudeau2019MG} and \citet{Manchuk2019CG} proposed to use moving least squares (MLS) polynomial basis functions centered on some interpolation points. As MLS functions have a local support, data points only influence a finite number of interpolation points, and the solution does not explicitly depend on a mesh. This is the main approach used in the MSS implementation code. 
@@ -262,7 +263,7 @@ As meshes can be difficult to generate, the above remarks may suggest that the m
 
 \subsection{Summary}
 
-In the above review, we have highlighted some common principles and differences between the existing implicit interpolation methods. The purpose here is not to enter an endless philosophical debate on the appropriateness of the various methods: they all exist and have shown their merits to create reasonable geological models from incomplete observations. Overall, the existence of these approaches illustrate the interest of mathematical abstractions and computational methods to compensate for the impossibility to quantitatively integrate all available geological concepts with observations. 
+In the above review, we have highlighted some common principles and differences between the existing implicit interpolation methods. The purpose here is not to enter an endless philosophical debate on the appropriateness of the various methods: they all have shown their merits to create reasonable geological models from incomplete observations. Overall, the diversity of these approaches illustrate the interest of mathematical abstractions and computational methods to take part in the set of tools and approaches which contribute to geological interpetation and reasoning \citep{frodeman_geological_1995}. %compensate for the impossibility to quantitatively integrate all available geological concepts with observations. 
 
 The above review allows us to provide the main parameters of the methods used in this benchmark study. Indeed, we applied several implementations of DcK, RBF and DSI to the data sets described in Section \ref{sec:data}. The names, main features and references 
 for the corresponding codes are summarized in Table \ref{tab:codes}. 
@@ -273,17 +274,17 @@ for the corresponding codes are summarized in Table \ref{tab:codes}.
 \hline
 \textbf{Name} & \textbf{Method} & \textbf{Compu\-ta\-tion} & \textbf{Visualiz\-ation} & \textbf{References} & \textbf{Language / dependency} & \textbf{License} & \textbf{Main parameters} \\
 \hline
-GemPy & DcK (increments) & Meshless & Marching cubes & \citet{delaVarga2018GMDD}, https://www.gempy.org/ & Python / Theano & LGPL & Type and parameters of variogram model \\
+GemPy & DcK (increments) & Meshless & Marching cubes & \citet{delaVarga2018GMDD}, \url{https://www.gempy.org} & Python / Theano & LGPL & Type and parameters of variogram model \\
 \hline
-LoopStru\-ctural & DSI (piecewise linear constant gradient, finite differences) & Cartesian and tetra\-hedral & Marching cubes & In prep., https://loop3d.github.io/LoopStructural & Python & MIT & Least squares weights for data / regularization \\
+LoopStru\-ctural & DSI (piecewise linear constant gradient, finite differences) & Cartesian and tetra\-hedral & Marching cubes & In prep., \url{https://loop3d.github.io/LoopStructural} & Python & MIT & Least squares weights for data / regularization \\
 \hline 
 MSS & FEM / DSI & Points & Marching cubes & \citep{Renaudeau2019BEMRMX,Renaudeau2019MG} & C++ & Proprietary & Least squares weights for data / regularization.\\
 \hline 
-SIGMA & DSI, finite differences & Cartesian & Marching cubes & \citet{Irakarama2018EAGE}, https://www.ring-team.org/13-news/173-new-training-sigma-seismic-imaging-for-geomodel-analysis & C++/CUDA & RING & Least squares weights for data / regularization \\
+SIGMA & DSI, finite differences & Cartesian & Marching cubes & \citet{Irakarama2018EAGE}, \url{https://www.ring-team.org/software/ring-libraries/258-sigma} & C++/CUDA & RING & Least squares weights for data / regularization \\
 \hline
-Structural\-Lab & DSI, piecewise linear minimal gradient & Tetra\-hedral & Marching tetra & \citet{Frank2007CG,Caumon2013GaRSITo}, https://www.ring-team.org/software/skua-gocad-plugins/42-structurallab & C++ / SKUA-GOCAD & RING & Least squares weights for data / regularization \\
+Structural\-Lab & DSI, piecewise linear minimal gradient & Tetra\-hedral & Marching tetra & \citet{Frank2007CG,Caumon2013GaRSITo}, \url{https://www.ring-team.org/software/skua-gocad-plugins/42-structurallab} & C++ / SKUA-GOCAD & RING & Least squares weights for data / regularization \\
 \hline
-SurfE & DcK & Cartesian & Marching cubes & \citet{Hillier2014MG}, https://github.com/MichaelHillier/surfe & C++ & MIT & Type and coefficients of RBF functions; interpolation or approximation \\ 
+SurfE & DcK & Cartesian & Marching cubes & \citet{Hillier2014MG}, \url{https://github.com/MichaelHillier/surfe} & C++ & MIT & Type and coefficients of RBF functions; interpolation or approximation \\ 
 \hline
 \end{tabular}
 }}
@@ -293,7 +294,7 @@ SurfE & DcK & Cartesian & Marching cubes & \citet{Hillier2014MG}, https://github
 
 \section{Benchmark data sets}\label{sec:data}
 
-We have selected three geological data sets to illustrate some typical features that structural modeling methods typically struggle with. In particular, we considered relatively complex geometric shapes generated by different types of geological processes: folding (Hecho data, Section \ref{sec:Hecho}) and hydrothermal alteration (Moureze synthetic data, Section \ref{sec:Moureze}), which can generate convoluted surfaces and stratigraphic series. The goal of the third data set (Claudius, Section \ref{sec:Claudius}) is to test ability of modeling methods to handle lateral thickness variations. Indeed, although isopach hypothesis is often a convenient modeling assumption, stratigraphic thickness may vary quite rapidly lateraly due to the independent or combined effect of depositional and tectonic processes (e.g., growth strata, differential compaction, sedimentary clinoforms, etc.). 
+We have selected three geological data sets to illustrate some features that structural modeling methods typically struggle with. In particular, we considered relatively complex geometric shapes generated by different types of geological processes: folding (Hecho data, Section \ref{sec:Hecho}) and hydrothermal alteration (Moureze synthetic data, Section \ref{sec:Moureze}), which can generate convoluted surfaces and stratigraphic series. The goal of the third data set (Claudius, Section \ref{sec:Claudius}) is to test ability of modeling methods to handle lateral thickness variations. Indeed, although isopach hypothesis is often a convenient modeling assumption, stratigraphic thickness may vary quite rapidly lateraly due to the independent or combined effect of depositional and tectonic processes (e.g., growth strata, differential compaction, sedimentary clinoforms, etc.). 
 
 For all three data sets, we propose a brief description of the geological settings, and we describe the available data. Each data set was prepared so as to serve both as a test of two-dimensional and three-dimensional codes. Therefore, each data set generally comes both with cross-section lines and unstructured point clouds.
 
@@ -381,31 +382,37 @@ by thresholding (value of 28 m) the perturbed distance field and extracting the 
 
 From this surface, we extracted two sets of seven E/W and thirteen N/S parallel cross-sections. These sections only contain polygonal lines, some of which consist of several connected components. We also created an unstructured point set by decimating the nodes of the reference surface. The decimation strategy both performed by random sampling and by manual removal of nodes. The manual removal targeted some bumps so that only a very limited number of points remained to constrain the surface geometry. The resulting data points have a heterogeneous density in order to evaluate at once the ability of the reconstruction methods to retrieve the reference shape, both in the case of dense and sparse sampling conditions. A (randomly chosen) fraction of these nodes also provides information about the reference surface orientation. Both the section lines and the points are exactly on the reference surface, so data noise can be considered as negligible. 
 
-\todo[inline]{
-Discuss SIVAS (Pauline) or multi-phase fold (Eric). 
-
-GC: The danger if there are too many data sets is that we will have too many results to present, making the paper complex. We can also propose other data sets and concentrate the results presentation on just a subset. }
-
-%\subsection{Highly deformed series}
-
-Options to be discussed: Maxelon's data base (https://doi.org/10.3929/ethz-a-004833149) and paper \citep{Maxelon2009CG} could be a good test. and it would be nice to give credit to this seminal paper to bring in more geological concepts. The minus side is that some data preparation would be needed. 
-
-We could also use some other challenging data sets in \citep{Laurent2016EaPSL,Grose2019JoSG,Sprague2005Ga}. 
-
-Some remarks, to be discussed: 
-\begin{enumerate}
-\item As compared to the 2D cases, the challenge of a full 3D data set is that we don't have a picture to check results away from the data. the consequence is that we should decimate the data to keep some points as a test set. 
-
-\item A criterion for selection is that the case study should be relatively simple to be illustrated in a paper. (even though it would be good to have a fairly large supplemental material with WebGL or some other 3D standard output). 
-
-\item There should be at least a few contact data points so that all methods can be tried (and break again. It brings insight to break methods :-) 
-This would help demonstrate the benefit of integrating S1, S2, etc. Possibly some optional inequality data could be used also. 
-
-\end{enumerate}
 
 \section{Evaluation Metrics}\label{sec:results}
 
-The interpolation results are available results 
+The interpolation results for the various data sets and codes are available at \url{https://github.com/Loop3D/ImplicitBenchmark}.
+
+To evaluate the results, we have considered three aspects: (1) the degree of fit to the input data; (2) the predictivity, considering the fitness to data not included in the benchmark; and (3) intrinsic measures of the produced scalar fields. We will now present and briefly describe and discuss these metrics. 
+
+\subsection{Degree of data fit and predictivity}
+
+All interpolation methods aim at honoring the input data, but we have seen that many methods also approximate the input data. Such approximations allow for filtering geometric noise and are also very useful to avoid spurious extrapolation artifacts. 
+Measuring the degree of extrapolation is, therefore, not necessarily bringing much insight in general, as the nugget effect on DcK or the weight of the regularization terms in least-squares or physically based approaches can be tuned to decrease the error. However, this may lead to overfitting and to a lower predictive power of the models away from the data. Therefore, we consider, for each data sets, some test data which can be used to test the ability of the models to predict the structural geometry away from the interpreted points. For this, we consider several types of test data:
+
+\begin{enumerate}
+	\item Test points located on the input interfaces allow to test the lateral predictive ability of the various methods.  
+  \item Test points located on interfaces not considered in the interpolation data allow to test the ability of implicit modeling to exploit stratigraphic consistency to extrapolate some horizons from others. 
+  \item Test orientations, located on data points or not, allow to test the ability of the methods to forecast stratal orientation. 
+\end{enumerate}
+ 
+For the test points, computing the root mean squared error between the reference and the interpolated scalar field is possible for all methods. However, for methods that impose the values (Eq. (\ref{eq:datasystem})), the result depends on the initial (and somewhat arbitrary) choice of the initial scala field values. In the increment-based methods, the values can be very different depending on the parameters of the covariance / basis function making any comparison meaningless. Therefore, we have tried to normalize the scalar field by dividing the value difference by the inverse of the local scalar field gradient norm $||\nabla f||$ to approximate a metric error \citep{Caumon2010MG}: 
+\begin{equation}
+\label{eq:err1}
+E_f(\bx_i) = \frac{f_{ref} - f(\bx_i)}{||\nabla f(\bx_f)||},
+\end{equation}
+
+\noindent where $\bx_i$ is the test data point location, $f_{ref}$ the reference scalar field value at that location. For result evaluation, we do not necessarily know the reference value. When the gradien norm is locally constant, Eq (\ref{eq:err1}) gives the true distance between the data point and the interpolated level set $f(\bx) = f_{ref}$. However, thickness variations exist in some data sets, so the error $E_f$ may only approximate the distance in that case. Also, there is no such thing as a reference scalar field, so the equation necessarily uses the norm of the interpolated scalar field to assess the error, which introduce another source of error in this error estimation. For these reasons, we finally chose to extract the level set corresponding to reference scalar value and to explicitly compute the error $E_d$ corresponding to the signed distance between the data point and that level set. This computation accurately estimates the true distance, except in some cases when the closest surface points lies on the boundary of the modeling domain. 
+
+This choice can be confirmed by comparing the errors $E_d$ and $Ef$ on the data sets. For example, on the Horizon D of the Claudius data where the gradient varies quite rapidly on some solutions, the relative average distance error between $E_d$ and $Ef$ can be close to 30\% in some cases. 
+
+
+
+This is very similar to validation and test data sets in machine learning: 
 To present the results, we plan to use a summary table with the main parameters retained for each method and each test case, and explain the rationale about the choice of these parameter values. The modeling results will be put on an open server, together with the scripts and software version information to allow the licensees of each considered software to reproduce the results. 
 
 % \subsection {Consistency}
@@ -434,7 +441,7 @@ Overall, we hope that these results will contribute to identifying avenues for f
 
 \section*{Acknowledgments}
 
-This work was performed in the frame of the LOOP project (https://loop3d.org/) and the RING project (http://ring.georessources.univ-lorraine.fr/). We would like to thank for their support the industrial and academic sponsors of the RING-GOCAD Consortium managed by ASGA, and the LOOP project partners. We would also like to thank Geoscience Australia for providing the Claudius seismic data set and Emerson for the SKUA-GOCAD software used to prepare the data. 
+This work was performed in the frame of the LOOP project (\url{https://loop3d.org/}) and the RING project (http://ring.georessources.univ-lorraine.fr/). We would like to thank for their support the industrial and academic sponsors of the RING-GOCAD Consortium managed by ASGA, and the LOOP project partners. We would also like to thank Geoscience Australia for providing the Claudius seismic data set and Emerson for the SKUA-GOCAD software used to prepare the data. 
 
 % Set your bibliography file here (without .bib)
 \bibliography{biblio}
