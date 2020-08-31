@@ -1,0 +1,13 @@
+# Inventory file written by SKUA-GOCAD Suite 2.9.5
+# Archive version: 2.9.5
+# This file is for troubleshooting purposes only.
+control.db	-1	
+data	-1	
+sdf_a070deae-8ed94563-ba84-24895c1aa606	2453724	Hecho_R3_scalarfield	ResultBox
+datastore_fb7b2920-cbcb4a23-ba2c-7be8f7140ab5	2453724	Hecho_R3_scalarfield_0	ResultBox
+datastore_05a25345-22cf4102-bd47-36b21dc1df1f	7361172	Hecho_R3_scalarfield_0_vectorfield	ResultBox
+datastore_27db9a40-239543e6-8ec7-5d791c7275a0	2453724	Hecho_MQ_scalarfield	ResultBox
+datastore_6354d2b6-e9e54cb5-8ef4-bb5da7ef7d53	7361172	Hecho_MQ_scalarfield_vectorfield	ResultBox
+history.db	-1	
+project	-1	
+inventory.txt	-1	

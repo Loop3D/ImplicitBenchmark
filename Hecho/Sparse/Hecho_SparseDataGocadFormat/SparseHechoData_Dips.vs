@@ -1,0 +1,65 @@
+GOCAD VSet 1 
+HEADER {
+last_selected_folder: 3D Property
+*atoms*symbol: sphere
+*vectors3d*variable: Orient
+*tensors3d*variable: Orient
+vectors3d: true
+*vectors3d*arrow: true
+name: Sparse_Dips_pnts
+}
+GOCAD_ORIGINAL_COORDINATE_SYSTEM
+NAME from_column
+PROJECTION Unknown
+DATUM Unknown
+AXIS_NAME U V W
+AXIS_UNIT m m m
+ZPOSITIVE Elevation
+END_ORIGINAL_COORDINATE_SYSTEM
+GEOLOGICAL_FEATURE Orientations
+PROPERTIES OrientX OrientZ Orient
+PROP_LEGAL_RANGES **none**  **none** **none**  **none** **none**  **none** 
+NO_DATA_VALUES -99999 -99999 -99999 
+PROPERTY_CLASSES orientx orientz orient
+PROPERTY_KINDS " Real Number"  " Real Number"  " Real Number" 
+PROPERTY_SUBCLASSES QUANTITY Float QUANTITY Float QUANTITY Float
+ESIZES 1  1  3 
+UNITS unitless unitless unitless
+PROPERTY_CLASS_HEADER X {
+kind: X
+unit: m
+}
+PROPERTY_CLASS_HEADER Y {
+kind: Y
+unit: m
+}
+PROPERTY_CLASS_HEADER Z {
+kind: Depth
+unit: m
+is_z: on
+low_clip: 0.584748
+high_clip: 3.328896
+pclip: 99
+}
+PROPERTY_CLASS_HEADER orientx {
+kind: Real Number
+unit: unitless
+pclip: 99
+name: orientx
+}
+PROPERTY_CLASS_HEADER orientz {
+kind: Real Number
+unit: unitless
+pclip: 99
+name: orientz
+}
+PROPERTY_CLASS_HEADER orient {
+kind: Real Number
+unit: unitless
+pclip: 99
+name: orient
+}
+PVRTX 1 3.8126380443572998 0.16382800042629242 0.5847480297088623 0.61914700269699097 0.78527498245239258 0.61914700269699097 0 0.78527498245239258 
+PVRTX 2 9.8708572387695313 0.058731000870466232 2.5201950073242188 -0.76446902751922607 0.64465999603271484 -0.76446902751922607 0 0.64465999603271484 
+PVRTX 3 4.8311362266540527 -0.031273998320102692 3.3288960456848145 0.067833997309207916 0.99769699573516846 0.067833997309207916 0 0.99769699573516846 
+END
