@@ -14,7 +14,7 @@ AddMxIsoLineConstraint iso_line "/gobj:Dips" on TSolid "/gobj:Solid" property "S
 MxTetraInterpolateScalarFieldProperty fitting_factor 2. initialize_property_with_constant "true" mxdsi_error 1.e-7 mxdsi_iter -1 on TSolid "/gobj:Solid[type=TSolid]" property "/Strati[topo_dim=0]" value 0.
 
 # Copy this basic solution then add axis constraint and reinterpolate
-PropertyCopy from "/Strati[topo_dim=0]" on GObj "/gobj:Solid" share_property_class "false" to "Strati_basic"; 
+PropertyCopy from "/Strati[topo_dim=0]" on GObj "/gobj:Solid" share_property_class "false" to "StructLab_basic"; 
 AddMxTetraFoldAxisCnstrLink azimuth 0 on TSolid "/gobj:Solid" plunge 0 property "/Strati[topo_dim=0]" region "everywhere" weight 1.; 
 MxTetraInterpolateScalarFieldProperty fitting_factor 2. initialize_property_with_constant "true" mxdsi_error 1.e-7 mxdsi_iter -1 on TSolid "/gobj:Solid[type=TSolid]" property "/Strati" value 0.
 

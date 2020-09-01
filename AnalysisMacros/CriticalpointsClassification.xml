@@ -1,0 +1,93 @@
+<!DOCTYPE classification>
+<classifications>
+ <classification>
+  <name>CriticalPointOrder</name>
+  <parent>none</parent>
+  <elements>
+   <element>
+    <Compressibility></Compressibility>
+    <Density></Density>
+    <HeatConductivity></HeatConductivity>
+    <Kuu></Kuu>
+    <Kvv></Kvv>
+    <Kww></Kww>
+    <Mohr-Coulomb_cohesion_range>0.01 0.3</Mohr-Coulomb_cohesion_range>
+    <Mohr-Coulomb_friction_angle_range>20 60</Mohr-Coulomb_friction_angle_range>
+    <Poisson_ratio_range>0.3 0.4</Poisson_ratio_range>
+    <Porosity></Porosity>
+    <SpecificHeat></SpecificHeat>
+    <Young_modulus_range>10 60</Young_modulus_range>
+    <clay_content></clay_content>
+    <code>0</code>
+    <color>#6495ed</color>
+    <description></description>
+    <name>LocalMin</name>
+    <paleo_bathymetry_range>1 500</paleo_bathymetry_range>
+    <pattern>rt_no_pattern</pattern>
+   </element>
+   <element>
+    <Compressibility></Compressibility>
+    <Density></Density>
+    <HeatConductivity></HeatConductivity>
+    <Kuu></Kuu>
+    <Kvv></Kvv>
+    <Kww></Kww>
+    <Mohr-Coulomb_cohesion_range>0.01 0.3</Mohr-Coulomb_cohesion_range>
+    <Mohr-Coulomb_friction_angle_range>20 60</Mohr-Coulomb_friction_angle_range>
+    <Poisson_ratio_range>0.3 0.4</Poisson_ratio_range>
+    <Porosity></Porosity>
+    <SpecificHeat></SpecificHeat>
+    <Young_modulus_range>10 60</Young_modulus_range>
+    <clay_content></clay_content>
+    <code>1</code>
+    <color>#3cb371</color>
+    <description></description>
+    <name>Saddle1</name>
+    <paleo_bathymetry_range>1 500</paleo_bathymetry_range>
+    <pattern>rt_no_pattern</pattern>
+   </element>
+   <element>
+    <Compressibility></Compressibility>
+    <Density></Density>
+    <HeatConductivity></HeatConductivity>
+    <Kuu></Kuu>
+    <Kvv></Kvv>
+    <Kww></Kww>
+    <Mohr-Coulomb_cohesion_range>0.01 0.3</Mohr-Coulomb_cohesion_range>
+    <Mohr-Coulomb_friction_angle_range>20 60</Mohr-Coulomb_friction_angle_range>
+    <Poisson_ratio_range>0.3 0.4</Poisson_ratio_range>
+    <Porosity></Porosity>
+    <SpecificHeat></SpecificHeat>
+    <Young_modulus_range>10 60</Young_modulus_range>
+    <clay_content></clay_content>
+    <code>2</code>
+    <color>#ffd700</color>
+    <description></description>
+    <name>Saddle2</name>
+    <paleo_bathymetry_range>1 500</paleo_bathymetry_range>
+    <pattern>rt_no_pattern</pattern>
+   </element>
+   <element>
+    <Compressibility></Compressibility>
+    <Density></Density>
+    <HeatConductivity></HeatConductivity>
+    <Kuu></Kuu>
+    <Kvv></Kvv>
+    <Kww></Kww>
+    <Mohr-Coulomb_cohesion_range>0.01 0.3</Mohr-Coulomb_cohesion_range>
+    <Mohr-Coulomb_friction_angle_range>20 60</Mohr-Coulomb_friction_angle_range>
+    <Poisson_ratio_range>0.3 0.4</Poisson_ratio_range>
+    <Porosity></Porosity>
+    <SpecificHeat></SpecificHeat>
+    <Young_modulus_range>10 60</Young_modulus_range>
+    <clay_content></clay_content>
+    <code>3</code>
+    <color>#ff0000</color>
+    <description></description>
+    <name>LocalMax</name>
+    <paleo_bathymetry_range>1 500</paleo_bathymetry_range>
+    <pattern>rt_no_pattern</pattern>
+   </element>
+  </elements>
+ </classification>
+</classifications>

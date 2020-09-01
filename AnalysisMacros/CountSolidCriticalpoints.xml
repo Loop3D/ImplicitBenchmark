@@ -254,7 +254,6 @@ Counts the Critical points (Needs RINGToolKit)
  <Command Type="CLIType">
   <Text>CameraUpdateAll</Text>
   <Parameters/>
-  <Used>No</Used>
  </Command>
  <Command Type="If">
   <Text>$Save_Statistics$ </Text>
