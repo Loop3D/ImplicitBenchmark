@@ -1,3 +1,4 @@
 Claudius_Results_SURFE.zip filter=lfs diff=lfs merge=lfs -text
 Hecho_Results_SURFE.zip filter=lfs diff=lfs merge=lfs -text
 Moureze_Results_SURFE.zip filter=lfs diff=lfs merge=lfs -text
+Hecho_Gradient_Field_Updates.zip filter=lfs diff=lfs merge=lfs -text
