@@ -267,6 +267,12 @@ if(U != 0 || U != NU-1 || V != 0 || V != NV-1 || W != 0 || W != NW-1 ){
   <Command Type="For">
    <Text>var dataobj in $Reference_Iso_Data$</Text>
    <Command Type="JSVariable">
+    <Text>featureName</Text>
+    <VariableType>String</VariableType>
+    <VariableScoped>Yes</VariableScoped>
+    <VariableId>"Result_" + $Reference_Iso_Data$[iref].title</VariableId>
+   </Command>
+   <Command Type="JSVariable">
     <Text>cur_data</Text>
     <VariableType>Object</VariableType>
     <VariableScoped>Yes</VariableScoped>

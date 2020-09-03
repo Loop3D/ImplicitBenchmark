@@ -1,0 +1,12 @@
+Object;Property;Local Minima;Saddle 1;Saddle 2;Local Maxima
+GemPyStructLabSparseCriticalPoints;CriticalPointOrder;2;9;9;2;
+LoopStructuralFDIStructLabSparseCriticalPoints;CriticalPointOrder;0;0;0;0;
+LoopStructuralPLIStructLabSparseCriticalPoints;CriticalPointOrder;0;0;0;0;
+MSSSparse_81x5x22StructLabSparseCriticalPoints;CriticalPointOrder;1;4;7;1;
+SIGMA_s10StructLabSparseCriticalPoints;CriticalPointOrder;0;2;3;0;
+SIGMA_s12StructLabSparseCriticalPoints;CriticalPointOrder;1;3;5;1;
+SIGMA_s13StructLabSparseCriticalPoints;CriticalPointOrder;0;2;2;0;
+StructLab_AxisStructLabSparseCriticalPoints;CriticalPointOrder;0;0;0;0;
+StructLab_BasicStructLabSparseCriticalPoints;CriticalPointOrder;0;0;0;0;
+SurfE_MQStructLabSparseCriticalPoints;CriticalPointOrder;3;6;6;3;
+SurfE_R3StructLabSparseCriticalPoints;CriticalPointOrder;1;0;1;0;
