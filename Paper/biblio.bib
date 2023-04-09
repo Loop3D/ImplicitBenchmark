@@ -733,9 +733,177 @@ All those features are integrated in a scalar ﬁeld whose gradient is the axial
 }
 
 
+@article{Goncalves2017CG,
+	title = {A machine learning approach to the potential-field method for implicit modeling of geological structures},
+	volume = {103},
+	issn = {00983004},
+	url = {https://linkinghub.elsevier.com/retrieve/pii/S0098300416304848},
+	doi = {10.1016/j.cageo.2017.03.015},
+	abstract = {Implicit modeling has experienced a rise in popularity over the last decade due to its advantages in terms of speed and reproducibility in comparison with manual digitization of geological structures. The potential-ﬁeld method consists in interpolating a scalar function that indicates to which side of a geological boundary a given point belongs to, based on cokriging of point data and structural orientations. This work proposes a vector potential-ﬁeld solution from a machine learning perspective, recasting the problem as multi-class classiﬁcation, which alleviates some of the original method's assumptions. The potentials related to each geological class are interpreted in a compositional data framework. Variogram modeling is avoided through the use of maximum likelihood to train the model, and an uncertainty measure is introduced. The methodology was applied to the modeling of a sample dataset provided with the software Move™. The calculations were implemented in the R language and 3D visualizations were prepared with the rgl package.},
+	language = {en},
+	urldate = {2018-08-28},
+	journal = {Computers \& Geosciences},
+	author = {Gonçalves, Ítalo Gomes and Kumaira, Sissa and Guadagnin, Felipe},
+	month = jun,
+	year = {2017},
+	pages = {173--182},
+	annote = {Kriging with calibration of parameters. 
+},
+
+	file = {Gonçalves et al. - 2017 - A machine learning approach to the potential-field.pdf:C\:\\Users\\caumon5\\Documents\\Biblio\\Zotero\\storage\\AV2CZY78\\Gonçalves et al. - 2017 - A machine learning approach to the potential-field.pdf:application/pdf},
+}
 
 
+@article{Irakarama2021MG,
+	title = {Finite {Difference} {Implicit} {Structural} {Modeling} of {Geological} {Structures}},
+	volume = {53},
+	copyright = {All rights reserved},
+	issn = {1874-8953},
+	doi = {10.1007/s11004-020-09887-w},
+	abstract = {We introduce a new method for implicit structural modeling. The main developments in this paper are the new regularization operators we propose by extending inherent properties of the classic one-dimensional discrete second derivative operator to higher dimensions. The proposed regularization operators discretize naturally on the Cartesian grid using finite differences, owing to the highly symmetric nature of the Cartesian grid. Furthermore, the proposed regularization operators do not require any special treatment on boundary nodes, and their generalization to higher dimensions is straightforward. As a result, the proposed method has the advantage of being simple to implement. Numerical examples show that the proposed method is robust and numerically efficient.},
+	journal = {Mathematical Geosciences},
+	author = {Irakarama, Modeste and Laurent, Gautier and Renaudeau, Julien and Caumon, Guillaume},
+	month = sep,
+	year = {2021},
+	pages = {785--808},
+}
 
+
+@article{Irakarama2022CD,
+	title = {Finite element implicit {3D} subsurface structural modeling},
+	volume = {149},
+	issn = {00104485},
+	url = {https://linkinghub.elsevier.com/retrieve/pii/S0010448522000513},
+	doi = {10.1016/j.cad.2022.103267},
+	abstract = {We introduce a method for 3D implicit geological structural modeling from sparse sample points, where several conformable geological surfaces are represented by one single scalar ﬁeld. Laplacian and Hessian regularization energies are discretized on a tetrahedral mesh using ﬁnite elements. This scheme is believed to oﬀer some geometrical ﬂexibility as it is readily implemented on both structured and unstructured grids. While implicit modeling on unstructured grids is not new, methods based on ﬁnite elements have received little attention. The ﬁnite element method is routinely used to solve boundary value problems. However, because boundary conditions are typically unknown in implicit subsurface structural modeling, the traditional ﬁnite element method requires some adjustments. To this end, we present boundary free discretizations of the Laplacian and Hessian energies that do not assume vanishing Neumann boundary conditions, thereby eliminating the boundary artifacts usually associated with that assumption. Furthermore, we argue that while an appropriate discretization of the Laplacian can be used to minimize the curvature of a function on triangulated meshes, it may fail to do so on tetrahedral meshes.},
+	language = {en},
+	urldate = {2022-04-19},
+	journal = {Computer-Aided Design},
+	author = {Irakarama, Modeste and Thierry-Coudon, Morgan and Zakari, Mustapha and Caumon, Guillaume},
+	month = apr,
+	year = {2022},
+	pages = {103267},
+}
+
+
+@article{Grose2021GMDa,
+	title = {{LoopStructural} 1.0: time-aware geological modelling},
+	volume = {14},
+	issn = {1991-9603},
+	shorttitle = {{LoopStructural} 1.0},
+	url = {https://gmd.copernicus.org/articles/14/3915/2021/},
+	doi = {10.5194/gmd-14-3915-2021},
+	abstract = {Abstract. In this contribution we introduce LoopStructural, a new open-source 3D
+geological modelling Python package (http://www.github.com/Loop3d/LoopStructural, last access: 15 June 2021).
+LoopStructural provides a generic API for 3D geological modelling applications harnessing
+the core Python scientific libraries pandas, numpy and scipy. Six different interpolation
+algorithms, including three discrete interpolators and 3 polynomial trend
+interpolators, can be used from the same model design. This means that
+different interpolation algorithms can be mixed and matched within a
+geological model allowing for different geological objects, e.g. different
+conformable foliations, fault surfaces and unconformities to be modelled using
+different algorithms. Geological features are incorporated into the model
+using a time-aware approach, where the most recent features are modelled
+first and used to constrain the geometries of the older features. For
+example, we use a fault frame for characterising the geometry of the fault
+surface and apply each fault sequentially to the faulted surfaces. In this
+contribution we use LoopStructural to produce synthetic proof of concepts models and a
+86 km × 52 km model of the Flinders Ranges in South Australia using map2loop.},
+	language = {en},
+	number = {6},
+	urldate = {2022-10-23},
+	journal = {Geoscientific Model Development},
+	author = {Grose, Lachlan and Ailleres, Laurent and Laurent, Gautier and Jessell, Mark},
+	month = jun,
+	year = {2021},
+	pages = {3915--3937},
+}
+
+
+@article{Hillier2021MG,
+	title = {Three-{Dimensional} {Structural} {Geological} {Modeling} {Using} {Graph} {Neural} {Networks}},
+	issn = {1874-8961, 1874-8953},
+	url = {https://link.springer.com/10.1007/s11004-021-09945-x},
+	doi = {10.1007/s11004-021-09945-x},
+	abstract = {Three-dimensional structural geomodels are increasingly being used for a wide variety of scientific and societal purposes. Most advanced methods for generating these models are implicit approaches, but they suffer limitations in the types of interpolation constraints permitted, which can lead to poor modeling in structurally complex settings. A geometric deep learning approach, using graph neural networks, is presented in this paper as an alternative to classical implicit interpolation that is driven by a learning through training paradigm. The graph neural network approach consists of a developed architecture utilizing unstructured meshes as graphs on which coupled implicit and discrete geological unit modeling is performed, with the latter treated as a classification problem. The architecture generates three-dimensional structural models constrained by scattered point data, sampling geological units and interfaces as well as planar and linear orientations. The modeling capacity of the architecture for representing geological structures is demonstrated from its application on two diverse case studies. The benefits of the approach are (1) its ability to provide an expressive framework for incorporating interpolation constraints using loss functions and (2) its capacity to deal with both continuous and discrete properties simultaneously. Furthermore, a framework is established for future research for which additional geological constraints can be integrated into the modeling process.},
+	language = {en},
+	urldate = {2021-07-09},
+	journal = {Mathematical Geosciences},
+	author = {Hillier, Michael and Wellmann, Florian and Brodaric, Boyan and de Kemp, Eric and Schetselaar, Ernst},
+	month = jun,
+	year = {2021},
+}
+
+
+@article{Goncalves2021C&G,
+	title = {A machine learning model for structural trend fields},
+	volume = {149},
+	issn = {00983004},
+	url = {https://linkinghub.elsevier.com/retrieve/pii/S0098300421000285},
+	doi = {10.1016/j.cageo.2021.104715},
+	abstract = {This work presents a Gaussian process model (a Bayesian derivation of kriging) for the interpolation of structural field data (dip and strike measurements). The structural data are treated as the directional derivatives of a latent potential field. The latent field’s isosurfaces characterize the general structural trend in a region, and the predictive variance can be used as a measure of uncertainty. The model’s parameters are optimized via maximum likelihood, avoiding the need for a variogram analysis. The model is tested using the orientation vectors of metamorphic foliation in meta-volcanic rocks of the Passo Feio Metamorphic Complex, in southern Brazil. An open-source implementation is available.},
+	language = {en},
+	urldate = {2023-04-08},
+	journal = {Computers \& Geosciences},
+	author = {Gonçalves, Ítalo Gomes and Guadagnin, Felipe and Kumaira, Sissa and Da Silva, Saulo Lopes},
+	month = apr,
+	year = {2021},
+	pages = {104715},
+	file = {Gonçalves et al. - 2021 - A machine learning model for structural trend fiel.pdf:C\:\\Users\\caumon5\\Documents\\Biblio\\Zotero\\storage\\38TTVS7P\\Gonçalves et al. - 2021 - A machine learning model for structural trend fiel.pdf:application/pdf},
+}
+
+
+@article{Bi2022GMD,
+	title = {{DeepISMNet}: three-dimensional implicit structural modeling with convolutional neural network},
+	volume = {15},
+	issn = {1991-9603},
+	shorttitle = {{DeepISMNet}},
+	url = {https://gmd.copernicus.org/articles/15/6841/2022/},
+	doi = {10.5194/gmd-15-6841-2022},
+	abstract = {Abstract. Implicit structural modeling using sparse and unevenly distributed data is essential for various scientific and societal purposes, ranging from natural source exploration to geological hazard forecasts. Most advanced implicit approaches formulate structural modeling as least squares minimization or spatial interpolation, using various mathematical methods to solve for a scalar field that optimally fits all the inputs under an assumption of smooth regularization. However, these approaches may not reasonably represent complex geometries and relationships of structures and may fail to fit a global structural trend when the known data are too sparse or unevenly distributed. Additionally, solving a large system of mathematical equations with iterative optimization solvers could be computationally expensive in 3-D. To deal with these issues, we propose an efficient deep learning method using a convolution neural network to create a full structural model from the sparse interpretations of stratigraphic interfaces and faults. The network is beneficial for the flexible incorporation of geological empirical knowledge when trained by numerous synthetic models with realistic structures that are automatically generated from a data simulation workflow. It also presents an impressive characteristic of integrating various types of geological constraints by optimally minimizing a hybrid loss function in training, thus opening new opportunities for further improving the structural modeling performance. Moreover, the deep neural network, after training, is highly efficient for the generation of structural models in many geological applications. The capacity of our approach for modeling complexly deformed structures is demonstrated by using both synthetic and field datasets in which the produced models can be geologically reasonable and structurally consistent with the inputs.},
+	language = {en},
+	number = {17},
+	urldate = {2023-04-08},
+	journal = {Geoscientific Model Development},
+	author = {Bi, Zhengfa and Wu, Xinming and Li, Zhaoliang and Chang, Dekuan and Yong, Xueshan},
+	month = sep,
+	year = {2022},
+	pages = {6841--6861},
+}
+
+
+@article{Irakarama2022MG,
+	title = {Implicit {Tetrahedral} and {Surface} {Mesh} {Generation} for {3D} {Reservoir} {Structural} {Modeling}},
+	volume = {54},
+	issn = {1874-8961, 1874-8953},
+	url = {https://link.springer.com/10.1007/s11004-022-10016-y},
+	doi = {10.1007/s11004-022-10016-y},
+	abstract = {This paper presents a method for tetrahedral mesh generation for subsurface reservoir structural modeling based on sequentially cutting an input tetrahedral grid with geological surfaces represented by implicit functions. Most of the existing literature on meshing to implicit surfaces mainly focuses on independent closed surfaces, making it hardly applicable to subsurface structural modeling where, in addition to occasional closed surfaces (e.g., detached salt diapirs), the subsurface model is typically made of a mixture of multiple intersecting ﬁnite surfaces (e.g., faults) and inﬁnite surfaces (e.g., horizons). This peculiar setting sometimes makes it challenging to build a sealed structural surface model (i.e., a boundary representation model), which is the starting point of traditional, but also challenging, constrained Delaunay solid mesh generation. The method presented herein bypasses the creation of a sealed surface model and generates a solid mesh directly from point sets and/or a set of topologically disconnected surfaces; the sealed surface model is obtained as a byproduct, if needed.},
+	language = {en},
+	number = {8},
+	urldate = {2023-04-09},
+	journal = {Mathematical Geosciences},
+	author = {Irakarama, Modeste},
+	month = nov,
+	year = {2022},
+	pages = {1349--1369},
+}
+
+@article{Pizzella2022MG,
+	title = {Taking {Better} {Advantage} of {Fold} {Axis} {Data} to {Characterize} {Anisotropy} of {Complex} {Folded} {Structures} in the {Implicit} {Modeling} {Framework}},
+	volume = {54},
+	issn = {1874-8961, 1874-8953},
+	url = {https://link.springer.com/10.1007/s11004-021-09950-0},
+	doi = {10.1007/s11004-021-09950-0},
+	language = {en},
+	number = {1},
+	urldate = {2023-04-09},
+	journal = {Mathematical Geosciences},
+	author = {Pizzella, Laure and Alais, Robin and Lopez, Simon and Freulon, Xavier and Rivoirard, Jacques},
+	month = jan,
+	year = {2022},
+	pages = {95--130},
+}
 
 
 

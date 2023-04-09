@@ -6,7 +6,7 @@ to whom questions should be addressed.*
 This data set is generated from a perturbed distance field to a set of fractures
 above a basement surface. The surface is quite complex and has many features at
 two main resolutions (one corresponding to the fractures and the other one to
-the noise). It is samples by two sets of cross section lines and a set of
+the noise). It is sampled by two sets of cross section lines and a set of
 points. 
 
 ## Contents
@@ -16,7 +16,8 @@ points.
  undersampled in the north). Some of the points bear
  orientation vectors representing the normal to the surface. 
  * `Sections_[EW,NS].csv` are sections lines. The field `PART_ID` is a unique 
- section identifier in each file. 
+ section identifier in each file. Please DO NOT use these values for 3D 
+ applications even for parameter estimation to highlight extrapolation errors. 
 
 All Data Files contain a Cutoff column, than contains a random number which may
 be used to decimate the data set. For example, taking 20% of the data means 

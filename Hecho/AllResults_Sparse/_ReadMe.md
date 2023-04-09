@@ -15,6 +15,8 @@ Property and object names in CSV files were designed to illustrate:
 
 * **ScalarFieldStats.csv** Contains statistics for all implicit properties on both on the reference Cartesian grid and tetrahedral mesh. All methods were natively evaluated at Cartesian grid nodes, except for StructuralLab which ran on the tetrahedral mesh. 
 
+* **ScalarFieldInterpValues.csv** Contains statistics for all implicit properties on the data points (SparseH[124579]) and on the test surfaces. 
+
 * **CriticalPoints.csv** Contains the number of critical points (minima, 1-saddles, 2-saddles and maxima) of each scalar field. For all scalar fields, these were computed on the scalar fields resampled on the tetrahedral mesh, so minor deviations may exist because of this resampling stage. 
 
 * **OrientationStats.csv** Gives the statistics of the angle difference between the reference surface orientation and the gradient of the interpolated scalar fields. 
