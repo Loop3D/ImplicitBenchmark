@@ -15,11 +15,12 @@ contains:
   field values rougly equal to the thicknesses from the top horizon **H1**. 
  * Faults are provided as curves (F[123]Line.csv) and surfaces, both in Autocad
   DXF format (F[123]Surf.dxf) and Gocad ASCII format (AllFaultSurfaces.ts) 
- * Dips.csv contain stratal traces and normal vectors (both informations are
-   equivalent in 2D but not in 3D. The Y coordinate is also obtained by 
+ * Dips.csv contain stratal traces and 2D normal vectors (both informations are
+   equivalent in 2D but not in 3D. The Y coordinate of the points is obtained by 
    random sampling. Each stratal trace consists of one line segment which 
-   has a unique `PART_ID`. To avoid redundancy, only one of each line 
-   extremities has orientation values, the other has no data values (-99999).
+   has a unique `PART_ID`, which can be used as tangent constraint for 3D interpolation.
+   To avoid redundancy, only one of each line extremities has 2D orientation values, 
+   the other has no data values (-99999).
 
 ## Output
 
