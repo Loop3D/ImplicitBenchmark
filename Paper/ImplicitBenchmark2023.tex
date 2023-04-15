@@ -121,7 +121,7 @@ Automation of three-dimensional structural modeling is essential to meet these n
 
 To address these challenges, several authors have proposed to more directly integrate structural concepts into modeling methods \citep{DeKemp2003G,Maxelon2009CG,MassiotGM2010,Laurent2016EaPSL,Grose2017JSG,Grose2018JGRSE,Grose2019JoSG,Pizzella2022MG}. This can be achieved either by manually or automatically adding new interpretive points or data such as fold axial surface and fold axes, or by integrating new mathematical terms in the interpolation problem. Another recent line of research has been on the mathematical formulation and the discretization of the regularization term \citep{Laurent2016MG,Martin2017CG,Renaudeau2019MG,Irakarama2021MG,Irakarama2022CD}. In this frame, theoretical comparisons between the various published methods can be made, but they may be of limited use to practitioners. Practical comparisons between methods are delicate, because they rely on software packages whose implementation is not always available. The level of implementation descriptions may also vary from one paper to another, making it difficult for graduate students to reproduce previous work. 
 
-In this paper (Section \ref{sec:methods}), we propose a synthetic review of the various interpolation methods which form the basis of implicit structural modeling codes. The goal of this presentation is to use consistent notations for all methods, with the intent to more easily highlight similarities and differences between them. We summarize the features and variants of six computer implementations of these methods, and stress the main parameters which can be used to adapt them to a particular geological setting. As in machine learning, tuning these method parameters using validation data can be achieved \citep{Goncalves2017CG}. Recently, several machine learning have been proposed for structural modeling using either training on synthetic models \citep{Bi2022GMD} or directly on the available data \citep{Hillier2021MG}. 
+In this paper (Section \ref{sec:methods}), we propose a synthetic review of the various interpolation methods which form the basis of implicit structural modeling codes. The goal of this presentation is to use consistent notations for all methods, with the intent to more easily highlight similarities and differences between them. We summarize the features and variants of seven computer implementations of these methods, and stress the main parameters which can be used to adapt them to a particular geological setting. As in machine learning, tuning these method parameters using validation data can be achieved \citep{Goncalves2017CG}. Recently, several machine learning have been proposed for structural modeling using either training on synthetic models \citep{Bi2022GMD} or directly on the available data \citep{Hillier2021MG}. 
 \todo[inline]{Shall we write more on machine learning methods in the introduction ? Or just mention that they are out of scope of the methods review ?}
 However, the lack of data may entail a poor predictive ability for parameter-rich models (overfitting); conversely, parsimonious models may be more stable but have a lower fit. This may explain why, in practice, parameter tuning is seldom done in three dimensional structural modeling. Another reason is that, beyond data fitting measures, defining a plausibility criterion is not immediate in the case of geological models. Geologists are trained to decide on the quality of a particular model based on their expertise, and are often reluctant to use purely data-driven methods for that. Expressing in mathematical terms the ``geological realism'' of a particular structural model is possible under some conditions, but it can be difficult to automate and, in general, is still an open problem \citep{Caumon2010MG,Jessell2010T}. Therefore, in this paper, we do not use cross-validation to optimize the choice of model parameters.
 
@@ -212,10 +212,12 @@ LoopStru\-ctural & DSI (piecewise linear constant gradient, finite differences) 
 MSS & FEM / DSI & Points & Marching cubes & \citep{Renaudeau2019BEMRMX,Renaudeau2019MG} & C++ & Proprietary & Least squares weights for data / regularization.\\
 \hline 
 SIGMA & DSI, finite differences & Cartesian & Marching cubes & \citet{Irakarama2021MG}, \url{https://www.ring-team.org/software/ring-libraries/258-sigma} & C++/CUDA & RING & Least squares weights for data / regularization \\
-\hline
+\hline 
 Structural\-Lab & DSI, piecewise linear minimal gradient & Tetra\-hedral & Marching tetra & \citet{Frank2007CG,Caumon2013GaRSITo}, \url{https://www.ring-team.org/software/skua-gocad-plugins/42-structurallab} & C++ / SKUA-GOCAD & RING & Least squares weights for data / regularization \\
 \hline
 SurfE & RBF, DcK & Cartesian & Marching cubes & \citet{Hillier2014MG}, \url{https://github.com/MichaelHillier/surfe} & C++ & MIT & Type and coefficients of RBF functions; interpolation or approximation \\ 
+\hline
+Subsurface3D & FEM & Tetra\-hedral & Marching tetra & \citet{Irakarama2022CD}, \url{https://subsurface3d.com} & C++/CUDA & Proprietary & Least squares weights for data / regularization \\
 \hline
 \end{tabular}
 }}
@@ -295,7 +297,9 @@ The SurfE code \citep{Hillier2014MG}, used in this study also implements the inc
 
 The discrete smooth interpolation \citep[DSI, ][]{Mallet1992CD} was originally proposed for explicit surfaces, then extended to implicit formulations \citep{Frank2007CG,Caumon2013GaRSITo,Souche20137ECEISE2,Laurent2016MG,Irakarama2021MG}. In DSI, the number of basis functions $N$ refers to the number of nodes of the mesh used to approximate the solution. In tetrahedral formulations, each basis function $\varphi_i$ is a piecewise linear ``hat function'' (equal to 1 at node $i$, linearly decreasing on the tetrahedra surrounding node $i$ and equal to zero at all the other nodes). These basis functions imply a piecewise constant gradient of the scalar field. They are used in two codes: StructuralLab \citep{Frank2007CG,Caumon2013GaRSITo} and LoopStructural \citep{Grose2021GMDa}. 
 
-In the SIGMA code \cite{Irakarama2021MG}, Lagrange polynomials defined on a Cartesian grid are used to discretize the data. The basis functions which control the smoothing term are estimated using finite differences.\todo{@Modeste, do you want to add something on the CAD 2022 approach ?} LoopStructural and MSS also implement some first-order finite difference operators. 
+In the SIGMA code \cite{Irakarama2021MG}, linear Lagrange basis functions defined on a Cartesian grid are used to discretize the implicit function; the smoothing terms are estimated using finite differences. LoopStructural and MSS also implement some first-order finite difference operators. 
+Lagrange basis functions are also used to discretize the implicit function on tetrahedral meshes in the finite elements approach of \citet{Irakarama2022CD}, where
+the test function is discretized using Crouzeix-Raviart basis functions. 
 
 As recently discussed by \citet{Renaudeau2019MG}, the choice of the basis functions has a strong impact on the structure of the linear system solved to evaluate the coefficients $v_i$ in Eq. (\ref{eq:basis}): a relatively small but dense system is formed in the case of RBF and DcK, whereas a larger but sparse system is formed in the case of piecewise linear DSI. Recently, \citet{Renaudeau2019MG} and \citet{Manchuk2019CG} proposed to use moving least squares (MLS) polynomial basis functions centered on some interpolation points spread over the domain of interest. As MLS functions have a local support, data points only influence a finite number of interpolation points, and the solution does not explicitly depend on a mesh. This is the main approach used in the MSS code. 
 
@@ -309,7 +313,7 @@ In general, the number of mesh nodes is larger than the number of data, a regula
 the minimization of the gradient difference between two adjacent tetrahedra \citep{Frank2007CG}; 
 discrete Laplacian \citep{Irakarama2021MG,Irakarama2022CD}; 
 sum of one-dimensional second derivatives approximated along several directions using finite differences \citep{Irakarama2021MG}; 
-thin plate bending energy discretized with MLS polynomial basis functions \citep{Renaudeau2019MG}. 
+thin plate bending energy discretized with MLS polynomial basis functions \citep{Renaudeau2019MG}; Hessian energy discretized using finite elements \citep{Irakarama2022CD}. 
 Note that, although DSI in implicit modeling is often assimilated to the constant gradient regularization in piecewise linear tetrahedra, its formulation allows for many other regularization possibilities \citep{Mallet1992CD}. Indeed, the original DSI formulation starts from a graph-based representation of the mesh nodes and considers a general class of roughness terms based on weighted neighborhood values to ensure convergence. 
 Alternatively, it is possible to use the same approaches as for solving partial differential equations, for instance the finite element method (FEM). Data then play the role of boundary conditions and the continuous energy formulation to be minimized plays the role of the regularization in DSI \citep{Renaudeau2019MG}. In both cases, an important parameter is the weight penalizing the regularization term against the data term in the least-squares system. 
 
@@ -350,8 +354,8 @@ For all three data sets, we propose a brief description of the geological settin
 \begin{figure}
 \centering\begin{tabular}{cc}
 a & \includegraphics[width=0.8\textwidth]{Hecho1}\\
-b & \includegraphics[width=0.8\textwidth]{Hecho2} \\
-c & \includegraphics[width=0.8\textwidth]{Hecho3} \\
+b & \includegraphics[width=0.8\textwidth]{hecho2} \\
+c & \includegraphics[width=0.8\textwidth]{hecho3} \\
 \end{tabular}
 \caption{Folded turbidite lobes outcrop (a) and interpretation with the ``Full'' data set (b) and the ``sparse'' data set (c). 
 Tangent and orientation data are shown as black lines and arrows.}
